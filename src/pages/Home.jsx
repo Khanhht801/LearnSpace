@@ -4,7 +4,7 @@ import Topics from '../components/Topics.jsx';
 import LibrarySection from '../components/LibrarySection.jsx';
 import ContributionSection from '../components/ContributionSection.jsx';
 import SavedSection from '../components/SavedSection.jsx';
-import FaqSection from '../components/FaqSection.jsx';
+import FeedbackSection from '../components/FeedbackSection.jsx';
 import Footer from '../components/Footer.jsx';
 
 export default function Home({ favoriteIds, onToggleFavorite }) {
@@ -41,7 +41,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
     <LibrarySection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
     <ContributionSection />
     <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
-    <FaqSection />
+    <FeedbackSection />
     <Footer />
     </>
   );

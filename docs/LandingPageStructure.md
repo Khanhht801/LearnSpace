@@ -1,4 +1,4 @@
-﻿# Cấu trúc landing page LearnSpace
+# Cấu trúc landing page LearnSpace
 
 Tham chiếu: [Phân tích nghiệp vụ](./PhanTichNghiepVu.md) và [Định hướng giao diện](./LangmasterStyle.md).
 
@@ -19,7 +19,7 @@ Mục tiêu: giúp người dùng tìm, đọc hoặc tải tài liệu và lưu
 
 ## 2. Các section — thứ tự từ trên xuống
 
-Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự navbar: **Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu**. FAQ và footer đặt cuối trang.
+Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự navbar: **Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu**. Góp ý và footer đặt cuối trang.
 
 | Thứ tự | Section | ID | Nội dung đề xuất | Hành động chính |
 | --- | --- | --- | --- | --- |
@@ -29,18 +29,25 @@ Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự 
 | 4 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
 | 5 | Đóng góp | `dong-gop` | Form đăng trực tiếp: tiêu đề, mô tả, người chia sẻ, chủ đề, trình độ, nguồn, điều kiện sử dụng, file và xác nhận quyền chia sẻ. Bên dưới là danh sách tài liệu cộng đồng | “Đăng tài liệu” lưu lên server và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
 | 6 | Đã lưu | `da-luu` | Xem trước danh sách tài liệu đã lưu trên trình duyệt; khi rỗng, hiện lời nhắc khám phá và lưu tài liệu; giải thích chưa đồng bộ giữa thiết bị | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 7 | Câu hỏi thường gặp | `faq` | Giải đáp về tài khoản, miễn phí, lưu tài liệu, đóng góp và báo lỗi | Mở/đóng từng câu trả lời |
+| 7 | Góp ý | `gop-y` | “Bạn muốn LearnSpace có thêm gì?”; chọn loại đề xuất và nhập nội dung, không yêu cầu tên hoặc email | “Gửi đề xuất” lưu riêng trên server, báo thành công sau khi lưu |
 | 8 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
-## 3. Nội dung câu hỏi thường gặp
+## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?
 
-| Thứ tự | Câu hỏi | Trả lời đề xuất |
-| --- | --- | --- |
-| 1 | Có cần tạo tài khoản không? | Không. Bạn có thể tìm, đọc và tải tài liệu công khai trực tiếp. |
-| 2 | Tài liệu có miễn phí không? | Tài liệu công khai được truy cập miễn phí; xem nguồn và điều kiện sử dụng trên từng tài liệu. |
-| 3 | Tài liệu đã lưu nằm ở đâu? | Mở mục Đã lưu. Danh sách chỉ lưu trên trình duyệt hiện tại, chưa đồng bộ giữa thiết bị; xóa dữ liệu trình duyệt có thể làm mất danh sách. |
-| 4 | Làm sao để đóng góp tài liệu? | Điền thông tin và chọn file trong mục Đóng góp, xác nhận quyền chia sẻ rồi nhấn Đăng tài liệu. Sau khi server lưu thành công, tài liệu xuất hiện công khai trong danh sách cộng đồng. |
-| 5 | Làm sao để báo liên kết lỗi? | Gửi đường dẫn tài liệu và mô tả lỗi qua kênh liên hệ trong mục Đóng góp. |
+Đặt sau Đã lưu, trước footer. Lời dẫn: “Chưa tìm thấy tài liệu mình cần, hay có ý tưởng giúp LearnSpace hữu ích hơn? Chia sẻ với chúng mình nhé.”
+
+| Thành phần | Nội dung / hành vi |
+| --- | --- |
+| Loại đề xuất | Tài liệu / chủ đề mới; Tính năng website; Góp ý khác |
+| Nội dung | Bắt buộc, 10–2.000 ký tự; gợi ý: “Mình muốn có thêm bài tập React về quản lý state…” |
+| Thông tin cá nhân | Không yêu cầu tên hoặc email |
+| Nút gửi | “Gửi đề xuất”; chuyển “Đang gửi…” và khóa form khi gửi |
+| Thành công | Chỉ báo sau khi server lưu được; xóa form, cảm ơn và cho gửi góp ý khác |
+| Thất bại | Hiện lỗi, giữ nguyên nội dung để sửa hoặc thử lại |
+| Lưu trữ | POST `/api/feedback`, lưu file JSON trong `data/feedback/` trên server; không đưa vào Git |
+| Riêng tư | Không công khai danh sách; không có API đọc công khai; chủ website xem file trên server |
+
+Đề xuất được xem xét, không đồng nghĩa với cam kết triển khai. Giữ nền hồng nhạt, font SVN-Gilroy và nút đỏ theo style.
 
 ## 4. Quy định giao diện và nội dung
 
@@ -61,7 +68,7 @@ Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự 
 
 ## 5. Thứ tự triển khai thống nhất
 
-**Navbar → Hero → Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu → FAQ → Footer**
+**Navbar → Hero → Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu → Góp ý → Footer**
 
 Lợi ích và hướng dẫn học nằm trong Giới thiệu; tài liệu nổi bật và mới cập nhật nằm trong Thư viện để trang gọn và giữ đúng thứ tự đã chọn.
 

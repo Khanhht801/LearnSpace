@@ -26,7 +26,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
         <div className="resource-note">MỘT CHÚT MỖI NGÀY <span>↗</span></div>
         <div className="resource-sheet sheet-back" />
         <div className="resource-sheet sheet-front">
-          <div className="sheet-top"><span className="sheet-logo">L↗</span><span>LEARN / EXPLORE / GROW</span><span>01</span></div>
+          <div className="sheet-top"><img className="sheet-logo" src="/logo.png" alt="" width="2160" height="720" /><span>LEARN / EXPLORE / GROW</span><span>01</span></div>
           <p className="sheet-caption">GHI CHÉP HỌC TẬP</p>
           <h2>Từ tò mò<br />đến <em>hiểu biết.</em></h2>
           <div className="code-preview"><span>const</span> journey = {'{'}<br />&nbsp; curiosity: <i>true</i>,<br />&nbsp; learning: <i>'every day'</i><br />{'}'};</div>

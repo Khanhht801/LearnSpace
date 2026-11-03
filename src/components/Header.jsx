@@ -15,8 +15,7 @@ export default function Header({ savedCount }) {
       }
     }}>
       <NavLink className="brand" to="/#hero" onClick={() => { closeMenu(); if (location.pathname === '/') window.scrollTo({ top: 0 }); }} aria-label="LearnSpace — Trang chủ">
-        <span className="brand-mark" aria-hidden="true">L<span>↗</span></span>
-        Learn<span>Space</span><span className="brand-dot">.</span>
+        <img className="brand-logo" src="/logo.png" alt="LearnSpace" width="2160" height="720" />
       </NavLink>
       <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen ? 'Đóng menu' : 'Mở menu'} onClick={() => setMenuOpen(!menuOpen)}>
         <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>

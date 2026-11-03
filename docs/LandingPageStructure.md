@@ -12,7 +12,7 @@ Mục tiêu: giúp người dùng tìm, đọc hoặc tải tài liệu và lưu
 | --- | --- | --- |
 | 1 | Logo LearnSpace | Về đầu trang chủ |
 | 2 | Giới thiệu | Cuộn đến section Giới thiệu (`#gioi-thieu`) |
-| 3 | Chủ đề ▾ | Cuộn đến section Chủ đề (`#chu-de`); dropdown cho phép mở thư viện đã lọc theo chủ đề |
+| 3 | Chủ đề | Không có tam giác; hover mở danh sách chủ đề để chọn; trên mobile chạm để mở. “Tất cả chủ đề” cuộn đến `#chu-de`, chọn chủ đề mở thư viện đã lọc |
 | 4 | Thư viện | Cuộn đến section Thư viện (`#thu-vien`); từ đây có thể mở trang toàn bộ tài liệu |
 | 5 | Đóng góp | Cuộn đến section Đóng góp (`#dong-gop`) |
 | 6 | Đã lưu | Cuộn đến section Đã lưu (`#da-luu`); có biểu tượng bookmark và số tài liệu đã lưu trên trình duyệt |
@@ -21,15 +21,15 @@ Mục tiêu: giúp người dùng tìm, đọc hoặc tải tài liệu và lưu
 
 Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự navbar: **Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu**. Góp ý và footer đặt cuối trang.
 
-| Thứ tự | Section | ID | Nội dung đề xuất | Hành động chính |
+| Thứ tự | Section | ID | Nội dung hiện tại | Hành động chính |
 | --- | --- | --- | --- | --- |
 | 1 | Hero | `hero` | Tiêu đề “Kiến thức dễ tìm. Học tập dễ hơn.”; mô tả thư viện học tập miễn phí, không cần tài khoản; ô tìm kiếm “Bạn muốn học gì hôm nay?”; minh họa học tập hoặc giao diện thư viện thực tế | “Khám phá tài liệu” cuộn đến Thư viện; tìm kiếm mở kết quả trong trang thư viện |
 | 2 | Giới thiệu | `gioi-thieu` | Giới thiệu LearnSpace và mục tiêu chia sẻ kiến thức; bốn lợi ích: miễn phí, dễ tìm, nguồn rõ ràng, thuận tiện học lại; hướng dẫn Tìm → Đọc/tải → Lưu | “Khám phá chủ đề” |
 | 3 | Chủ đề | `chu-de` | Các thẻ React, JavaScript, Git, Kỹ năng học tập…; mỗi thẻ có biểu tượng, tên và mô tả ngắn; chỉ hiện chủ đề đã có nội dung | Chọn chủ đề để mở thư viện đã lọc |
 | 4 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
-| 5 | Đóng góp | `dong-gop` | Form đăng trực tiếp: tiêu đề, mô tả, người chia sẻ, chủ đề, trình độ, nguồn, điều kiện sử dụng, file và xác nhận quyền chia sẻ. Bên dưới là danh sách tài liệu cộng đồng | “Đăng tài liệu” lưu lên server và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
-| 6 | Đã lưu | `da-luu` | Xem trước danh sách tài liệu đã lưu trên trình duyệt; khi rỗng, hiện lời nhắc khám phá và lưu tài liệu; giải thích chưa đồng bộ giữa thiết bị | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 7 | Góp ý | `gop-y` | “Bạn muốn LearnSpace có thêm gì?”; chọn loại đề xuất và nhập nội dung, không yêu cầu tên hoặc email | “Gửi đề xuất” lưu riêng trên server, báo thành công sau khi lưu |
+| 5 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
+| 6 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
+| 7 | Góp ý — Bạn muốn LearnSpace có thêm gì? | `gop-y` | Thay hoàn toàn phần câu hỏi thường gặp. Form chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không yêu cầu tên hoặc email | “Gửi đề xuất” lưu riêng trên server; hiện đang gửi, thành công hoặc lỗi; không công khai góp ý |
 | 8 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
 ## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?
@@ -65,6 +65,7 @@ Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự 
 | Nội dung thực tế | Không dùng số liệu cộng đồng hoặc đánh giá giả; liên kết đọc/tải phải hoạt động |
 | Đóng góp | Đăng trực tiếp qua API; chỉ báo thành công khi server đã lưu file và metadata; không xóa dữ liệu form khi đăng thất bại |
 | Đã lưu | Trạng thái thống nhất giữa navbar, card và danh sách; dùng dữ liệu trên trình duyệt hiện tại |
+| Góp ý | Section `#gop-y` sau Đã lưu; form hiển thị trực tiếp, lưu riêng trên server; footer liên kết “Góp ý cho LearnSpace” đến section này |
 
 ## 5. Thứ tự triển khai thống nhất
 

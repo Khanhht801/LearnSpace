@@ -29,7 +29,7 @@ Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự 
 | 4 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
 | 5 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
 | 6 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 7 | Góp ý — Bạn muốn LearnSpace có thêm gì? | `gop-y` | Thay hoàn toàn phần câu hỏi thường gặp. Form chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không yêu cầu tên hoặc email | “Gửi đề xuất” lưu riêng trên server; hiện đang gửi, thành công hoặc lỗi; không công khai góp ý |
+| 7 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
 | 8 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
 ## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?

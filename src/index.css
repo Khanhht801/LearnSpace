@@ -1,5 +1,6 @@
 ﻿:root { font-family: 'SVN-Gilroy', 'Segoe UI', sans-serif; color: #252525; background: #fff8f8; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; color-scheme: light; --primary: #db1f1f; --primary-dark: #9d0b0f; --brand-gradient: linear-gradient(180deg, #db1f1f 0%, #9d0b0f 100%); --muted: #686060; --border: #f0dada; }
 * { box-sizing: border-box; }
+html { scroll-padding-top: 112px; }
 body { margin: 0; min-width: 320px; line-height: 1.65; }
 button, input, textarea { font: inherit; }
 a { color: var(--primary); text-underline-offset: 4px; }

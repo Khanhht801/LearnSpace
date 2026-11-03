@@ -1,6 +1,7 @@
-﻿import { useEffect, useState } from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import CourseDetail from './pages/CourseDetail.jsx';
@@ -9,15 +10,15 @@ import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 function getInitialFavoriteIds() {
+  try {
   const savedValue = localStorage.getItem('favoriteCourseIds');
 
   if (!savedValue) {
     return [];
   }
 
-  try {
     const parsedValue = JSON.parse(savedValue);
-    return Array.isArray(parsedValue) ? parsedValue : [];
+    return Array.isArray(parsedValue) ? parsedValue.filter((id) => Number.isInteger(id)) : [];
   } catch {
     return [];
   }
@@ -25,9 +26,15 @@ function getInitialFavoriteIds() {
 
 export default function App() {
   const [favoriteIds, setFavoriteIds] = useState(getInitialFavoriteIds);
+  const [storageError, setStorageError] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('favoriteCourseIds', JSON.stringify(favoriteIds));
+    try {
+      localStorage.setItem('favoriteCourseIds', JSON.stringify(favoriteIds));
+      setStorageError(false);
+    } catch {
+      setStorageError(true);
+    }
   }, [favoriteIds]);
 
   function handleToggleFavorite(courseId) {
@@ -40,20 +47,12 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <header className="site-header">
-        <NavLink className="brand" to="/">Learn<span>Space</span></NavLink>
-        <nav aria-label="Điều hướng chính">
-          <NavLink to="/" end>Trang chủ</NavLink>
-          <NavLink to="/about">Giới thiệu</NavLink>
-          <NavLink to="/courses">Khóa học</NavLink>
-          <NavLink to="/contact">Liên hệ</NavLink>
-        </nav>
-        <p className="favorite-count">Yêu thích <strong>{favoriteIds.length}</strong></p>
-      </header>
+      <Header savedCount={favoriteIds.length} />
+      {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
 
       <main className="main-content" id="main-content">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
           <Route path="/about" element={<About />} />
           <Route
             path="/courses"
@@ -73,6 +72,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

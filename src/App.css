@@ -115,7 +115,7 @@
 .resource-note svg { color: var(--primary-dark); width: 28px; height: 28px; }
 .hero-mascot { position: absolute; z-index: 2; right: -7%; bottom: 40px; width: 67%; height: auto; filter: drop-shadow(0 15px 12px #65080b28); }
 .mascot-platform { position: absolute; z-index: 1; right: -2%; bottom: 38px; width: 60%; height: 35px; border-radius: 50%; background: linear-gradient(180deg, #f48070, #d94741); box-shadow: 0 14px 30px #65080b30; }
-.floating-bookmark { position: absolute; z-index: 3; right: 1%; bottom: 0; display: flex; align-items: center; gap: 13px; padding: 17px 22px; background: #fff9f5; border-radius: 17px; box-shadow: 0 12px 24px #65080b28; transform: rotate(5deg); font-size: 17px; color: #382d2a; font-weight: 700; }
+.floating-bookmark { position: absolute; z-index: 3; right: 16%; bottom: 0; display: flex; align-items: center; gap: 13px; padding: 17px 22px; background: #fff9f5; border-radius: 17px; box-shadow: 0 12px 24px #65080b28; transform: rotate(5deg); font-size: 17px; color: #382d2a; font-weight: 700; }
 .floating-bookmark > span { display: grid; place-items: center; width: 42px; height: 42px; background: #ffe6df; border-radius: 10px; color: var(--primary); }
 .floating-bookmark small { display: block; font-size: 13px; font-weight: 400; color: #77665f; margin-top: 2px; }
 .visual-spark { position: absolute; color: #ffdc9e; font-size: 36px; }

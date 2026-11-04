@@ -229,7 +229,7 @@
   .introduction-benefit h3 { font-size: 22px; margin-bottom: 12px; }
 }
 /* Learning journey */
-.main-content > .journey-section { padding: 64px 24px 76px; overflow: hidden; background: #fff6f8; border: 0; border-radius: 0; box-shadow: none; scroll-margin-top: 24px; }
+.main-content > .journey-section { padding: 64px 24px 76px; overflow: hidden; background: #fff; border: 0; border-radius: 0; box-shadow: none; scroll-margin-top: 24px; }
 .journey-inner { position: relative; max-width: 1220px; margin-inline: auto; }
 .journey-heading { text-align: center; }
 .journey-eyebrow { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 24px; color: var(--primary); font-size: 24px; line-height: 1.4; font-weight: 800; }

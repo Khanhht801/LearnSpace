@@ -108,7 +108,7 @@ Tài liệu cộng đồng hiển thị tiêu đề, mô tả, chủ đề, trì
 
 - Vị trí: ngay sau `#gioi-thieu`, trước `#chu-de`; ID `hanh-trinh`.
 - Component: `src/components/Journey.jsx`, được đặt sau `<Introduction />` trong `src/pages/Home.jsx`; style trong `src/App.css`.
-- Dùng nền hồng nhạt `#FFF6F8`, font SVN-Gilroy và màu đỏ thương hiệu hiện tại.
+- Dùng nền hồng nhạt `#FFFFFF`, font SVN-Gilroy và màu đỏ thương hiệu hiện tại.
 - Phần đầu căn giữa: nhãn “BẮT ĐẦU TỪ ĐIỀU NHỎ” với hai đường kẻ hai bên; tiêu đề hai dòng, dòng đầu đen và dòng sau đỏ, gạch cong và tia vàng trang trí.
 - Mô tả: “Chỉ cần một chủ đề bạn quan tâm, LearnSpace sẽ giúp bạn bắt đầu hành trình học hỏi.”
 

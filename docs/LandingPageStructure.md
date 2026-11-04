@@ -140,3 +140,12 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 - Giữ mô tả, thông tin người chia sẻ/nguồn/điều kiện sử dụng trong mục mở rộng và liên kết tải file thật.
 - Có trạng thái đang tải, trống và lỗi với nút thử lại. Đăng thành công trong popup Đóng góp sẽ tự cập nhật section Chia sẻ.
 - Desktop ba cột, tối đa 991px hai cột, tối đa 600px một cột. Không thêm mục navbar riêng.
+
+## 10. Section Đã lưu — Góc học tập của bạn
+
+- Section `#da-luu` dùng nền hồng nhạt, tiêu đề “Điều hay đã lưu, sẵn sàng để học tiếp.” với dòng thứ hai màu đỏ.
+- Khi chưa lưu tài liệu: khung trắng kem bo góc lớn, tấm nền hồng xoay phía sau, icon bookmark, tiêu đề “Bộ sưu tập của bạn đang chờ tài liệu đầu tiên” và lời nhắc lưu để học tiếp.
+- Gợi ý React, React Router và API dẫn đến kết quả tìm kiếm thật; nút “Khám phá thư viện” cuộn đến `#thu-vien`.
+- Mascot mới `/mascot-reading.png`: gà vàng ngồi đọc sách đỏ, khăn đỏ chữ L, ba lô đỏ; nền trong suốt, đặt ở góc dưới trái theo ảnh mẫu. Ngôi sao vàng trang trí hai bên.
+- Khi đã có tài liệu: giữ danh sách xem trước tối đa ba tài liệu, “Tiếp tục đọc”, “Bỏ lưu” và “Xem tất cả đã lưu”; đồng bộ với trạng thái yêu thích trên navbar và thư viện.
+- Mobile chuyển khung thành toàn chiều rộng và đặt mascot thấp hơn để không che nội dung hay nút.

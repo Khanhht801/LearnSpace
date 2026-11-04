@@ -890,23 +890,31 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
 .about-visual-caption > span { display: grid; place-items: center; width: 40px; height: 40px; background: #fff1f4; border-radius: 12px; color: var(--primary); font-size: 28px; }
 .about-visual-caption small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
 .about-values { padding-block: var(--about-space) calc(var(--about-space) + 20px); background: white; scroll-margin-top: 112px; }
-.about-values-heading { max-width: 720px; margin-bottom: 32px; }
-.about-values h2 { font-size: clamp(30px, 3.4vw, 44px); line-height: 1.25; font-weight: 800; letter-spacing: -.025em; margin-bottom: 18px; }
-.about-values-heading > p:last-child { color: var(--muted); font-size: 18px; margin-bottom: 0; }
-.about-values-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-.about-value-card { display: flex; flex-direction: column; padding: 26px 22px; border: 1px solid var(--border); border-radius: 20px; background: linear-gradient(180deg, #fff, #fffafa); }
-.about-value-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-.about-value-icon { display: grid; place-items: center; width: 54px; height: 54px; background: #fff0f1; border-radius: 16px; color: var(--primary); }
-.about-value-number { color: #907878; font-weight: 700; font-size: 13px; }
-.about-value-card h3 { font-size: 22px; font-weight: 800; line-height: 1.35; margin: 0 0 13px; letter-spacing: -.02em; }
-.about-value-card > p { color: var(--muted); font-size: 17px; line-height: 1.7; margin-bottom: 24px; flex: 1; }
-.about-value-card > a { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; text-decoration: none; color: var(--primary-dark); }
-.about-value-card > a:hover { text-decoration: underline; }
+/* Six core values arranged around a shared center. */
+.about-page .about-values > .about-inner { width: min(1440px, calc(100% - 64px)); }
+.about-values .core-values-label { display: inline-block; margin: 0 0 28px; padding: 8px 20px; border-radius: 20px 24px 12px 24px; background: var(--brand-gradient); color: white; font-size: 28px; font-weight: 800; line-height: 1.3; letter-spacing: -.02em; }
+.core-values-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 440px) minmax(0, 1fr); align-items: center; gap: 14px; }
+.core-values-column { display: grid; grid-template-rows: repeat(3, minmax(145px, auto)); }
+.core-value-item { display: flex; align-items: center; padding: 20px 0; }
+.core-value-item + .core-value-item { border-top: 1px dashed #a39a9a; }
+.core-value-item h3 { margin: 0 0 10px; color: var(--primary); font-size: 22px; line-height: 1.3; font-weight: 800; letter-spacing: -.015em; }
+.core-value-item p { margin: 0; font-size: 18px; line-height: 1.6; color: #252525; }
+.core-values-right h3 { text-align: right; }
+.core-values-diagram { display: block; width: 100%; height: auto; overflow: visible; }
+.core-values-count { fill: #db1f1f; font-family: inherit; font-size: 88px; font-weight: 800; }
+.core-values-word { fill: #252525; font-family: inherit; font-size: 29px; font-weight: 800; letter-spacing: -.5px; }
+.core-value-mobile-icon { display: none; }
 @media (max-width: 1100px) {
   .about-hero-layout { gap: 24px; }
   .about-hero h1 { font-size: 40px; }
   .about-hero-visual { min-height: 360px; }
-  .about-values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .core-values-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; }
+  .core-values-diagram { grid-column: 1 / -1; grid-row: 1; width: min(100%, 400px); margin: 0 auto 24px; }
+  .core-values-column { grid-template-rows: none; align-self: start; }
+  .core-values-right h3 { text-align: left; }
+  .core-value-item { align-items: flex-start; gap: 14px; }
+  .core-value-mobile-icon { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border: 1px solid var(--border); border-radius: 50%; background: #fff5f5; color: var(--primary); }
+
 }
 @media (max-width: 800px) {
   .about-page { --about-space: 32px; }
@@ -920,7 +928,7 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
   .about-page .about-inner { width: calc(100% - 40px); }
   .about-hero { padding-top: 36px; }
   .about-hero h1 { font-size: 34px; }
-  .about-description, .about-values-heading > p:last-child { font-size: 17px; }
+  .about-description { font-size: 17px; }
   .about-hero-note { font-size: 12px; }
   .about-hero-visual { min-height: 290px; }
   .about-paper { padding: 16px; }
@@ -928,7 +936,16 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
   .about-paper > span { font-size: 8px; }
   .about-visual-caption { left: 0; padding: 12px 16px; font-size: 16px; }
   .about-visual-caption small { font-size: 12px; }
-  .about-values-grid { grid-template-columns: 1fr; gap: 16px; }
-  .about-value-card { padding: 24px; }
-  .about-value-top { margin-bottom: 18px; }
+
+}
+
+@media (max-width: 640px) {
+  .about-page .about-values > .about-inner { width: calc(100% - 40px); }
+  .about-values .core-values-label { font-size: 24px; margin-bottom: 20px; }
+  .core-values-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .core-values-diagram { grid-column: 1; width: min(100%, 340px); margin-bottom: 18px; }
+  .core-values-right .core-value-item:first-child { border-top: 1px dashed #a39a9a; }
+  .core-value-item { padding-block: 22px; }
+  .core-value-item h3 { font-size: 21px; }
+  .core-value-item p { font-size: 17px; }
 }

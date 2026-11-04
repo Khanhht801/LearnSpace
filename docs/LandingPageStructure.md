@@ -19,7 +19,7 @@ Mục tiêu: giúp người dùng tìm, đọc hoặc tải tài liệu và lưu
 
 ## 2. Các section — thứ tự từ trên xuống
 
-Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Chia sẻ → Đã lưu**. Hành trình đặt ngay sau Giới thiệu, không thêm mục riêng trên navbar. Góp ý và footer đặt cuối trang.
+Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành trình → Chủ đề → Thư viện → Thông điệp → Đóng góp → Chia sẻ → Đã lưu**. Hành trình đặt ngay sau Giới thiệu, không thêm mục riêng trên navbar. Góp ý và footer đặt cuối trang.
 
 | Thứ tự | Section | ID | Nội dung hiện tại | Hành động chính |
 | --- | --- | --- | --- | --- |
@@ -28,11 +28,12 @@ Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành t
 | 3 | Hành trình | `hanh-trinh` | “Ba bước nhỏ, thêm một điều mới.”; ba thẻ 01–03: Tìm điều bạn tò mò → Đọc và khám phá → Lưu để học tiếp; mascot trên thẻ đầu | Hướng dẫn hành trình học hỏi |
 | 4 | Chủ đề | `chu-de` | Các thẻ React, JavaScript, Git, Kỹ năng học tập…; mỗi thẻ có biểu tượng, tên và mô tả ngắn; chỉ hiện chủ đề đã có nội dung | Chọn chủ đề để mở thư viện đã lọc |
 | 5 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
-| 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu của bạn”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng đặt trong section Chia sẻ riêng ngay sau Đóng góp | “Chia sẻ tài liệu của bạn” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; danh sách cập nhật tại section Chia sẻ sau khi đăng thành công |
-| 7 | Chia sẻ | `chia-se` | Tài liệu cộng đồng mới nhất; thẻ bìa hồng, chủ đề, định dạng, dung lượng, ngày đăng và mô tả | Xem tất cả / Thu gọn, tải tài liệu, xem nguồn |
-| 8 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 9 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng muốn có hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
-| 10 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
+| 6 | Thông điệp | `thong-diep` | Tinh thần LearnSpace: không cần biết tất cả, chỉ cần luôn muốn học hỏi; mascot đeo tai nghe đọc sách | Truyền tải tinh thần học hỏi và cộng đồng |
+| 7 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu của bạn”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng đặt trong section Chia sẻ riêng ngay sau Đóng góp | “Chia sẻ tài liệu của bạn” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; danh sách cập nhật tại section Chia sẻ sau khi đăng thành công |
+| 8 | Chia sẻ | `chia-se` | Tài liệu cộng đồng mới nhất; thẻ bìa hồng, chủ đề, định dạng, dung lượng, ngày đăng và mô tả | Xem tất cả / Thu gọn, tải tài liệu, xem nguồn |
+| 9 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
+| 10 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng muốn có hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
+| 11 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
 ## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?
 
@@ -71,7 +72,7 @@ Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành t
 
 ## 5. Thứ tự triển khai thống nhất
 
-**Navbar → Hero → Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Chia sẻ → Đã lưu → Góp ý → Footer**
+**Navbar → Hero → Giới thiệu → Hành trình → Chủ đề → Thư viện → Thông điệp → Đóng góp → Chia sẻ → Đã lưu → Góp ý → Footer**
 
 Lợi ích nằm trong Giới thiệu; hướng dẫn học là section Hành trình riêng ngay sau đó. Tài liệu nổi bật và mới cập nhật nằm trong Thư viện.
 
@@ -158,3 +159,12 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 - Cột phải là form trắng bo góc lớn; ba lựa chọn dạng pill: Tài liệu / chủ đề mới, Tính năng muốn có, Góp ý khác. Giá trị API vẫn là `content`, `feature`, `other`.
 - Ô nội dung nền xám nhạt, placeholder nhiều dòng gợi ý tài liệu/tính năng/góp ý; giữ giới hạn 10–2.000 ký tự, label và hướng dẫn truy cập. Nút đỏ “Gửi đề xuất” kèm icon máy bay giấy.
 - Giữ nguyên API và quyền riêng tư: chỉ xóa form khi lưu thành công, giữ nội dung khi lỗi, khóa form trong lúc gửi và hiển thị thông báo trạng thái.
+
+## 12. Section Thông điệp — Tinh thần LearnSpace
+
+- ID `thong-diep`, component `src/components/MessageSection.jsx`; ngay sau `#thu-vien`, trước `#dong-gop`. Không thêm mục navbar riêng.
+- Theo mẫu: nền hồng nhạt, họa tiết sóng phía dưới, hai cột trên desktop và một cột ở màn hình tối đa 800px.
+- Cột trái: nhãn pill “TINH THẦN LEARNSPACE”; tiêu đề “Không cần biết tất cả. Chỉ cần luôn muốn học hỏi.” với dòng thứ hai màu đỏ.
+- Nội dung: “Mỗi người bắt đầu với một nền tảng khác nhau, nhưng ai cũng có thể tiếp tục tiến bộ. LearnSpace tin rằng tri thức có giá trị hơn khi được khám phá, lưu giữ và sẻ chia.”
+- Khung thông điệp có icon cộng đồng và dòng “Học theo cách riêng. Phát triển cùng cộng đồng.”; không có nút thao tác.
+- Cột phải dùng ảnh mới `/mascot-message.png`: gà vàng khăn đỏ chữ L, tai nghe đỏ, đọc sách bên chồng sách và chậu cây; các bong bóng biểu tượng bóng đèn, biểu đồ tăng trưởng và mũ tốt nghiệp. Ảnh có nền trong suốt.

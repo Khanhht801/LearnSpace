@@ -4,6 +4,7 @@ import Introduction from '../components/Introduction.jsx';
 import Journey from '../components/Journey.jsx';
 import Topics from '../components/Topics.jsx';
 import LibrarySection from '../components/LibrarySection.jsx';
+import MessageSection from '../components/MessageSection.jsx';
 import ContributionSection from '../components/ContributionSection.jsx';
 import SharedSection from '../components/SharedSection.jsx';
 import SavedSection from '../components/SavedSection.jsx';
@@ -48,6 +49,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
     <Journey />
     <Topics />
     <LibrarySection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
+    <MessageSection />
     <ContributionSection onDocumentShared={() => setSharedRevision((value) => value + 1)} />
     <SharedSection revision={sharedRevision} />
     <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />

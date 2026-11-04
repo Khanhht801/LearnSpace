@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 
 const MAX_SIZE = 10 * 1024 * 1024;
 const accept = '.pdf,.txt,.md,.docx,.pptx,.xlsx';
+const sharingOptions = [
+  { title: 'Ghi chép học tập', description: 'Tóm tắt, hệ thống kiến thức và mẹo học hiệu quả.', icon: 'M7 3v4M17 3v4M5 5h14v17H5V5ZM8 11h8M8 15h8M8 18h5' },
+  { title: 'Tài liệu hữu ích', description: 'Slide, bài giảng, đề cương hay tài liệu tham khảo chất lượng.', icon: 'M5 2h9l5 5v15H5V2ZM14 2v6h5M8 12h8M8 16h8' },
+  { title: 'Kinh nghiệm ôn luyện', description: 'Cách học, lộ trình ôn tập hoặc trải nghiệm thi thực tế.', icon: 'M2 8l10-5 10 5-10 5L2 8ZM6 10v7c4 3 8 3 12 0v-7M22 8v9' },
+  { title: 'Bộ sưu tập theo chủ đề', description: 'Tổng hợp tài liệu, ghi chú và nguồn học xoay quanh một chủ đề cụ thể.', icon: 'M2 7l10-5 10 5-10 5L2 7ZM5 11l-3 2 10 5 10-5-3-2M5 17l-3 2 10 5 10-5-3-2' },
+];
 
 export default function ContributionSection() {
   const dialogRef = useRef(null);
@@ -49,13 +55,20 @@ export default function ContributionSection() {
       <div className="landing-inner">
         <div className="contribution-layout">
           <div className="contribution-copy">
-            <p className="eyebrow">KIẾN THỨC HAY, CÙNG NHAU CHIA SẺ</p>
+            <p className="eyebrow"><span aria-hidden="true">✦</span> KIẾN THỨC MỞ, CỘNG ĐỒNG MẠNH</p>
             <h2 id="contribution-title">Chia sẻ điều bạn biết,<br /><span>giúp người khác tiến xa hơn.</span></h2>
-            <p>Đăng tài liệu học tập của bạn ngay tại đây. Thêm tiêu đề, mô tả và nguồn để mọi người dễ tìm hiểu, lựa chọn và tải về.</p>
-            <div className="contribution-actions"><button type="button" aria-haspopup="dialog" onClick={() => dialogRef.current.showModal()}>Chia sẻ tài liệu <span aria-hidden="true">↗</span></button></div>
-            <p className="contribution-review">Chia sẻ tài liệu bạn có quyền sử dụng, cùng cộng đồng học hỏi mỗi ngày.</p>
+            <p>Một ghi chú bạn từng viết, một tài liệu bạn thấy hữu ích hay một kinh nghiệm nhỏ cũng có thể trở thành điểm khởi đầu cho ai đó.</p>
+            <div className="contribution-actions"><button type="button" aria-haspopup="dialog" onClick={() => dialogRef.current.showModal()}>Chia sẻ tài liệu của bạn <span aria-hidden="true">→</span></button></div>
           </div>
-          <div className="contribution-options"><h3>Bạn có thể chia sẻ gì?</h3><ol><li><span aria-hidden="true">01</span><div><h4>Ghi chép học tập</h4><p>Những kiến thức, tóm tắt và kinh nghiệm bạn tích lũy.</p></div></li><li><span aria-hidden="true">02</span><div><h4>Tài liệu hữu ích</h4><p>Bài tập, tài liệu tham khảo và nội dung học tập có nguồn rõ ràng.</p></div></li><li><span aria-hidden="true">03</span><div><h4>Kiến thức của bạn</h4><p>Bài hướng dẫn tự biên soạn giúp người khác bắt đầu dễ dàng hơn.</p></div></li></ol></div>
+          <div className="contribution-panel">
+            <span className="contribution-spark contribution-spark-one" aria-hidden="true">✦</span>
+            <span className="contribution-spark contribution-spark-two" aria-hidden="true">✧</span>
+            <div className="contribution-options">
+              <h3>Bạn có thể chia sẻ gì?</h3>
+              <ul>{sharingOptions.map((option) => <li key={option.title}><span className="contribution-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 26" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d={option.icon} /></svg></span><div><h4>{option.title}</h4><p>{option.description}</p></div></li>)}</ul>
+            </div>
+            <div className="contribution-mascot" aria-hidden="true"><div className="contribution-books"><span /><span /></div><img src="/mascot.png" alt="" width="1254" height="1254" loading="lazy" /></div>
+          </div>
         </div>
         <dialog className="contribution-dialog" ref={dialogRef} aria-labelledby="upload-dialog-title" onCancel={(event) => { if (uploading) event.preventDefault(); }}>
           <form className="upload-form" onSubmit={handleSubmit} aria-busy={uploading}>

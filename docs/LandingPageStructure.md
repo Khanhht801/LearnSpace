@@ -28,7 +28,7 @@ Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành t
 | 3 | Hành trình | `hanh-trinh` | “Ba bước nhỏ, thêm một điều mới.”; ba thẻ 01–03: Tìm điều bạn tò mò → Đọc và khám phá → Lưu để học tiếp; mascot trên thẻ đầu | Hướng dẫn hành trình học hỏi |
 | 4 | Chủ đề | `chu-de` | Các thẻ React, JavaScript, Git, Kỹ năng học tập…; mỗi thẻ có biểu tượng, tên và mô tả ngắn; chỉ hiện chủ đề đã có nội dung | Chọn chủ đề để mở thư viện đã lọc |
 | 5 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
-| 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
+| 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu của bạn”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu của bạn” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
 | 7 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
 | 8 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
 | 9 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
@@ -90,7 +90,7 @@ Yêu cầu này thay thế phương án gửi email/chủ website đăng thủ c
 | File | Một file PDF, TXT, MD, DOCX, PPTX hoặc XLSX; tối đa 10 MB |
 | Xác nhận | Có quyền chia sẻ và đồng ý đăng công khai |
 
-Luồng: bấm “Chia sẻ tài liệu” → mở hộp thoại → nhập thông tin → chọn file → kiểm tra → đang đăng → server lưu → báo thành công và làm mới danh sách. Form mặc định ẩn để section gọn; đóng bằng nút Đóng hoặc Escape, giữ bản nhập khi mở lại. Trong khi đăng, chặn đóng để tránh mất trạng thái. Lỗi giữ nguyên nội dung để sửa hoặc thử lại. Danh sách có trạng thái đang tải, trống, lỗi và nút làm mới.
+Luồng: bấm “Chia sẻ tài liệu của bạn” → mở hộp thoại → nhập thông tin → chọn file → kiểm tra → đang đăng → server lưu → báo thành công và làm mới danh sách. Form mặc định ẩn để section gọn; đóng bằng nút Đóng hoặc Escape, giữ bản nhập khi mở lại. Trong khi đăng, chặn đóng để tránh mất trạng thái. Lỗi giữ nguyên nội dung để sửa hoặc thử lại. Danh sách có trạng thái đang tải, trống, lỗi và nút làm mới.
 
 Tài liệu cộng đồng hiển thị tiêu đề, mô tả, chủ đề, trình độ, tên người chia sẻ, nguồn, điều kiện sử dụng, ngày đăng, dung lượng và nút tải file. Ngày đăng lấy từ server. File được tải dưới dạng đính kèm.
 
@@ -120,3 +120,12 @@ Tài liệu cộng đồng hiển thị tiêu đề, mô tả, chủ đề, trì
 Ba thẻ bo góc, nền trắng trong nhẹ, viền và bóng hồng nhạt; số bước đặt ở góc trên trái. Desktop hiển thị ba cột với mũi tên nối ngang. Ở màn hình rộng tối đa 800px, chuyển thành một cột với mũi tên hướng xuống. Mascot dùng lại `/mascot.png`, hiển thị phần đầu phía trên thẻ đầu tiên; các ngôi sao trang trí màu hồng.
 
 Các bước dùng danh sách có thứ tự và icon trang trí được ẩn với trình đọc màn hình. Section chỉ hướng dẫn, không có nút hay liên kết thao tác riêng.
+
+## 8. Giao diện section Đóng góp
+
+Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ trắng và điểm nhấn vàng nhạt. Desktop chia hai cột; màn hình tối đa 991px xếp nội dung và khung gợi ý theo chiều dọc.
+
+- Bên trái: nhãn “KIẾN THỨC MỞ, CỘNG ĐỒNG MẠNH”; tiêu đề “Chia sẻ điều bạn biết, giúp người khác tiến xa hơn.”; mô tả khuyến khích chia sẻ ghi chú, tài liệu và kinh nghiệm; nút trắng “Chia sẻ tài liệu của bạn” có mũi tên.
+- Bên phải: khung bo góc có viền sáng, tiêu đề “Bạn có thể chia sẻ gì?”; bốn dòng gồm Ghi chép học tập, Tài liệu hữu ích, Kinh nghiệm ôn luyện và Bộ sưu tập theo chủ đề. Mỗi dòng có icon đỏ trên nền kem hồng và mô tả ngắn.
+- Mascot dùng lại `/mascot.png` ở góc dưới phải cùng chồng sách trang trí; ngôi sao vàng nhạt quanh khung.
+- Nút chia sẻ tiếp tục mở popup đăng tài liệu hiện tại. Giữ nguyên kiểm tra file, quyền chia sẻ, trạng thái đăng, thông báo lỗi/thành công và danh sách tài liệu cộng đồng bên dưới.

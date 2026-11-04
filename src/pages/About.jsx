@@ -46,11 +46,19 @@ function ValuesDiagram() {
 }
 
 function ValueItem({ value }) {
+  const icon = <span className="core-value-mobile-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d={value.path} fillRule="evenodd" /></svg></span>;
+
   return (
-    <article className="core-value-item">
-      <span className="core-value-mobile-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d={value.path} fillRule="evenodd" /></svg></span>
-      <div><h3>{value.title}</h3><p>{value.description}</p></div>
-    </article>
+    <>
+      <article className="core-value-item">
+        {icon}
+        <div><h3>{value.title}</h3><p>{value.description}</p></div>
+      </article>
+      <details className="core-value-accordion">
+        <summary>{icon}<h3>{value.title}</h3><span className="core-value-chevron" aria-hidden="true" /></summary>
+        <p>{value.description}</p>
+      </details>
+    </>
   );
 }
 

@@ -185,3 +185,11 @@ Hai section `#chu-de` và `#thu-vien` dùng cùng thang chữ với các section
 | Hành động thẻ | Chủ đề 18px, xem nội dung 16px, nút lưu 15px | Chủ đề 17px, các nút còn lại giữ nguyên |
 
 Khoảng cách sau phần đầu section tăng để chữ thoáng. Từ 992px đến 1200px, liên kết xem tất cả xuống dưới tiêu đề để tránh ép chiều ngang; breakpoint lưới thẻ giữ nguyên.
+
+## 14. Khoảng cách giữa các section
+
+- Dùng biến CSS `--landing-section-space`: padding trên/dưới 44px trên desktop, 32px khi màn hình tối đa 800px, 28px khi tối đa 480px. Thay cho các khoảng 64–110px trước đây.
+- Hero dùng 40px trên / 48px dưới; tối đa 800px dùng 32px / 36px.
+- Khoảng từ heading đến thẻ Chủ đề, Thư viện, Chia sẻ: 32px trên desktop, 24px trên điện thoại. Giới thiệu đến bốn thẻ giảm còn 40px / 30px.
+- Giữ khoảng trống cần thiết cho mascot tràn khỏi khung Đóng góp, Đã lưu và mascot phía trên bước đầu Hành trình. Không giảm padding bên trong form hoặc nút bấm.
+- Thông điệp giữ 56px phía dưới trên desktop, 40px trên mobile cho họa tiết sóng; Đã lưu giữ 48px / 32px để mascot không bị cắt.

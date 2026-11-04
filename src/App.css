@@ -827,3 +827,35 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
   .topic-card h3, .library-card h3 { font-size: 25px; }
   .topic-card-action { font-size: 17px; }
 }
+
+/* Compact, consistent spacing between landing sections. */
+.main-content:has(> .welcome-page) { --landing-section-space: 44px; }
+.main-content > :is(.introduction, .journey-section, .topics-section, .library-section, .message-section, .contribution-section, .shared-section, .saved-section, .feedback-section) { padding-block: var(--landing-section-space); }
+.main-content > .welcome-page { padding-block: 40px 48px; }
+.introduction-benefits { margin-top: 40px; }
+.topics-heading, .library-section .library-heading, .shared-heading { margin-bottom: 32px; }
+.saved-section .library-heading { margin-bottom: 40px; }
+/* Reserve space only where the artwork extends outside its panel. */
+.contribution-layout { padding-bottom: 46px; }
+.main-content > .contribution-section { padding-bottom: 32px; }
+.main-content > .saved-section { padding-bottom: 48px; }
+.main-content > .message-section { padding-bottom: 56px; }
+.message-waves { height: 95px; }
+@media (max-width: 800px) {
+  .main-content:has(> .welcome-page) { --landing-section-space: 32px; }
+  .main-content > .welcome-page { padding-block: 32px 36px; }
+  .main-content > .message-section { padding-bottom: 40px; }
+  .main-content > .saved-section { padding-bottom: 32px; }
+  .introduction-benefits { margin-top: 30px; }
+  .saved-section .library-heading { margin-bottom: 32px; }
+  .message-inner { gap: 20px; }
+  .feedback-layout { gap: 24px; }
+}
+@media (max-width: 480px) {
+  .main-content:has(> .welcome-page) { --landing-section-space: 28px; }
+  .topics-heading, .library-section .library-heading, .shared-heading { margin-bottom: 24px; }
+  .introduction-heading { gap: 18px; }
+  .contribution-layout { gap: 32px; padding-bottom: 52px; }
+  .main-content > .contribution-section { padding-bottom: 28px; }
+  .message-waves { height: 65px; }
+}

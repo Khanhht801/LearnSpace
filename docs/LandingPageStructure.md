@@ -168,3 +168,20 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 - Nội dung: “Mỗi người bắt đầu với một nền tảng khác nhau, nhưng ai cũng có thể tiếp tục tiến bộ. LearnSpace tin rằng tri thức có giá trị hơn khi được khám phá, lưu giữ và sẻ chia.”
 - Khung thông điệp có icon cộng đồng và dòng “Học theo cách riêng. Phát triển cùng cộng đồng.”; không có nút thao tác.
 - Cột phải dùng ảnh mới `/mascot-message.png`: gà vàng khăn đỏ chữ L, tai nghe đỏ, đọc sách bên chồng sách và chậu cây; các bong bóng biểu tượng bóng đèn, biểu đồ tăng trưởng và mũ tốt nghiệp. Ảnh có nền trong suốt.
+
+## 13. Cỡ chữ section Chủ đề và Thư viện
+
+Hai section `#chu-de` và `#thu-vien` dùng cùng thang chữ với các section landing page khác, giữ font SVN-Gilroy và màu hiện tại:
+
+| Thành phần | Desktop | Mobile tối đa 600px |
+| --- | --- | --- |
+| Nhãn section | 18px, weight 800 | 14px |
+| Tiêu đề section | `clamp(32px, 3.5vw, 50px)`, weight 800 | 30px |
+| Mô tả section | 21px; tối đa 800px dùng 19px | 17px |
+| Liên kết xem tất cả | 19px | 17px |
+| Tiêu đề thẻ | 27px, weight 800 | 25px |
+| Mô tả thẻ | 19px; tối đa 800px dùng 18px | 18px |
+| Metadata, tag, số tài liệu | 14px | 14px |
+| Hành động thẻ | Chủ đề 18px, xem nội dung 16px, nút lưu 15px | Chủ đề 17px, các nút còn lại giữ nguyên |
+
+Khoảng cách sau phần đầu section tăng để chữ thoáng. Từ 992px đến 1200px, liên kết xem tất cả xuống dưới tiêu đề để tránh ép chiều ngang; breakpoint lưới thẻ giữ nguyên.

@@ -954,7 +954,8 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
   .core-value-accordion:not(:first-of-type), .core-values-right .core-value-accordion:first-of-type { border-top: 1px dashed #a39a9a; }
   .core-value-accordion summary { display: flex; align-items: center; gap: 14px; min-height: 48px; cursor: pointer; list-style: none; }
   .core-value-accordion summary::-webkit-details-marker { display: none; }
-  .core-value-accordion h3 { flex: 1; min-width: 0; margin: 0; color: var(--primary); font-size: 21px; line-height: 1.3; font-weight: 800; letter-spacing: -.015em; }
+  .core-value-accordion h3 { flex: 1; min-width: 0; margin: 0; color: #252525; font-size: 21px; line-height: 1.3; font-weight: 800; letter-spacing: -.015em; }
+  .core-value-accordion summary:hover h3, .core-value-accordion summary:focus-visible h3, .core-value-accordion[open] h3 { color: var(--primary); }
   .core-value-chevron { flex: 0 0 9px; width: 9px; height: 9px; margin: 0 4px 5px 0; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(45deg); }
   .core-value-accordion[open] .core-value-chevron { margin-bottom: -4px; transform: rotate(225deg); }
   .core-value-accordion > p { margin: 12px 0 0 62px; color: #252525; font-size: 17px; line-height: 1.6; }

@@ -19,18 +19,19 @@ Mục tiêu: giúp người dùng tìm, đọc hoặc tải tài liệu và lưu
 
 ## 2. Các section — thứ tự từ trên xuống
 
-Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự navbar: **Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu**. Góp ý và footer đặt cuối trang.
+Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Đã lưu**. Hành trình đặt ngay sau Giới thiệu, không thêm mục riêng trên navbar. Góp ý và footer đặt cuối trang.
 
 | Thứ tự | Section | ID | Nội dung hiện tại | Hành động chính |
 | --- | --- | --- | --- | --- |
 | 1 | Hero | `hero` | Tiêu đề “Kiến thức dễ tìm. Học tập dễ hơn.”; mô tả thư viện học tập miễn phí, không cần tài khoản; ô tìm kiếm “Bạn muốn học gì hôm nay?”; minh họa học tập hoặc giao diện thư viện thực tế | “Khám phá tài liệu” cuộn đến Thư viện; tìm kiếm mở kết quả trong trang thư viện |
-| 2 | Giới thiệu | `gioi-thieu` | Giới thiệu LearnSpace và mục tiêu chia sẻ kiến thức; bốn lợi ích: miễn phí, dễ tìm, nguồn rõ ràng, thuận tiện học lại; hướng dẫn Tìm → Đọc/tải → Lưu | “Khám phá chủ đề” |
-| 3 | Chủ đề | `chu-de` | Các thẻ React, JavaScript, Git, Kỹ năng học tập…; mỗi thẻ có biểu tượng, tên và mô tả ngắn; chỉ hiện chủ đề đã có nội dung | Chọn chủ đề để mở thư viện đã lọc |
-| 4 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
-| 5 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
-| 6 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 7 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
-| 8 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
+| 2 | Giới thiệu | `gioi-thieu` | Tiêu đề “Một không gian chung. Nhiều cơ hội học hỏi.”; mô tả bên phải; bốn thẻ: Học không rào cản, Tìm đúng điều cần học, Tôn trọng nguồn kiến thức, Điều hay, luôn ở lại; nền hồng nhạt, icon đỏ | Đọc giới thiệu và lợi ích |
+| 3 | Hành trình | `hanh-trinh` | “Ba bước nhỏ, thêm một điều mới.”; ba thẻ 01–03: Tìm điều bạn tò mò → Đọc và khám phá → Lưu để học tiếp; mascot trên thẻ đầu | Hướng dẫn hành trình học hỏi |
+| 4 | Chủ đề | `chu-de` | Các thẻ React, JavaScript, Git, Kỹ năng học tập…; mỗi thẻ có biểu tượng, tên và mô tả ngắn; chỉ hiện chủ đề đã có nội dung | Chọn chủ đề để mở thư viện đã lọc |
+| 5 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
+| 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
+| 7 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
+| 8 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
+| 9 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
 ## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?
 
@@ -69,9 +70,9 @@ Hero đặt đầu trang. Các section chính tiếp theo đi đúng thứ tự 
 
 ## 5. Thứ tự triển khai thống nhất
 
-**Navbar → Hero → Giới thiệu → Chủ đề → Thư viện → Đóng góp → Đã lưu → Góp ý → Footer**
+**Navbar → Hero → Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Đã lưu → Góp ý → Footer**
 
-Lợi ích và hướng dẫn học nằm trong Giới thiệu; tài liệu nổi bật và mới cập nhật nằm trong Thư viện để trang gọn và giữ đúng thứ tự đã chọn.
+Lợi ích nằm trong Giới thiệu; hướng dẫn học là section Hành trình riêng ngay sau đó. Tài liệu nổi bật và mới cập nhật nằm trong Thư viện.
 
 ## 6. Chi tiết section Đóng góp — đăng tài liệu trực tiếp
 
@@ -101,3 +102,21 @@ Tài liệu cộng đồng hiển thị tiêu đề, mô tả, chủ đề, trì
 - Hosting chỉ phục vụ file tĩnh sẽ không xử lý upload. Khi đưa lên mạng cần server Node.js và ổ đĩa lưu trữ bền vững; sao lưu thư mục dữ liệu.
 - Bản này chưa có quản trị, kiểm duyệt, xác minh tài khoản, chống spam hoặc quét mã độc. Dữ liệu người dùng nhập được hiển thị dạng văn bản; có kiểm tra định dạng và dung lượng file phía server.
 - Tài liệu cộng đồng nằm trong section Đóng góp; danh mục biên tập trong Thư viện và tính năng Đã lưu hiện vẫn dùng dữ liệu cũ.
+
+## 7. Section Hành trình — Ba bước nhỏ, thêm một điều mới
+
+- Vị trí: ngay sau `#gioi-thieu`, trước `#chu-de`; ID `hanh-trinh`.
+- Component: `src/components/Journey.jsx`, được đặt sau `<Introduction />` trong `src/pages/Home.jsx`; style trong `src/App.css`.
+- Dùng nền hồng nhạt `#FFF6F8`, font SVN-Gilroy và màu đỏ thương hiệu hiện tại.
+- Phần đầu căn giữa: nhãn “BẮT ĐẦU TỪ ĐIỀU NHỎ” với hai đường kẻ hai bên; tiêu đề hai dòng, dòng đầu đen và dòng sau đỏ, gạch cong và tia vàng trang trí.
+- Mô tả: “Chỉ cần một chủ đề bạn quan tâm, LearnSpace sẽ giúp bạn bắt đầu hành trình học hỏi.”
+
+| Bước | Tiêu đề | Mô tả | Biểu tượng |
+| --- | --- | --- | --- |
+| 01 | Tìm điều bạn tò mò | Bắt đầu từ chủ đề khiến bạn muốn khám phá ngay hôm nay. | Kính lúp |
+| 02 | Đọc và khám phá | Mở tài liệu, ghi nhớ điều cần thiết và hiểu sâu hơn từng ý tưởng. | Sách mở |
+| 03 | Lưu để học tiếp | Đánh dấu nội dung hữu ích để quay lại bất cứ khi nào bạn sẵn sàng. | Bookmark |
+
+Ba thẻ bo góc, nền trắng trong nhẹ, viền và bóng hồng nhạt; số bước đặt ở góc trên trái. Desktop hiển thị ba cột với mũi tên nối ngang. Ở màn hình rộng tối đa 800px, chuyển thành một cột với mũi tên hướng xuống. Mascot dùng lại `/mascot.png`, hiển thị phần đầu phía trên thẻ đầu tiên; các ngôi sao trang trí màu hồng.
+
+Các bước dùng danh sách có thứ tự và icon trang trí được ẩn với trình đọc màn hình. Section chỉ hướng dẫn, không có nút hay liên kết thao tác riêng.

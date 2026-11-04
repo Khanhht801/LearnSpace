@@ -31,16 +31,16 @@ Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành t
 | 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu của bạn”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng đặt trong section Chia sẻ riêng ngay sau Đóng góp | “Chia sẻ tài liệu của bạn” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; danh sách cập nhật tại section Chia sẻ sau khi đăng thành công |
 | 7 | Chia sẻ | `chia-se` | Tài liệu cộng đồng mới nhất; thẻ bìa hồng, chủ đề, định dạng, dung lượng, ngày đăng và mô tả | Xem tất cả / Thu gọn, tải tài liệu, xem nguồn |
 | 8 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 9 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
+| 9 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng muốn có hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
 | 10 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
 ## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?
 
-Đặt sau Đã lưu, trước footer. Lời dẫn: “Chưa tìm thấy tài liệu mình cần, hay có ý tưởng giúp LearnSpace hữu ích hơn? Chia sẻ với chúng mình nhé.”
+Đặt sau Đã lưu, trước footer. Lời dẫn: “Một ý tưởng nhỏ cũng có thể giúp LearnSpace trở nên hữu ích hơn cho nhiều người học.”
 
 | Thành phần | Nội dung / hành vi |
 | --- | --- |
-| Loại đề xuất | Tài liệu / chủ đề mới; Tính năng website; Góp ý khác |
+| Loại đề xuất | Tài liệu / chủ đề mới; Tính năng muốn có; Góp ý khác |
 | Nội dung | Bắt buộc, 10–2.000 ký tự; gợi ý: “Mình muốn có thêm bài tập React về quản lý state…” |
 | Thông tin cá nhân | Không yêu cầu tên hoặc email |
 | Nút gửi | “Gửi đề xuất”; chuyển “Đang gửi…” và khóa form khi gửi |
@@ -149,3 +149,12 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 - Mascot mới `/mascot-reading.png`: gà vàng ngồi đọc sách đỏ, khăn đỏ chữ L, ba lô đỏ; nền trong suốt, đặt ở góc dưới trái theo ảnh mẫu. Ngôi sao vàng trang trí hai bên.
 - Khi đã có tài liệu: giữ danh sách xem trước tối đa ba tài liệu, “Tiếp tục đọc”, “Bỏ lưu” và “Xem tất cả đã lưu”; đồng bộ với trạng thái yêu thích trên navbar và thư viện.
 - Mobile chuyển khung thành toàn chiều rộng và đặt mascot thấp hơn để không che nội dung hay nút.
+
+## 11. Giao diện section Góp ý
+
+- Section `#gop-y` theo mẫu: nền hồng nhạt có họa tiết cong, hai cột trên desktop; màn hình tối đa 800px xếp dọc.
+- Cột trái có nhãn “CÙNG LÀM LEARNSPACE TỐT HƠN”, tiêu đề “Bạn muốn LearnSpace có thêm gì?” đen/đỏ và lời mời chia sẻ ý tưởng.
+- Mascot mới `/mascot-feedback.png`: gà vàng khăn đỏ chữ L, ba lô đỏ đứng cạnh hộp thư đỏ có phong bì và bóng đèn ý tưởng; ảnh nền trong suốt đặt dưới mô tả.
+- Cột phải là form trắng bo góc lớn; ba lựa chọn dạng pill: Tài liệu / chủ đề mới, Tính năng muốn có, Góp ý khác. Giá trị API vẫn là `content`, `feature`, `other`.
+- Ô nội dung nền xám nhạt, placeholder nhiều dòng gợi ý tài liệu/tính năng/góp ý; giữ giới hạn 10–2.000 ký tự, label và hướng dẫn truy cập. Nút đỏ “Gửi đề xuất” kèm icon máy bay giấy.
+- Giữ nguyên API và quyền riêng tư: chỉ xóa form khi lưu thành công, giữ nội dung khi lỗi, khóa form trong lúc gửi và hiển thị thông báo trạng thái.

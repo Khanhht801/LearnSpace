@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Introduction from '../components/Introduction.jsx';
+import Journey from '../components/Journey.jsx';
 import Topics from '../components/Topics.jsx';
 import LibrarySection from '../components/LibrarySection.jsx';
 import ContributionSection from '../components/ContributionSection.jsx';
@@ -41,6 +42,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
       </div>
     </section>
     <Introduction />
+    <Journey />
     <Topics />
     <LibrarySection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
     <ContributionSection />

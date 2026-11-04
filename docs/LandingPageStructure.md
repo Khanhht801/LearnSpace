@@ -131,7 +131,7 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 - Mascot dùng lại `/mascot.png` ở góc dưới phải cùng chồng sách trang trí; ngôi sao vàng nhạt quanh khung.
 - Nút chia sẻ tiếp tục mở popup đăng tài liệu hiện tại. Giữ nguyên kiểm tra file, quyền chia sẻ, trạng thái đăng, thông báo lỗi/thành công và danh sách tài liệu cộng đồng tại section `#chia-se` ngay sau đó.
 
-## 9. Section Chia sẻ — Tài liệu vừa được chia sẻ
+## 9. Section Chia sẻ — Tài liệu được chia sẻ
 
 - ID `chia-se`, đặt ngay sau `dong-gop` và trước `da-luu`; component `src/components/SharedSection.jsx`.
 - Tách toàn bộ danh sách khỏi nền đỏ của Đóng góp. Section mới nền trắng, nhãn đỏ “TỪ CỘNG ĐỒNG LEARNSPACE”, tiêu đề đen/đỏ và mô tả theo mẫu.

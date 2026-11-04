@@ -33,7 +33,7 @@ export default function SharedSection({ revision }) {
     <section className="shared-section" id="chia-se" aria-labelledby="shared-title">
       <div className="shared-inner">
         <div className="shared-heading">
-          <div><p className="eyebrow">TỪ CỘNG ĐỒNG LEARNSPACE</p><h2 id="shared-title">Tài liệu <span>vừa được chia sẻ</span></h2><p>Khám phá những nội dung mới nhất được cộng đồng LearnSpace bổ sung.</p></div>
+          <div><p className="eyebrow">TỪ CỘNG ĐỒNG LEARNSPACE</p><h2 id="shared-title">Tài liệu <span>được chia sẻ</span></h2><p>Khám phá những nội dung mới nhất được cộng đồng LearnSpace bổ sung.</p></div>
           <button className="shared-view-all" type="button" aria-expanded={showAll} aria-controls="shared-documents" onClick={() => setShowAll((value) => !value)}>{showAll ? 'Thu gọn tài liệu' : 'Xem tất cả tài liệu mới'} <span aria-hidden="true">→</span></button>
         </div>
         <div id="shared-documents" aria-live="polite">

@@ -19,7 +19,7 @@ Mục tiêu: giúp người dùng tìm, đọc hoặc tải tài liệu và lưu
 
 ## 2. Các section — thứ tự từ trên xuống
 
-Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Đã lưu**. Hành trình đặt ngay sau Giới thiệu, không thêm mục riêng trên navbar. Góp ý và footer đặt cuối trang.
+Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Chia sẻ → Đã lưu**. Hành trình đặt ngay sau Giới thiệu, không thêm mục riêng trên navbar. Góp ý và footer đặt cuối trang.
 
 | Thứ tự | Section | ID | Nội dung hiện tại | Hành động chính |
 | --- | --- | --- | --- | --- |
@@ -28,10 +28,11 @@ Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành t
 | 3 | Hành trình | `hanh-trinh` | “Ba bước nhỏ, thêm một điều mới.”; ba thẻ 01–03: Tìm điều bạn tò mò → Đọc và khám phá → Lưu để học tiếp; mascot trên thẻ đầu | Hướng dẫn hành trình học hỏi |
 | 4 | Chủ đề | `chu-de` | Các thẻ React, JavaScript, Git, Kỹ năng học tập…; mỗi thẻ có biểu tượng, tên và mô tả ngắn; chỉ hiện chủ đề đã có nội dung | Chọn chủ đề để mở thư viện đã lọc |
 | 5 | Thư viện | `thu-vien` | Hiển thị 3–6 tài liệu nổi bật; có thể thêm nhóm mới cập nhật khi đủ nội dung. Card có tên, mô tả, chủ đề, trình độ, loại và ngày cập nhật | “Đọc tài liệu”, “Lưu tài liệu”, “Xem tất cả tài liệu”; chỉ hiện tải khi có file thật |
-| 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu của bạn”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng nằm bên dưới | “Chia sẻ tài liệu của bạn” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; “Làm mới” cập nhật danh sách |
-| 7 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
-| 8 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
-| 9 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
+| 6 | Đóng góp | `dong-gop` | Giới thiệu ngắn, các gợi ý chia sẻ và nút “Chia sẻ tài liệu của bạn”. Form mặc định ẩn, chỉ xuất hiện trong popup khi bấm nút. Danh sách tài liệu cộng đồng đặt trong section Chia sẻ riêng ngay sau Đóng góp | “Chia sẻ tài liệu của bạn” mở popup; “Đăng tài liệu” lưu và công khai; “Tải tài liệu” tải file; danh sách cập nhật tại section Chia sẻ sau khi đăng thành công |
+| 7 | Chia sẻ | `chia-se` | Tài liệu cộng đồng mới nhất; thẻ bìa hồng, chủ đề, định dạng, dung lượng, ngày đăng và mô tả | Xem tất cả / Thu gọn, tải tài liệu, xem nguồn |
+| 8 | Đã lưu | `da-luu` | Xem trước tài liệu đã lưu; khi rỗng, mời khám phá và lưu tài liệu. Đã bỏ dòng ghi chú về lưu trên trình duyệt và mất dữ liệu khỏi section | “Tiếp tục đọc”, “Bỏ lưu”, “Xem tất cả đã lưu”; khi rỗng có “Khám phá tài liệu” |
+| 9 | Góp ý | `gop-y` | Tiêu đề “Bạn muốn LearnSpace có thêm gì?”; chọn Tài liệu / chủ đề mới, Tính năng website hoặc Góp ý khác; nhập nội dung, không cần tên hay email | “Gửi đề xuất”; lưu riêng trên server, thông báo thành công hoặc lỗi; không công khai góp ý |
+| 10 | Footer | — | Logo, giới thiệu ngắn, liên kết điều hướng, kênh liên hệ thật, thông tin nguồn, điều kiện sử dụng và bản quyền phù hợp | Mở liên kết hoặc kênh liên hệ |
 
 ## 3. Section Góp ý — Bạn muốn LearnSpace có thêm gì?
 
@@ -70,7 +71,7 @@ Hero đặt đầu trang. Các section tiếp theo: **Giới thiệu → Hành t
 
 ## 5. Thứ tự triển khai thống nhất
 
-**Navbar → Hero → Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Đã lưu → Góp ý → Footer**
+**Navbar → Hero → Giới thiệu → Hành trình → Chủ đề → Thư viện → Đóng góp → Chia sẻ → Đã lưu → Góp ý → Footer**
 
 Lợi ích nằm trong Giới thiệu; hướng dẫn học là section Hành trình riêng ngay sau đó. Tài liệu nổi bật và mới cập nhật nằm trong Thư viện.
 
@@ -90,7 +91,7 @@ Yêu cầu này thay thế phương án gửi email/chủ website đăng thủ c
 | File | Một file PDF, TXT, MD, DOCX, PPTX hoặc XLSX; tối đa 10 MB |
 | Xác nhận | Có quyền chia sẻ và đồng ý đăng công khai |
 
-Luồng: bấm “Chia sẻ tài liệu của bạn” → mở hộp thoại → nhập thông tin → chọn file → kiểm tra → đang đăng → server lưu → báo thành công và làm mới danh sách. Form mặc định ẩn để section gọn; đóng bằng nút Đóng hoặc Escape, giữ bản nhập khi mở lại. Trong khi đăng, chặn đóng để tránh mất trạng thái. Lỗi giữ nguyên nội dung để sửa hoặc thử lại. Danh sách có trạng thái đang tải, trống, lỗi và nút làm mới.
+Luồng: bấm “Chia sẻ tài liệu của bạn” → mở hộp thoại → nhập thông tin → chọn file → kiểm tra → đang đăng → server lưu → báo thành công và cập nhật danh sách trong section Chia sẻ. Form mặc định ẩn để section gọn; đóng bằng nút Đóng hoặc Escape, giữ bản nhập khi mở lại. Trong khi đăng, chặn đóng để tránh mất trạng thái. Lỗi giữ nguyên nội dung để sửa hoặc thử lại. Danh sách có trạng thái đang tải, trống, lỗi và nút thử lại khi tải thất bại.
 
 Tài liệu cộng đồng hiển thị tiêu đề, mô tả, chủ đề, trình độ, tên người chia sẻ, nguồn, điều kiện sử dụng, ngày đăng, dung lượng và nút tải file. Ngày đăng lấy từ server. File được tải dưới dạng đính kèm.
 
@@ -101,7 +102,7 @@ Tài liệu cộng đồng hiển thị tiêu đề, mô tả, chủ đề, trì
 - `npm run dev` hoặc `npm run preview` cung cấp cả giao diện và API; `npm run build` rồi `npm start` để chạy bản build bằng Node.js.
 - Hosting chỉ phục vụ file tĩnh sẽ không xử lý upload. Khi đưa lên mạng cần server Node.js và ổ đĩa lưu trữ bền vững; sao lưu thư mục dữ liệu.
 - Bản này chưa có quản trị, kiểm duyệt, xác minh tài khoản, chống spam hoặc quét mã độc. Dữ liệu người dùng nhập được hiển thị dạng văn bản; có kiểm tra định dạng và dung lượng file phía server.
-- Tài liệu cộng đồng nằm trong section Đóng góp; danh mục biên tập trong Thư viện và tính năng Đã lưu hiện vẫn dùng dữ liệu cũ.
+- Tài liệu cộng đồng nằm trong section Chia sẻ; danh mục biên tập trong Thư viện và tính năng Đã lưu hiện vẫn dùng dữ liệu cũ.
 
 ## 7. Section Hành trình — Ba bước nhỏ, thêm một điều mới
 
@@ -128,4 +129,14 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 - Bên trái: nhãn “KIẾN THỨC MỞ, CỘNG ĐỒNG MẠNH”; tiêu đề “Chia sẻ điều bạn biết, giúp người khác tiến xa hơn.”; mô tả khuyến khích chia sẻ ghi chú, tài liệu và kinh nghiệm; nút trắng “Chia sẻ tài liệu của bạn” có mũi tên.
 - Bên phải: khung bo góc có viền sáng, tiêu đề “Bạn có thể chia sẻ gì?”; bốn dòng gồm Ghi chép học tập, Tài liệu hữu ích, Kinh nghiệm ôn luyện và Bộ sưu tập theo chủ đề. Mỗi dòng có icon đỏ trên nền kem hồng và mô tả ngắn.
 - Mascot dùng lại `/mascot.png` ở góc dưới phải cùng chồng sách trang trí; ngôi sao vàng nhạt quanh khung.
-- Nút chia sẻ tiếp tục mở popup đăng tài liệu hiện tại. Giữ nguyên kiểm tra file, quyền chia sẻ, trạng thái đăng, thông báo lỗi/thành công và danh sách tài liệu cộng đồng bên dưới.
+- Nút chia sẻ tiếp tục mở popup đăng tài liệu hiện tại. Giữ nguyên kiểm tra file, quyền chia sẻ, trạng thái đăng, thông báo lỗi/thành công và danh sách tài liệu cộng đồng tại section `#chia-se` ngay sau đó.
+
+## 9. Section Chia sẻ — Tài liệu vừa được chia sẻ
+
+- ID `chia-se`, đặt ngay sau `dong-gop` và trước `da-luu`; component `src/components/SharedSection.jsx`.
+- Tách toàn bộ danh sách khỏi nền đỏ của Đóng góp. Section mới nền trắng, nhãn đỏ “TỪ CỘNG ĐỒNG LEARNSPACE”, tiêu đề đen/đỏ và mô tả theo mẫu.
+- Lấy dữ liệu thật từ `GET /api/documents`, sắp xếp mới nhất trước; mặc định hiện tối đa ba thẻ. “Xem tất cả tài liệu mới” mở toàn bộ ngay trong section; “Thu gọn tài liệu” trở lại ba thẻ.
+- Thẻ có bìa minh họa bằng CSS theo chủ đề, nhãn chủ đề, nhãn “Mới” khi đăng trong bảy ngày qua, tên, định dạng, dung lượng và ngày đăng theo múi giờ Asia/Bangkok. Không thêm số trang hoặc thời gian giả khi API chưa cung cấp.
+- Giữ mô tả, thông tin người chia sẻ/nguồn/điều kiện sử dụng trong mục mở rộng và liên kết tải file thật.
+- Có trạng thái đang tải, trống và lỗi với nút thử lại. Đăng thành công trong popup Đóng góp sẽ tự cập nhật section Chia sẻ.
+- Desktop ba cột, tối đa 991px hai cột, tối đa 600px một cột. Không thêm mục navbar riêng.

@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Introduction from '../components/Introduction.jsx';
 import Journey from '../components/Journey.jsx';
 import Topics from '../components/Topics.jsx';
 import LibrarySection from '../components/LibrarySection.jsx';
 import ContributionSection from '../components/ContributionSection.jsx';
+import SharedSection from '../components/SharedSection.jsx';
 import SavedSection from '../components/SavedSection.jsx';
 import FeedbackSection from '../components/FeedbackSection.jsx';
 import Footer from '../components/Footer.jsx';
 
 export default function Home({ favoriteIds, onToggleFavorite }) {
+  const [sharedRevision, setSharedRevision] = useState(0);
   return (
     <>
     <section className="welcome-page" id="hero" aria-labelledby="hero-title">
@@ -45,7 +48,8 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
     <Journey />
     <Topics />
     <LibrarySection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
-    <ContributionSection />
+    <ContributionSection onDocumentShared={() => setSharedRevision((value) => value + 1)} />
+    <SharedSection revision={sharedRevision} />
     <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
     <FeedbackSection />
     <Footer />

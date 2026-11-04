@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const MAX_SIZE = 10 * 1024 * 1024;
 const accept = '.pdf,.txt,.md,.docx,.pptx,.xlsx';
@@ -9,28 +9,12 @@ const sharingOptions = [
   { title: 'Bộ sưu tập theo chủ đề', description: 'Tổng hợp tài liệu, ghi chú và nguồn học xoay quanh một chủ đề cụ thể.', icon: 'M2 7l10-5 10 5-10 5L2 7ZM5 11l-3 2 10 5 10-5-3-2M5 17l-3 2 10 5 10-5-3-2' },
 ];
 
-export default function ContributionSection() {
+export default function ContributionSection({ onDocumentShared }) {
   const dialogRef = useRef(null);
-  const [documents, setDocuments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [listError, setListError] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [uploading, setUploading] = useState(false);
   const [fileName, setFileName] = useState('');
-  const [refresh, setRefresh] = useState(0);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    setListError('');
-    fetch('/api/documents', { signal: controller.signal })
-      .then(async (response) => { if (!response.ok) throw new Error(); const items = await response.json(); if (!Array.isArray(items)) throw new Error(); setDocuments(items); })
-      .catch((reason) => { if (reason.name !== 'AbortError') setListError('Chưa thể tải tài liệu cộng đồng. Vui lòng thử lại.'); })
-      .finally(() => { if (!controller.signal.aborted) setLoading(false); });
-    return () => controller.abort();
-  }, [refresh]);
-
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -45,7 +29,7 @@ export default function ContributionSection() {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || 'Không thể đăng tài liệu.');
       setSuccess(`Đã đăng “${result.title}”. Mọi người có thể xem thông tin và tải file bên dưới.`);
-      form.reset(); setFileName(''); setRefresh((value) => value + 1);
+      form.reset(); setFileName(''); onDocumentShared?.();
     } catch (reason) { setError(reason instanceof SyntaxError || reason instanceof TypeError ? 'Không thể kết nối để đăng tài liệu. Nội dung bạn nhập vẫn được giữ lại.' : reason.message); }
     finally { setUploading(false); }
   }
@@ -87,10 +71,7 @@ export default function ContributionSection() {
             {error && <p className="upload-error" role="alert">{error}</p>}{success && <p className="upload-success" role="status">{success}</p>}
           </form>
         </dialog>
-        <div className="community-documents" aria-labelledby="community-title">
-          <div className="community-heading"><div><p className="eyebrow">TỪ CỘNG ĐỒNG LEARNSPACE</p><h3 id="community-title">Tài liệu vừa được chia sẻ</h3></div><button type="button" onClick={() => setRefresh((value) => value + 1)} disabled={loading}>Làm mới</button></div>
-          {loading ? <p role="status">Đang tải tài liệu…</p> : listError ? <p role="alert">{listError}</p> : documents.length === 0 ? <p className="community-empty">Chưa có tài liệu cộng đồng. Hãy là người đầu tiên chia sẻ điều hữu ích!</p> : <div className="community-grid">{documents.map((item) => <article className="community-card" key={item.id}><div className="community-meta"><span>{item.topic}</span><span>{item.level}</span></div><h4>{item.title}</h4><p className="community-description">{item.description}</p><dl><div><dt>Người chia sẻ</dt><dd>{item.author}</dd></div><div><dt>Nguồn</dt><dd>{item.source}</dd></div><div><dt>Sử dụng</dt><dd>{item.usageNote}</dd></div></dl><p className="community-date">{new Intl.DateTimeFormat('vi-VN', {timeZone: 'Asia/Bangkok'}).format(new Date(item.createdAt))} · {(item.fileSize / 1024 / 1024).toFixed(2)} MB</p><a className="button-link" href={item.fileUrl} download>Tải tài liệu <span aria-hidden="true">↓</span></a></article>)}</div>}
-        </div>
+
       </div>
     </section>
   );

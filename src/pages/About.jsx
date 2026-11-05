@@ -189,7 +189,6 @@ export default function About() {
       <section className="about-start" id="bat-dau" aria-labelledby="about-start-title">
         <div className="about-inner">
           <div className="about-start-panel">
-            <span className="about-start-decoration" aria-hidden="true">✦</span>
             <p className="eyebrow">MỘT ĐIỀU HAY ĐANG CHỜ BẠN</p>
             <h2 id="about-start-title">Điều bạn muốn khám phá<br />tiếp theo là gì?</h2>
             <p className="about-start-description">Bắt đầu từ một nội dung bạn quan tâm, lưu lại điều hữu ích và quay lại khi bạn muốn tìm hiểu thêm.</p>

@@ -65,6 +65,7 @@ function ValueItem({ value }) {
 
 export default function About() {
   const { key, hash } = useLocation();
+  const contributionEmail = import.meta.env.VITE_CONTRIBUTION_EMAIL?.trim();
 
   useLayoutEffect(() => {
     if (!hash) {
@@ -136,6 +137,69 @@ export default function About() {
             <li><span aria-hidden="true">02</span><div><h3>Ý tưởng tập hợp</h3><p>Đưa việc tìm kiếm và lưu nội dung về cùng một không gian.</p></div></li>
             <li><span aria-hidden="true">03</span><div><h3>Mong muốn sẻ chia</h3><p>Để kiến thức được tiếp nối qua những đóng góp của cộng đồng.</p></div></li>
           </ol>
+        </div>
+      </section>
+      <section className="about-how" id="cach-hoat-dong" aria-labelledby="about-how-title">
+        <div className="about-inner">
+          <div className="about-section-heading">
+            <p className="eyebrow">BẮT ĐẦU THẬT ĐƠN GIẢN</p>
+            <h2 id="about-how-title">Ba bước nhỏ.<br /><span>Thêm một điều mới.</span></h2>
+            <p>Không cần bắt đầu bằng một kế hoạch lớn. Hãy chọn một nội dung bạn muốn tìm hiểu hôm nay.</p>
+          </div>
+          <ol className="about-how-steps">
+            <li>
+              <span className="about-how-number" aria-hidden="true">01</span>
+              <span className="about-how-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d={values[0].path} fillRule="evenodd" /></svg></span>
+              <h3>Chọn nội dung</h3>
+              <p>Tìm theo tên hoặc khám phá theo chủ đề để chọn điều bạn đang quan tâm.</p>
+              <Link to="/courses">Mở thư viện <span aria-hidden="true">↗</span></Link>
+            </li>
+            <li>
+              <span className="about-how-number" aria-hidden="true">02</span>
+              <span className="about-how-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d={values[1].path} fillRule="evenodd" /></svg></span>
+              <h3>Xem thông tin</h3>
+              <p>Đọc mô tả, xem cấp độ và thời lượng để biết nội dung có phù hợp với bạn.</p>
+              <Link to="/courses/1">Khám phá React cơ bản <span aria-hidden="true">↗</span></Link>
+            </li>
+            <li>
+              <span className="about-how-number" aria-hidden="true">03</span>
+              <span className="about-how-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d={values[2].path} fillRule="evenodd" /></svg></span>
+              <h3>Lưu để quay lại</h3>
+              <p>Nhấn yêu thích để giữ nội dung hữu ích trong danh sách đã lưu trên trình duyệt hiện tại.</p>
+              <Link to="/saved">Xem nội dung đã lưu <span aria-hidden="true">↗</span></Link>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <section className="about-team" id="nguoi-xay-dung" aria-labelledby="about-team-title">
+        <div className="about-inner about-team-layout">
+          <div className="about-section-heading">
+            <p className="eyebrow">CON NGƯỜI & KẾT NỐI</p>
+            <h2 id="about-team-title">Người đứng sau<br /><span>LearnSpace.</span></h2>
+            <p>Một không gian học tập được hoàn thiện từ những điều nhỏ: nội dung dễ tìm hơn, thao tác dễ dùng hơn và những góp ý được lắng nghe.</p>
+            <a className="about-team-feedback" href="/#gop-y">Gửi một góp ý cho LearnSpace <span aria-hidden="true">↗</span></a>
+          </div>
+          <article className="about-team-card" aria-labelledby="about-project-title">
+            <div className="about-team-card-top"><span className="about-project-avatar" aria-hidden="true">LS</span><div><p>DỰ ÁN HỌC TẬP & CHIA SẺ</p><h3 id="about-project-title">LearnSpace</h3></div></div>
+            <p>LearnSpace đang từng bước phát triển một nơi để tìm kiếm, lưu lại và chia sẻ nội dung học tập. Thông tin về người xây dựng sẽ được giới thiệu tại đây khi được công bố.</p>
+            <div className="about-team-principle"><span aria-hidden="true">✦</span><p>Cùng xây dựng một nơi mà kiến thức hữu ích được giữ lại và sẻ chia.</p></div>
+          </article>
+        </div>
+      </section>
+      <section className="about-start" id="bat-dau" aria-labelledby="about-start-title">
+        <div className="about-inner">
+          <div className="about-start-panel">
+            <span className="about-start-decoration" aria-hidden="true">✦</span>
+            <p className="eyebrow">MỘT ĐIỀU HAY ĐANG CHỜ BẠN</p>
+            <h2 id="about-start-title">Điều bạn muốn khám phá<br />tiếp theo là gì?</h2>
+            <p className="about-start-description">Bắt đầu từ một nội dung bạn quan tâm, lưu lại điều hữu ích và quay lại khi bạn muốn tìm hiểu thêm.</p>
+            <div className="about-start-actions">
+              <Link className="button-link" to="/courses">Khám phá thư viện <span aria-hidden="true">↗</span></Link>
+              <Link className="about-start-share" to="/contact">Chia sẻ tài liệu <span aria-hidden="true">↗</span></Link>
+            </div>
+            <div className="about-start-contact"><a href="/#gop-y">Góp ý cho LearnSpace</a><span aria-hidden="true">·</span>{contributionEmail ? <a href={`mailto:${contributionEmail}`}>{contributionEmail}</a> : <span>Kênh liên hệ sẽ được cập nhật.</span>}</div>
+          </div>
+          <div className="about-page-bottom"><span>LearnSpace · Không gian chia sẻ kiến thức.</span><a href="#about-title">Về đầu trang ↑</a></div>
         </div>
       </section>
     </div>

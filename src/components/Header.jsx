@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import topics from '../data/topics.js';
 
 export default function Header({ savedCount }) {
@@ -21,7 +21,7 @@ export default function Header({ savedCount }) {
         <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
       </button>
       <nav id="primary-navigation" className={menuOpen ? 'primary-nav is-open' : 'primary-nav'} aria-label="Điều hướng chính">
-        {location.pathname === '/' ? <a href="#gioi-thieu" onClick={closeMenu}>Giới thiệu</a> : <NavLink to="/about" onClick={closeMenu}>Giới thiệu</NavLink>}
+        <NavLink to="/about" onClick={closeMenu}>Giới thiệu</NavLink>
         <details className="topic-menu" key={location.key}
           onPointerEnter={(event) => { if (event.pointerType === 'mouse') event.currentTarget.open = true; }}
           onPointerLeave={(event) => { if (event.pointerType === 'mouse' && !event.currentTarget.contains(document.activeElement)) event.currentTarget.open = false; }}
@@ -30,17 +30,20 @@ export default function Header({ savedCount }) {
           <summary>Chủ đề</summary>
           <div className="topic-dropdown">
             <span className="dropdown-label">KHÁM PHÁ CHỦ ĐỀ</span>
-            {location.pathname === '/' && <a href="#chu-de" onClick={(event) => { closeMenu(); event.currentTarget.closest('details').open = false; }}>Tất cả chủ đề</a>}
-            {topics.map((topic) => <NavLink key={topic.id} to={`/courses?topic=${topic.id}`} onClick={closeMenu}>{topic.title}</NavLink>)}
+            <Link to="/courses" onClick={closeMenu}>Tất cả chủ đề</Link>
+            {topics.map((topic) => {
+              const isActive = location.pathname === '/courses' && new URLSearchParams(location.search).get('topic') === topic.id;
+              return <Link key={topic.id} to={`/courses?topic=${topic.id}`} className={isActive ? 'active' : undefined} aria-current={isActive ? 'page' : undefined} onClick={closeMenu}>{topic.title}</Link>;
+            })}
           </div>
         </details>
-        {location.pathname === '/' ? <a href="#thu-vien" onClick={closeMenu}>Thư viện</a> : <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>}
-        {location.pathname === '/' ? <a href="#dong-gop" onClick={closeMenu}>Đóng góp</a> : <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>}
+        <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
+        <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>
-      <a className="saved-link" href={location.pathname === '/' ? '#da-luu' : '/#da-luu'} onClick={closeMenu} aria-label={`Đã lưu: ${savedCount} tài liệu`}>
+      <NavLink className="saved-link" to="/saved" onClick={closeMenu} aria-label={`Đã lưu: ${savedCount} tài liệu`}>
         <svg width="18" height="20" viewBox="0 0 18 20" fill="none" aria-hidden="true"><path d="M4 2h10a1 1 0 0 1 1 1v14l-6-4-6 4V3a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /></svg>
         <span>Đã lưu</span><strong>{savedCount}</strong>
-      </a>
+      </NavLink>
     </header>
   );
 }

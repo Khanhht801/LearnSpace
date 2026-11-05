@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const values = [
   { title: 'Dễ tìm điều cần học', description: 'Tìm theo tên và khám phá theo chủ đề để đến gần hơn với nội dung bạn quan tâm.', path: 'M10 1a9 9 0 1 0 5.2 16.35l5.85 5.85 2.15-2.15-5.85-5.85A9 9 0 0 0 10 1Zm0 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z' },
@@ -63,6 +64,14 @@ function ValueItem({ value }) {
 }
 
 export default function About() {
+  const { key, hash } = useLocation();
+
+  useLayoutEffect(() => {
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, [key, hash]);
+
   return (
     <div className="about-page">
       <section className="about-hero" aria-labelledby="about-title">
@@ -98,6 +107,35 @@ export default function About() {
               {values.slice(3).map((value) => <ValueItem key={value.title} value={value} />)}
             </div>
           </div>
+        </div>
+      </section>
+      <section className="about-story" id="cau-chuyen" aria-labelledby="about-story-title">
+        <div className="about-inner">
+          <div className="about-story-layout">
+            <div className="about-story-visual">
+              <div className="about-story-notebook" aria-hidden="true">
+                <span>Ý TƯỞNG NHỎ, KHÔNG GIAN CHUNG</span>
+                <strong>Kiến thức hay,<br />đừng để lạc mất.</strong>
+                <div className="about-story-note"><span>01</span> Tìm lại dễ hơn</div>
+                <div className="about-story-note"><span>02</span> Giữ điều hữu ích</div>
+                <div className="about-story-note"><span>03</span> Cùng nhau sẻ chia</div>
+              </div>
+              <img src="/mascot-message.png" alt="Linh vật LearnSpace bên những cuốn sách và tài liệu học tập" width="1024" height="1024" loading="lazy" />
+              <span className="about-story-spark" aria-hidden="true">✦</span>
+            </div>
+            <div className="about-story-copy">
+              <p className="eyebrow">CÂU CHUYỆN LEARNSPACE</p>
+              <h2 id="about-story-title">Từ những tài liệu rời rạc,<br /><span>đến một không gian chung.</span></h2>
+              <p>Khi tự học, đôi lúc điều khó không chỉ là hiểu một kiến thức mới, mà còn là tìm lại tài liệu hữu ích đã từng gặp. Một đường dẫn lưu vội, một ghi chép nằm quên, một nội dung muốn đọc lại nhưng không biết ở đâu.</p>
+              <p>LearnSpace hướng đến một điều đơn giản: tập hợp nội dung học tập trong một không gian dễ tìm, dễ lưu và dễ chia sẻ. Bắt đầu với những nội dung lập trình đang có, LearnSpace mong muốn từng bước làm cho việc học và chia sẻ kiến thức trở nên gần gũi hơn.</p>
+              <blockquote>Điều hữu ích với bạn hôm nay có thể là điểm bắt đầu của một người khác ngày mai.</blockquote>
+            </div>
+          </div>
+          <ol className="about-story-steps" aria-label="Ý tưởng xây dựng LearnSpace">
+            <li><span aria-hidden="true">01</span><div><h3>Nhu cầu ban đầu</h3><p>Tìm một nơi để những nội dung hữu ích không bị lãng quên.</p></div></li>
+            <li><span aria-hidden="true">02</span><div><h3>Ý tưởng tập hợp</h3><p>Đưa việc tìm kiếm và lưu nội dung về cùng một không gian.</p></div></li>
+            <li><span aria-hidden="true">03</span><div><h3>Mong muốn sẻ chia</h3><p>Để kiến thức được tiếp nối qua những đóng góp của cộng đồng.</p></div></li>
+          </ol>
         </div>
       </section>
     </div>

@@ -960,3 +960,45 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
   .core-value-accordion[open] .core-value-chevron { margin-bottom: -4px; transform: rotate(225deg); }
   .core-value-accordion > p { margin: 12px 0 0 62px; color: #252525; font-size: 17px; line-height: 1.6; }
 }
+
+/* The story behind LearnSpace. */
+.about-story { padding-block: var(--about-space); background: #fff6f8; scroll-margin-top: 112px; overflow: hidden; }
+.about-story-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: center; }
+.about-story-copy h2 { margin-bottom: 24px; font-size: clamp(30px, 3vw, 43px); font-weight: 800; line-height: 1.3; letter-spacing: -.025em; }
+.about-story-copy h2 span { color: var(--primary); }
+.about-story-copy > p:not(.eyebrow) { color: var(--muted); font-size: 18px; line-height: 1.75; }
+.about-story-copy blockquote { margin: 24px 0 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--primary); color: var(--primary-dark); font-size: 20px; font-weight: 700; line-height: 1.6; }
+.about-story-visual { position: relative; isolation: isolate; min-width: 0; padding-top: 120px; }
+.about-story-visual::before { content: ''; position: absolute; inset: 22% 0 0; z-index: -2; border-radius: 50%; background: #ffe4e7; }
+.about-story-visual img { display: block; position: relative; width: 110%; height: auto; margin-left: -5%; filter: drop-shadow(0 12px 18px #9d0b0f10); }
+.about-story-notebook { position: absolute; top: 14px; left: 6%; z-index: -1; width: 78%; padding: 26px 30px; border: 1px solid var(--border); border-radius: 18px; background: #fffdf8; box-shadow: 0 12px 30px #9d0b0f08; transform: rotate(-7deg); }
+.about-story-notebook > span { color: var(--primary-dark); font-size: 11px; font-weight: 800; letter-spacing: .06em; }
+.about-story-notebook > strong { display: block; margin: 12px 0 18px; font-size: 29px; line-height: 1.3; }
+.about-story-note { display: flex; align-items: center; gap: 12px; padding-block: 8px; border-top: 1px solid #f0dada; color: #686060; font-size: 15px; }
+.about-story-note span { color: var(--primary); font-size: 12px; font-weight: 800; }
+.about-story-spark { position: absolute; right: 0; top: 15%; color: var(--primary); font-size: 40px; }
+.about-story-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 36px 0 0; padding: 28px 0 0; border-top: 1px solid var(--border); list-style: none; }
+.about-story-steps li { display: flex; align-items: flex-start; gap: 14px; }
+.about-story-steps li > span { flex-shrink: 0; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #f0dada; border-radius: 50%; background: white; color: var(--primary); font-size: 14px; font-weight: 800; }
+.about-story-steps h3 { margin: 0 0 8px; font-size: 20px; font-weight: 800; line-height: 1.4; }
+.about-story-steps p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
+@media (max-width: 1000px) {
+  .about-story-layout { gap: 32px; }
+  .about-story-notebook { padding: 20px; }
+  .about-story-notebook > strong { font-size: 24px; }
+  .about-story-steps { gap: 20px; }
+}
+@media (max-width: 800px) {
+  .about-story-layout { grid-template-columns: 1fr; gap: 26px; }
+  .about-story-copy { grid-row: 1; }
+  .about-story-visual { width: min(100%, 460px); margin-inline: auto; }
+  .about-story-steps { grid-template-columns: 1fr; margin-top: 24px; gap: 22px; }
+}
+@media (max-width: 480px) {
+  .about-story-copy h2 { font-size: 30px; }
+  .about-story-copy > p:not(.eyebrow) { font-size: 17px; }
+  .about-story-copy blockquote { font-size: 18px; }
+  .about-story-notebook > span { font-size: 9px; }
+  .about-story-notebook > strong { font-size: 23px; }
+  .about-story-note { font-size: 13px; }
+}

@@ -154,9 +154,9 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 ## 11. Giao diện section Góp ý
 
 - Section `#gop-y` theo mẫu: nền hồng nhạt có họa tiết cong, hai cột trên desktop; màn hình tối đa 800px xếp dọc.
-- Cột trái có nhãn “CÙNG LÀM LEARNSPACE TỐT HƠN”, tiêu đề “Bạn muốn LearnSpace có thêm gì?” đen/đỏ và lời mời chia sẻ ý tưởng.
-- Mascot mới `/mascot-feedback.png`: gà vàng khăn đỏ chữ L, ba lô đỏ đứng cạnh hộp thư đỏ có phong bì và bóng đèn ý tưởng; ảnh nền trong suốt đặt dưới mô tả.
-- Cột phải là form trắng bo góc lớn; ba lựa chọn dạng pill: Tài liệu / chủ đề mới, Tính năng muốn có, Góp ý khác. Giá trị API vẫn là `content`, `feature`, `other`.
+- Cột phải có nhãn “CÙNG LÀM LEARNSPACE TỐT HƠN”, tiêu đề “Bạn muốn LearnSpace có thêm gì?” đen/đỏ và lời mời chia sẻ ý tưởng. Trên màn hình tối đa 800px, giới thiệu và ảnh ở trên form.
+- Mascot `/mascot-feedback.png`: hộp thư đỏ có phong bì ở bên trái, gà vàng khăn đỏ chữ L và ba lô đỏ ở bên phải hướng về form, bóng đèn ý tưởng phía trên; chữ L giữ đúng chiều, ảnh nền trong suốt đặt dưới mô tả.
+- Cột trái là form trắng bo góc lớn; ba lựa chọn dạng pill: Tài liệu / chủ đề mới, Tính năng muốn có, Góp ý khác. Giá trị API vẫn là `content`, `feature`, `other`.
 - Ô nội dung nền xám nhạt, placeholder nhiều dòng gợi ý tài liệu/tính năng/góp ý; giữ giới hạn 10–2.000 ký tự, label và hướng dẫn truy cập. Nút đỏ “Gửi đề xuất” kèm icon máy bay giấy.
 - Giữ nguyên API và quyền riêng tư: chỉ xóa form khi lưu thành công, giữ nội dung khi lỗi, khóa form trong lúc gửi và hiển thị thông báo trạng thái.
 

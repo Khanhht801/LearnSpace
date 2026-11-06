@@ -1,6 +1,7 @@
 const courses = [
   {
     id: 1,
+    coverImage: '/images/library/react-basics.webp',
     title: 'React cơ bản',
     level: 'Cơ bản',
     duration: 12,
@@ -8,6 +9,7 @@ const courses = [
   },
   {
     id: 2,
+    coverImage: '/images/library/react-router.webp',
     title: 'React Router',
     level: 'Trung bình',
     duration: 8,
@@ -15,6 +17,7 @@ const courses = [
   },
   {
     id: 3,
+    coverImage: '/images/library/working-with-api.webp',
     title: 'Làm việc với API',
     level: 'Trung bình',
     duration: 10,

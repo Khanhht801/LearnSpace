@@ -10,7 +10,7 @@ export default function Journey() {
       <div className="journey-inner">
         <div className="journey-heading">
           <p className="journey-eyebrow">BẮT ĐẦU TỪ ĐIỀU NHỎ</p>
-          <h2 id="journey-title">Ba bước nhỏ,<br /><span>thêm một điều mới.<i className="journey-rays" aria-hidden="true"><b /><b /><b /></i></span></h2>
+          <h2 id="journey-title">Ba bước nhỏ,<br /><span>thêm một <span className="journey-highlight">điều mới</span>.<i className="journey-rays" aria-hidden="true"><b /><b /><b /></i></span></h2>
           <p className="journey-description">Chỉ cần một chủ đề bạn quan tâm, LearnSpace sẽ giúp bạn bắt đầu hành trình học hỏi.</p>
         </div>
         <ol className="journey-steps">

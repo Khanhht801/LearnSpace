@@ -237,7 +237,8 @@
 .journey-eyebrow::before, .journey-eyebrow::after { content: ''; width: 40px; height: 2px; background: var(--primary); }
 .journey-heading h2 { margin: 0 0 24px; font-size: clamp(38px, 5.2vw, 70px); font-weight: 800; line-height: 1.2; letter-spacing: -.025em; }
 .journey-heading h2 > span { position: relative; display: inline-block; color: var(--primary); }
-.journey-heading h2 > span::after { content: ''; position: absolute; bottom: -12px; right: 18%; width: 27%; height: 17px; border-top: 5px solid #ffd16b; border-radius: 50%; transform: rotate(1deg); }
+.journey-highlight { position: relative; display: inline-block; white-space: nowrap; }
+.journey-highlight::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 17px; border-top: 5px solid #ffd16b; border-radius: 50%; transform: rotate(1deg); }
 .journey-rays { position: absolute; right: -21px; top: -26px; display: flex; gap: 9px; transform: rotate(32deg); }
 .journey-rays b { width: 6px; height: 22px; background: #ffc43c; border-radius: 10px; }
 .journey-rays b:first-child { transform: rotate(-24deg) translateY(6px); }

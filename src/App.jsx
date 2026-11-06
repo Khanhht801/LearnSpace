@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header.jsx';
+import ScrollToLocation from './components/ScrollToLocation.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import CourseDetail from './pages/CourseDetail.jsx';
 import Courses from './pages/Courses.jsx';
 import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
+import Topics from './pages/Topics.jsx';
+import TopicDetail from './pages/TopicDetail.jsx';
 
 function getInitialFavoriteIds() {
   try {
@@ -47,6 +50,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <ScrollToLocation />
       <Header savedCount={favoriteIds.length} />
       {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
 
@@ -54,6 +58,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/topics" element={<Topics />} />
+          <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
           <Route
             path="/courses"
             element={

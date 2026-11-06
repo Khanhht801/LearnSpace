@@ -21,7 +21,7 @@ export default function Header({ savedCount }) {
       </button>
       <nav id="primary-navigation" className={menuOpen ? 'primary-nav is-open' : 'primary-nav'} aria-label="Điều hướng chính">
         <NavLink to="/about" onClick={closeMenu}>Giới thiệu</NavLink>
-        <NavLink to="/#chu-de" onClick={closeMenu} className={() => location.pathname === '/' && location.hash === '#chu-de' ? 'active' : undefined}>Chủ đề</NavLink>
+        <NavLink to="/topics" onClick={closeMenu}>Chủ đề</NavLink>
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>

@@ -1,6 +1,5 @@
 ﻿import { useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import topics from '../data/topics.js';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export default function Header({ savedCount }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,21 +21,7 @@ export default function Header({ savedCount }) {
       </button>
       <nav id="primary-navigation" className={menuOpen ? 'primary-nav is-open' : 'primary-nav'} aria-label="Điều hướng chính">
         <NavLink to="/about" onClick={closeMenu}>Giới thiệu</NavLink>
-        <details className="topic-menu" key={location.key}
-          onPointerEnter={(event) => { if (event.pointerType === 'mouse') event.currentTarget.open = true; }}
-          onPointerLeave={(event) => { if (event.pointerType === 'mouse' && !event.currentTarget.contains(document.activeElement)) event.currentTarget.open = false; }}
-          onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false; }}
-          onKeyDown={(event) => { if (event.key === 'Escape') { event.stopPropagation(); event.currentTarget.open = false; event.currentTarget.querySelector('summary').focus(); } }}>
-          <summary>Chủ đề</summary>
-          <div className="topic-dropdown">
-            <span className="dropdown-label">KHÁM PHÁ CHỦ ĐỀ</span>
-            <Link to="/courses" onClick={closeMenu}>Tất cả chủ đề</Link>
-            {topics.map((topic) => {
-              const isActive = location.pathname === '/courses' && new URLSearchParams(location.search).get('topic') === topic.id;
-              return <Link key={topic.id} to={`/courses?topic=${topic.id}`} className={isActive ? 'active' : undefined} aria-current={isActive ? 'page' : undefined} onClick={closeMenu}>{topic.title}</Link>;
-            })}
-          </div>
-        </details>
+        <NavLink to="/#chu-de" onClick={closeMenu} className={() => location.pathname === '/' && location.hash === '#chu-de' ? 'active' : undefined}>Chủ đề</NavLink>
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>

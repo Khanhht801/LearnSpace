@@ -52,8 +52,10 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
     <MessageSection />
     <ContributionSection onDocumentShared={() => setSharedRevision((value) => value + 1)} />
     <SharedSection revision={sharedRevision} />
-    <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
-    <FeedbackSection />
+    <div className="personal-sections">
+      <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
+      <FeedbackSection />
+    </div>
     <Footer />
     </>
   );

@@ -145,6 +145,7 @@ Section `#dong-gop` dùng nền đỏ gradient, họa tiết cong mờ, chữ tr
 ## 10. Section Đã lưu — Góc học tập của bạn
 
 - Section `#da-luu` dùng nền hồng nhạt, tiêu đề “Điều hay đã lưu, sẵn sàng để học tiếp.” với dòng thứ hai màu đỏ.
+- `#da-luu` và `#gop-y` nằm trong `.personal-sections` với hai hàng CSS Grid bằng nhau, lấy chiều cao theo nội dung dài hơn ở mỗi kích thước màn hình. Nội dung căn giữa theo chiều dọc, tự giãn khi danh sách đã lưu hoặc thông báo góp ý thay đổi.
 - Khi chưa lưu tài liệu: khung trắng kem bo góc lớn, tấm nền hồng xoay phía sau, icon bookmark, tiêu đề “Bộ sưu tập của bạn đang chờ tài liệu đầu tiên” và lời nhắc lưu để học tiếp.
 - Gợi ý React, React Router và API dẫn đến kết quả tìm kiếm thật; nút “Khám phá thư viện” cuộn đến `#thu-vien`.
 - Mascot mới `/mascot-reading.png`: gà vàng ngồi đọc sách đỏ, khăn đỏ chữ L, ba lô đỏ; nền trong suốt, đặt ở góc dưới trái theo ảnh mẫu. Ngôi sao vàng trang trí hai bên.

@@ -9,13 +9,11 @@ export default function Topics() {
 
   return (
     <div className="topics-page" id="topics-top">
-      <section className="topics-page-intro" aria-labelledby="topics-page-title">
+      <section className="topics-page-intro topics-discovery-intro" aria-labelledby="topics-page-title">
         <div className="topic-page-inner">
-          <nav className="topic-breadcrumb" aria-label="Đường dẫn"><Link to="/">Trang chủ</Link><span aria-hidden="true">/</span><span aria-current="page">Chủ đề</span></nav>
           <p className="eyebrow">KHÁM PHÁ CHỦ ĐỀ</p>
           <h1 id="topics-page-title">Bạn muốn tìm hiểu<br /><span>điều gì hôm nay?</span></h1>
           <p className="topics-page-lead">Khám phá kiến thức theo từng chủ đề và tìm điểm bắt đầu phù hợp với bạn.</p>
-          <div className="topics-intro-bottom"><span>Mỗi chủ đề, một hướng khám phá.</span><a href="#topic-list">Chọn chủ đề của bạn <span aria-hidden="true">↓</span></a></div>
         </div>
       </section>
 

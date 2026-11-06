@@ -8,15 +8,13 @@
 .topics-page h3 { line-height: 1.4; }
 .topics-page p { text-wrap: pretty; }
 .topics-page-intro { padding: 28px 0 0; background: #fff5f4; border-bottom: 1px solid var(--border); }
+.topics-discovery-intro { padding-block: 48px 24px; }
 .topic-breadcrumb { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; color: var(--muted); font-size: 14px; }
 .topic-breadcrumb a { color: var(--muted); text-decoration: none; }
 .topic-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
 .topics-page-intro h1 { max-width: 880px; margin-bottom: 20px; font-size: clamp(38px, 5.3vw, 64px); font-weight: 800; line-height: 1.14; }
 .topics-page-intro h1 > span { color: var(--primary); }
 .topics-page-lead { max-width: 600px; margin-bottom: 28px; color: var(--muted); font-size: 20px; line-height: 1.7; }
-.topics-intro-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 40px; padding: 22px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 15px; }
-.topics-intro-bottom a { display: inline-flex; align-items: center; gap: 22px; min-height: 44px; font-weight: 700; text-decoration: none; }
-.topics-intro-bottom a:hover { text-decoration: underline; }
 .topics-page-catalog { padding: 64px 0 72px; }
 .topic-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 32px; }
 .topic-section-heading h2 { margin-bottom: 0; }
@@ -87,9 +85,9 @@
 @media (max-width: 600px) {
   .topic-page-inner { width: calc(100% - 40px); }
   .topics-page-intro { padding-top: 20px; }
+  .topics-discovery-intro { padding-block: 32px 16px; }
   .topic-breadcrumb { margin-bottom: 32px; font-size: 13px; }
   .topics-page-lead { font-size: 18px; }
-  .topics-intro-bottom { align-items: flex-start; flex-direction: column; gap: 8px; margin-top: 28px; padding-block: 16px; }
   .topic-section-heading { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 24px; }
   .topics-page-catalog, .topics-page-start, .topics-page-suggest, .topic-detail-section { padding-block: 40px; }
   .topic-start-layout, .topic-detail-hero, .topic-preparation-grid, .topic-knowledge-grid, .topic-practice-layout, .topic-next-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }

@@ -9,6 +9,10 @@
 .topics-page p { text-wrap: pretty; }
 .topics-page-intro { padding: 28px 0 0; background: #fff5f4; border-bottom: 1px solid var(--border); }
 .topics-discovery-intro { padding-block: 48px 24px; }
+.topics-discovery-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: 32px; }
+.topics-discovery-copy { min-width: 0; }
+.topics-discovery-copy .topics-page-lead { margin-bottom: 0; }
+.topics-discovery-mascot { display: block; justify-self: center; width: min(100%, 360px); height: auto; }
 .topic-breadcrumb { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; color: var(--muted); font-size: 14px; }
 .topic-breadcrumb a { color: var(--muted); text-decoration: none; }
 .topic-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
@@ -75,6 +79,7 @@
 .topic-practice-layout li::marker { color: var(--primary); }
 .topic-next-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 @media (max-width: 900px) {
+  .topics-discovery-layout { gap: 24px; }
   .topic-start-layout { gap: 40px; }
   .topic-detail-hero { gap: 28px; }
   .topic-detail-hero .topics-page-lead { font-size: 18px; }
@@ -86,6 +91,8 @@
   .topic-page-inner { width: calc(100% - 40px); }
   .topics-page-intro { padding-top: 20px; }
   .topics-discovery-intro { padding-block: 32px 16px; }
+  .topics-discovery-layout { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .topics-discovery-mascot { width: min(65%, 240px); }
   .topic-breadcrumb { margin-bottom: 32px; font-size: 13px; }
   .topics-page-lead { font-size: 18px; }
   .topic-section-heading { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 24px; }

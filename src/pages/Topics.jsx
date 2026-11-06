@@ -10,10 +10,13 @@ export default function Topics() {
   return (
     <div className="topics-page" id="topics-top">
       <section className="topics-page-intro topics-discovery-intro" aria-labelledby="topics-page-title">
-        <div className="topic-page-inner">
-          <p className="eyebrow">KHÁM PHÁ CHỦ ĐỀ</p>
-          <h1 id="topics-page-title">Bạn muốn tìm hiểu<br /><span>điều gì hôm nay?</span></h1>
-          <p className="topics-page-lead">Khám phá kiến thức theo từng chủ đề và tìm điểm bắt đầu phù hợp với bạn.</p>
+        <div className="topic-page-inner topics-discovery-layout">
+          <div className="topics-discovery-copy">
+            <p className="eyebrow">KHÁM PHÁ CHỦ ĐỀ</p>
+            <h1 id="topics-page-title">Bạn muốn tìm hiểu<br /><span>điều gì hôm nay?</span></h1>
+            <p className="topics-page-lead">Khám phá kiến thức theo từng chủ đề và tìm điểm bắt đầu phù hợp với bạn.</p>
+          </div>
+          <img className="topics-discovery-mascot" src="/mascot-topics.png" alt="Linh vật LearnSpace: chú gà vàng đeo khăn đỏ, cầm sách và vẫy cánh mời bạn khám phá chủ đề" width="1254" height="1254" fetchPriority="high" />
         </div>
       </section>
 

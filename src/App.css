@@ -55,6 +55,7 @@
 .topic-menu { position: relative; }
 .topic-menu summary { list-style: none; display: flex; align-items: center; gap: 8px; }
 .topic-menu summary::-webkit-details-marker { display: none; }
+.topic-menu summary::after { content: ''; flex-shrink: 0; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid currentColor; }
 .topic-menu[open] summary, .topic-menu summary:hover { color: var(--primary); background: #fff2f2; }
 .topic-dropdown { position: absolute; top: calc(100% + 12px); left: 0; width: 240px; padding: 16px; background: white; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 12px 32px #3a16121a; }
 .topic-dropdown::before { content: ''; position: absolute; top: -13px; left: 0; right: 0; height: 13px; }

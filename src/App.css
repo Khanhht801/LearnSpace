@@ -1114,8 +1114,6 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
 .about-start-contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; margin-top: 28px; color: #ffe8e8; font-size: 14px; }
 .about-start-contact a { color: white; overflow-wrap: anywhere; }
 .about-start-panel :focus-visible { outline-color: white; }
-.about-page-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding-top: 26px; color: var(--muted); font-size: 14px; }
-.about-page-bottom a { color: var(--primary-dark); font-weight: 700; text-decoration: none; }
 @media (max-width: 1000px) {
   .about-how-steps { gap: 24px; }
   .about-how-steps li { padding: 24px; }

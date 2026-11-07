@@ -1,5 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Footer from '../components/Footer.jsx';
 
 const values = [
   { title: 'Dễ tìm điều cần học', description: 'Tìm theo tên và khám phá theo chủ đề để đến gần hơn với nội dung bạn quan tâm.', path: 'M10 1a9 9 0 1 0 5.2 16.35l5.85 5.85 2.15-2.15-5.85-5.85A9 9 0 0 0 10 1Zm0 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z' },
@@ -198,9 +199,9 @@ export default function About() {
             </div>
             <div className="about-start-contact"><a href="/#gop-y">Góp ý cho LearnSpace</a><span aria-hidden="true">·</span>{contributionEmail ? <a href={`mailto:${contributionEmail}`}>{contributionEmail}</a> : <span>Kênh liên hệ sẽ được cập nhật.</span>}</div>
           </div>
-          <div className="about-page-bottom"><span>LearnSpace · Không gian chia sẻ kiến thức.</span><a href="#about-title">Về đầu trang ↑</a></div>
         </div>
       </section>
+      <Footer topId="about-title" />
     </div>
   );
 }

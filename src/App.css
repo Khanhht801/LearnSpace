@@ -51,8 +51,8 @@
 .brand { display: inline-flex; align-items: center; flex-shrink: 0; font-size: 25px; letter-spacing: -1.2px; gap: 0; }
 .brand-logo { display: block; width: 216px; height: auto; }
 .site-header .primary-nav { display: flex; align-items: center; gap: 7px; width: auto; order: initial; }
-.site-header nav a { color: #454040; font-size: 18px; font-weight: 650; padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-.login-button { display: flex; align-items: center; gap: 8px; color: var(--primary-dark); font-size: 18px; white-space: nowrap; font-weight: 650; padding: 7px 10px; border: 1px solid #f0dada; border-radius: 9px; background: #fff8f8; }
+.site-header nav a { color: #454040; font-size: 20px; font-weight: 650; padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+.login-button { display: flex; align-items: center; gap: 8px; color: var(--primary-dark); font-size: 20px; white-space: nowrap; font-weight: 650; padding: 7px 10px; border: 1px solid #f0dada; border-radius: 9px; background: #fff8f8; }
 .login-button:hover { border-color: var(--primary); background: #fff2f2; color: var(--primary-dark); }
 .menu-toggle { display: none; }
 .main-content:has(.welcome-page) { width: 100%; margin: 0; }
@@ -145,8 +145,8 @@
 }
 @media (max-width: 480px) {
   .site-header { padding-inline: 16px; gap: 8px; }
-  .brand-logo { width: clamp(136px, 35vw, 168px); }
-  .login-button { padding: 8px; font-size: 14px; }
+  .brand-logo { width: clamp(108px, 30vw, 144px); }
+  .login-button { padding: 8px; }
   .login-button > svg { display: none; }
   .main-content > .welcome-page { padding-inline: 20px; }
   .hero-eyebrow { font-size: 9px; gap: 9px; letter-spacing: .07em; }

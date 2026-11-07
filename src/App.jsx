@@ -51,7 +51,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <ScrollToLocation />
-      <Header savedCount={favoriteIds.length} />
+      <Header />
       {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
 
       <main className="main-content" id="main-content">

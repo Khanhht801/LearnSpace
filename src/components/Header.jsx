@@ -1,7 +1,7 @@
 ﻿import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-export default function Header({ savedCount }) {
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const closeMenu = () => setMenuOpen(false);
@@ -25,10 +25,10 @@ export default function Header({ savedCount }) {
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>
-      <NavLink className="saved-link" to="/saved" onClick={closeMenu} aria-label={`Đã lưu: ${savedCount} tài liệu`}>
-        <svg width="18" height="20" viewBox="0 0 18 20" fill="none" aria-hidden="true"><path d="M4 2h10a1 1 0 0 1 1 1v14l-6-4-6 4V3a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /></svg>
-        <span>Đã lưu</span><strong>{savedCount}</strong>
-      </NavLink>
+      <button className="login-button" type="button" onClick={closeMenu}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.6" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+        <span>Đăng nhập</span>
+      </button>
     </header>
   );
 }

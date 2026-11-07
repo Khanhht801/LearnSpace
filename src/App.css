@@ -52,9 +52,8 @@
 .brand-logo { display: block; width: 216px; height: auto; }
 .site-header .primary-nav { display: flex; align-items: center; gap: 7px; width: auto; order: initial; }
 .site-header nav a { color: #454040; font-size: 18px; font-weight: 650; padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-.saved-link { display: flex; align-items: center; gap: 8px; color: var(--primary-dark); text-decoration: none; font-size: 18px; white-space: nowrap; font-weight: 650; padding: 7px 10px; border: 1px solid #f0dada; border-radius: 9px; background: #fff8f8; }
-.saved-link strong { min-width: 22px; text-align: center; font-size: 13px; border-radius: 5px; background: #f7dede; }
-.saved-link.active, .saved-link:hover { border-color: var(--primary); }
+.login-button { display: flex; align-items: center; gap: 8px; color: var(--primary-dark); font-size: 18px; white-space: nowrap; font-weight: 650; padding: 7px 10px; border: 1px solid #f0dada; border-radius: 9px; background: #fff8f8; }
+.login-button:hover { border-color: var(--primary); background: #fff2f2; }
 .menu-toggle { display: none; }
 .main-content:has(.welcome-page) { width: 100%; margin: 0; }
 /* Hero composition follows the reference while retaining the brand palette. */
@@ -146,9 +145,9 @@
 }
 @media (max-width: 480px) {
   .site-header { padding-inline: 16px; gap: 8px; }
-  .brand-logo { width: 168px; }
-  .saved-link { gap: 6px; padding: 8px; }
-  .saved-link > span { display: none; }
+  .brand-logo { width: clamp(136px, 35vw, 168px); }
+  .login-button { padding: 8px; font-size: 14px; }
+  .login-button > svg { display: none; }
   .main-content > .welcome-page { padding-inline: 20px; }
   .hero-eyebrow { font-size: 9px; gap: 9px; letter-spacing: .07em; }
   .hero-description { font-size: 15px; }

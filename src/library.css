@@ -6,17 +6,18 @@
 .library-page .eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .09em; }
 .library-page > :where(section) h2 { font-size: clamp(28px, 3vw, 38px); font-weight: 800; letter-spacing: -.025em; }
 .library-page p { text-wrap: pretty; }
-.library-intro { background: #fff5f4; border-bottom: 1px solid var(--border); padding-block: 48px 42px; }
+.library-intro { background: #fff5f4; border-bottom: 1px solid var(--border); padding-block: 24px; }
 .library-intro-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: 48px; }
-.library-intro h1 { font-size: clamp(38px, 4.8vw, 60px); line-height: 1.16; font-weight: 800; }
+.library-intro h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.14; font-weight: 800; margin-bottom: 14px; }
+.library-intro .eyebrow { margin-bottom: 10px; }
 .library-intro h1 span, .library-practice h2 span { color: var(--primary); }
-.library-lead { max-width: 600px; color: var(--muted); font-size: 19px; line-height: 1.75; margin-bottom: 26px; }
+.library-lead { max-width: 600px; color: var(--muted); font-size: 17px; line-height: 1.65; margin-bottom: 18px; }
 .library-search { display: flex; align-items: center; gap: 12px; padding: 4px 18px; background: white; border: 1px solid #dfbcbc; border-radius: 14px; color: var(--primary-dark); }
 .library-search svg { flex-shrink: 0; }
 .library-search input { min-width: 0; min-height: 52px; padding-inline: 0; background: white; border: 0; border-radius: 0; font-size: 16px; }
 .library-search:focus-within { border-color: var(--primary); }
 .library-mascot-wrap { display: grid; justify-items: center; }
-.library-mascot { display: block; width: min(100%, 340px); height: auto; }
+.library-mascot { display: block; width: min(100%, 250px); height: auto; }
 .library-mascot-caption { margin-top: 8px; color: var(--primary-dark); font-size: 14px; font-weight: 700; }
 .library-catalog { padding-block: 52px 64px; }
 .library-catalog-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
@@ -71,10 +72,11 @@
 }
 @media (max-width: 600px) {
   .library-inner { width: calc(100% - 40px); }
-  .library-intro { padding-block: 32px 24px; }
+  .library-intro { padding-block: 18px 16px; }
   .library-intro-layout, .library-practice-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .library-lead { font-size: 17px; }
-  .library-mascot { width: 210px; }
+  .library-intro-layout { gap: 16px; }
+  .library-lead { font-size: 16px; margin-bottom: 16px; }
+  .library-mascot { width: 110px; }
   .library-mascot-caption { font-size: 13px; }
   .library-search { padding-inline: 12px; gap: 8px; }
   .library-search input { font-size: 16px; }

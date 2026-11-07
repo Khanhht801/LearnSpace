@@ -18,15 +18,6 @@
 .library-mascot-wrap { display: grid; justify-items: center; }
 .library-mascot { display: block; width: min(100%, 340px); height: auto; }
 .library-mascot-caption { margin-top: 8px; color: var(--primary-dark); font-size: 14px; font-weight: 700; }
-.library-filters-section { border-bottom: 1px solid var(--border); padding-block: 22px; }
-.library-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
-.library-filter-field { display: flex; align-items: center; gap: 12px; }
-.library-filter-field label { margin: 0; color: var(--muted); font-size: 14px; }
-.library-filter-field select { max-width: 240px; min-height: 46px; padding: 10px 32px 10px 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff; font: inherit; font-size: 15px; color: #252525; cursor: pointer; }
-.library-result-count { margin: 0 0 0 auto; color: var(--muted); font-size: 15px; }
-.library-result-count strong { color: var(--primary-dark); }
-.library-reset { padding: 8px 12px; background: #fff2f2; color: var(--primary-dark); font-size: 14px; }
-.library-reset:hover { color: var(--primary-dark); background: #ffe4e4; }
 .library-catalog { padding-block: 52px 64px; }
 .library-catalog-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
 .library-catalog-heading h2 { max-width: 700px; margin: 0; font-size: clamp(28px, 2.8vw, 34px); }
@@ -87,10 +78,6 @@
   .library-mascot-caption { font-size: 13px; }
   .library-search { padding-inline: 12px; gap: 8px; }
   .library-search input { font-size: 16px; }
-  .library-filters { align-items: stretch; gap: 16px 12px; }
-  .library-filter-field { flex: 1 1 140px; flex-direction: column; align-items: stretch; gap: 6px; min-width: 0; }
-  .library-filter-field select { width: 100%; max-width: none; font-size: 14px; padding-right: 20px; }
-  .library-result-count { flex-basis: 100%; margin: 0; }
   .library-catalog, .library-practice { padding-block: 36px; }
   .library-catalog-heading { margin-bottom: 24px; }
   .library-saved-layout { gap: 16px; align-items: flex-start; }

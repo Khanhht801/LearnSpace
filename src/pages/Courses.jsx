@@ -42,17 +42,9 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
           <div className="library-mascot-wrap"><img src="/mascot-library.png" width="1254" height="1254" className="library-mascot" alt="" fetchPriority="high" /><span className="library-mascot-caption">Mỗi trang đọc, một điều mới.</span></div>
         </div>
       </section>
-      <section className="library-filters-section" aria-labelledby="library-filter-title">
-        <div className="library-inner library-filters">
-          <h2 id="library-filter-title" className="sr-only">Chọn tài liệu phù hợp</h2>
-          <div className="library-filter-field"><label htmlFor="library-topic">Chủ đề</label><select id="library-topic" value={selectedTopic?.id || ''} onChange={(event) => updateFilter('topic', event.target.value)}><option value="">Tất cả chủ đề</option>{topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}</select></div>
-          <div className="library-filter-field"><label htmlFor="library-level">Trình độ</label><select id="library-level" value={selectedLevel} onChange={(event) => updateFilter('level', event.target.value)}><option value="">Tất cả trình độ</option>{levels.map((level) => <option key={level} value={level}>{level}</option>)}</select></div>
-          {hasFilters && <button type="button" className="library-reset" onClick={() => setSearchParams({}, { replace: true })}>Xóa bộ lọc <span aria-hidden="true">×</span></button>}
-          <p className="library-result-count" role="status" aria-atomic="true">Tìm thấy <strong>{filteredCourses.length}</strong> tài liệu</p>
-        </div>
-      </section>
       <section className="library-catalog" id="library-catalog" aria-labelledby="library-catalog-title">
         <div className="library-inner">
+          <p className="sr-only" role="status" aria-atomic="true">Tìm thấy {filteredCourses.length} tài liệu</p>
           <div className="library-catalog-heading"><div><p className="eyebrow">{savedOnly ? 'ĐÃ CHỌN CHO RIÊNG MÌNH' : 'ĐỌC, HIỂU VÀ KHÁM PHÁ'}</p><h2 id="library-catalog-title">{savedOnly ? 'Những tài liệu bạn muốn đọc lại' : 'Một tài liệu hay. Một bước tiến mới.'}</h2></div><span className="library-catalog-label">Học theo nhịp của bạn</span></div>
           {filteredCourses.length > 0 ? <div className="library-grid">{filteredCourses.map((course) => {
             const topic = topics.find((item) => item.courseIds.includes(course.id));

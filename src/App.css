@@ -510,12 +510,17 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
 .contribution-checklist-copy img { display: block; width: min(100%, 300px); height: auto; margin: 20px auto 0; filter: drop-shadow(0 16px 14px #9d0b0f12); }
 .contribution-checklist-panel { min-width: 0; padding: 34px; border: 1px solid #f5d9dd; border-radius: 30px; background: #fff; box-shadow: 0 16px 40px #9d0b0f08; }
 .contribution-checklist-panel ul { list-style: none; padding: 0; margin: 0; }
-.contribution-checklist-panel li { display: flex; align-items: flex-start; gap: 16px; padding-block: 20px; }
+.contribution-checklist-panel li { padding-block: 12px; }
 .contribution-checklist-panel li:first-child { padding-top: 0; }
 .contribution-checklist-panel li + li { border-top: 1px solid #f3e4e5; }
 .contribution-check { display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #fff0ed; color: var(--primary-dark); font-weight: 800; }
-.contribution-checklist-panel h3 { margin: 0 0 6px; font-size: 19px; line-height: 1.5; }
-.contribution-checklist-panel li p { color: #575153; margin: 0; }
+.contribution-checklist-panel h3 { margin: 0; font-size: 19px; line-height: 1.5; }
+.contribution-checklist-item summary { display: flex; align-items: center; gap: 16px; min-height: 48px; list-style: none; cursor: pointer; border-radius: 8px; }
+.contribution-checklist-item summary::-webkit-details-marker { display: none; }
+.contribution-checklist-item summary:hover h3 { color: var(--primary-dark); }
+.contribution-checklist-toggle { flex-shrink: 0; width: 9px; height: 9px; margin: 0 4px 4px auto; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary); transform: rotate(45deg); }
+.contribution-checklist-item[open] .contribution-checklist-toggle { transform: rotate(225deg); margin-bottom: -4px; }
+.contribution-checklist-panel li p { color: #575153; margin: 8px 0 8px 46px; }
 .contribution-ready { border-top: 1px solid #f3e4e5; padding-top: 24px; margin-top: 4px; }
 .contribution-ready p { color: #575153; font-size: 14px; }
 .contribution-ready strong { color: #252525; font-size: 18px; }

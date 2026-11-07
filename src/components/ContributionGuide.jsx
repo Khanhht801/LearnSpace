@@ -24,7 +24,17 @@ export default function ContributionGuide({ onShare }) {
       <section className="contribution-checklist" aria-labelledby="contribution-checklist-title">
         <div className="landing-inner contribution-checklist-layout">
           <div className="contribution-checklist-copy"><p className="eyebrow">CÙNG GIỮ CHẤT LƯỢNG NGUỒN HỌC</p><h2 id="contribution-checklist-title">Trước khi bạn đăng,<br /><span>kiểm tra một chút nhé.</span></h2><p>Một vài lưu ý nhỏ để tài liệu của bạn dễ tìm, dễ học và hữu ích hơn với mọi người.</p><img src="/mascot.png" alt="Linh vật LearnSpace: chú gà vàng đeo khăn đỏ và ba lô, đồng hành cùng người chia sẻ" width="1254" height="1254" loading="lazy" /></div>
-          <div className="contribution-checklist-panel"><ul>{checklist.map((item) => <li key={item.title}><span className="contribution-check" aria-hidden="true">✓</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}</ul><div className="contribution-ready"><p><strong>Sẵn sàng chia sẻ điều hữu ích?</strong><br />File và tên hiển thị của bạn sẽ được đăng công khai.</p><button type="button" aria-haspopup="dialog" onClick={onShare}>Chia sẻ tài liệu <span aria-hidden="true">↗</span></button></div></div>
+          <div className="contribution-checklist-panel">
+            <ul>{checklist.map((item) => (
+              <li key={item.title}>
+                <details className="contribution-checklist-item">
+                  <summary><span className="contribution-check" aria-hidden="true">✓</span><h3>{item.title}</h3><span className="contribution-checklist-toggle" aria-hidden="true" /></summary>
+                  <p>{item.text}</p>
+                </details>
+              </li>
+            ))}</ul>
+            <div className="contribution-ready"><p><strong>Sẵn sàng chia sẻ điều hữu ích?</strong><br />File và tên hiển thị của bạn sẽ được đăng công khai.</p><button type="button" aria-haspopup="dialog" onClick={onShare}>Chia sẻ tài liệu <span aria-hidden="true">↗</span></button></div>
+          </div>
         </div>
       </section>
     </>

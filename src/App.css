@@ -51,8 +51,8 @@
 .brand { display: inline-flex; align-items: center; flex-shrink: 0; font-size: 25px; letter-spacing: -1.2px; gap: 0; }
 .brand-logo { display: block; width: 216px; height: auto; }
 .site-header .primary-nav { display: flex; align-items: center; gap: 7px; width: auto; order: initial; }
-.site-header nav a { color: #454040; font-size: 20px; font-weight: 650; padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-.login-button { display: flex; align-items: center; gap: 8px; color: var(--primary-dark); font-size: 20px; white-space: nowrap; font-weight: 650; padding: 7px 10px; border: 1px solid #f0dada; border-radius: 9px; background: #fff8f8; }
+.site-header nav a { color: #454040; font-size: 21px; font-weight: 650; padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+.login-button { display: flex; align-items: center; gap: 8px; color: var(--primary-dark); font-size: 21px; white-space: nowrap; font-weight: 650; padding: 7px 10px; border: 1px solid #f0dada; border-radius: 9px; background: #fff8f8; }
 .login-button:hover { border-color: var(--primary); background: #fff2f2; color: var(--primary-dark); }
 .menu-toggle { display: none; }
 .main-content:has(.welcome-page) { width: 100%; margin: 0; }

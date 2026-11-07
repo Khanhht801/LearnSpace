@@ -5,7 +5,7 @@ const courses = [
     title: 'React cơ bản',
     level: 'Cơ bản',
     duration: 12,
-    description: 'Component, JSX, props và state trong React.',
+    description: 'Làm quen với JSX, component, props và state để xây dựng giao diện React đầu tiên.',
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const courses = [
     title: 'React Router',
     level: 'Trung bình',
     duration: 8,
-    description: 'Điều hướng và tổ chức nhiều màn hình trong SPA.',
+    description: 'Tổ chức ứng dụng thành nhiều màn hình và tạo liên kết điều hướng giữa các trang.',
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const courses = [
     title: 'Làm việc với API',
     level: 'Trung bình',
     duration: 10,
-    description: 'Dùng useEffect để lấy và quản lý dữ liệu từ API.',
+    description: 'Lấy dữ liệu bằng useEffect và xử lý trạng thái đang tải, lỗi hoặc chưa có dữ liệu.',
   },
 ];
 

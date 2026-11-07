@@ -39,7 +39,14 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
             <div className="library-search"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.7" /><path d="m16 16 5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" /></svg><input id="course-search" type="search" value={keyword} onChange={(event) => updateFilter('q', event.target.value)} placeholder="Tìm tài liệu, ví dụ: React, props, API…" /></div>
             {savedOnly && <p className="library-storage-note">Danh sách được lưu trên trình duyệt hiện tại, chưa đồng bộ giữa thiết bị.</p>}
           </div>
-          <div className="library-mascot-wrap"><img src="/mascot-library.png" width="1254" height="1254" className="library-mascot" alt="" fetchPriority="high" /><span className="library-mascot-caption">Mỗi trang đọc, một điều mới.</span></div>
+          <div className="library-mascot-wrap">
+            <div className="library-mascot-decor" aria-hidden="true">
+              <div className="library-floating-note library-note-code"><span className="library-note-symbol">&lt;/&gt;</span><div><strong>Học một chút</strong><span>Hiểu thêm mỗi ngày</span></div></div>
+              <div className="library-floating-note library-note-book"><svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /></svg><div><strong>Đọc & khám phá</strong><span>Từng trang kiến thức</span></div></div>
+              <span className="library-decor-star library-star-one">✦</span><span className="library-decor-star library-star-two">✧</span><span className="library-decor-dot" />
+            </div>
+            <img src="/mascot-library.png" width="1254" height="1254" className="library-mascot" alt="" fetchPriority="high" /><span className="library-mascot-caption">Mỗi trang đọc, một điều mới.</span>
+          </div>
         </div>
       </section>
       <section className="library-catalog" id="library-catalog" aria-labelledby="library-catalog-title">

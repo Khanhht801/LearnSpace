@@ -65,9 +65,9 @@ export function LibraryProvider({ children }) {
   return <LibraryContext.Provider value={{ ...state, retry }}>{children}</LibraryContext.Provider>;
 }
 
-export function LibraryBoundary() {
+export function LibraryBoundary({ children }) {
   const { loading, error, retry } = useLibrary();
   if (loading) return <section className="library-inner" role="status"><p>Đang tải tài liệu…</p></section>;
   if (error) return <section className="library-inner"><p role="alert">Không thể tải thư viện. Vui lòng kiểm tra kết nối và thử lại.</p><button type="button" onClick={retry}>Thử lại</button></section>;
-  return <Outlet />;
+  return children ?? <Outlet />;
 }

@@ -58,19 +58,15 @@ export default function App() {
       <main className="main-content" id="main-content">
         <LibraryProvider>
           <Routes>
+            <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
+            <Route path="/topics" element={<Topics />} />
+            <Route
+              path="/courses"
+              element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />}
+            />
+            <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
             <Route element={<LibraryBoundary />}>
-              <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
-              <Route path="/topics" element={<Topics />} />
               <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
-              <Route
-                path="/courses"
-                element={
-                  <Courses
-                    favoriteIds={favoriteIds}
-                    onToggleFavorite={handleToggleFavorite}
-                  />
-                }
-              />
               <Route
                 path="/courses/:courseId"
                 element={
@@ -80,7 +76,6 @@ export default function App() {
                   />
                 }
               />
-              <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
             </Route>
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

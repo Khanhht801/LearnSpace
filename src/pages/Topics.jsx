@@ -1,3 +1,4 @@
+import { LibraryBoundary } from '../hooks/LibraryProvider.jsx';
 import { useLibrary } from '../hooks/useLibrary.js';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.jsx';
@@ -22,17 +23,19 @@ export default function Topics() {
 
       <section className="topics-page-catalog" id="topic-list" aria-labelledby="topic-list-title">
         <div className="topic-page-inner">
-          <GalleryHoverCarousel
-            heading="Các chủ đề để khám phá"
-            description="Chọn điều bạn quan tâm và khám phá kiến thức theo cách của bạn."
-            items={topics.map((topic) => ({
-              id: topic.id,
-              title: topic.title,
-              summary: topic.description,
-              url: `/topics/${topic.id}`,
-              image: topic.coverImage,
-            }))}
-          />
+          <LibraryBoundary>
+            <GalleryHoverCarousel
+              heading="Các chủ đề để khám phá"
+              description="Chọn điều bạn quan tâm và khám phá kiến thức theo cách của bạn."
+              items={topics.map((topic) => ({
+                id: topic.id,
+                title: topic.title,
+                summary: topic.description,
+                url: `/topics/${topic.id}`,
+                image: topic.coverImage,
+              }))}
+            />
+          </LibraryBoundary>
         </div>
       </section>
 

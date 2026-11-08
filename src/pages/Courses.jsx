@@ -1,3 +1,4 @@
+import { LibraryBoundary } from '../hooks/LibraryProvider.jsx';
 import { useLibrary } from '../hooks/useLibrary.js';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -49,18 +50,20 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
       </section>
       <section className="library-catalog" id="library-catalog" aria-labelledby="library-catalog-title">
         <div className="library-inner">
-          <p className="sr-only" role="status" aria-atomic="true">Tìm thấy {filteredCourses.length} tài liệu</p>
-          <div className="library-catalog-heading"><div><p className="eyebrow">{savedOnly ? 'ĐÃ CHỌN CHO RIÊNG MÌNH' : 'ĐỌC, HIỂU VÀ KHÁM PHÁ'}</p><h2 id="library-catalog-title">{savedOnly ? 'Những tài liệu bạn muốn đọc lại' : 'Một tài liệu hay. Một bước tiến mới.'}</h2></div><span className="library-catalog-label">Học theo nhịp của bạn</span></div>
-          <label htmlFor="category-filter">Chủ đề </label>
-          <select id="category-filter" value={selectedTopic?.id || ''} onChange={(event) => updateFilter('topic', event.target.value)}>
-            <option value="">Tất cả chủ đề</option>
-            {topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}
-          </select>
-          {filteredCourses.length > 0 ? <div className="library-grid">{filteredCourses.map((course) => {
-            const topic = topics.find((item) => item.courseIds.includes(course.id));
-            const saved = favoriteIds.includes(course.id);
-            return <article className="library-card" key={course.id}><div className="library-card-cover"><img src={course.coverImage} alt="" width="960" height="520" loading="lazy" decoding="async" /></div><div className="library-card-body"><div className="library-card-meta"><span>{topic?.title || 'Kiến thức'}</span><span>{course.file_type?.toUpperCase()}</span></div><h3><Link to={`/courses/${course.id}`}>{course.title}</Link></h3><p>{course.description}</p><div className="library-card-actions"><Link to={`/courses/${course.id}`}>Xem tài liệu <span aria-hidden="true">→</span></Link><button type="button" aria-pressed={saved} aria-label={`${saved ? 'Bỏ lưu' : 'Lưu'} ${course.title}`} onClick={() => onToggleFavorite(course.id)}><Bookmark filled={saved} />{saved ? 'Đã lưu' : 'Lưu'}</button></div></div></article>;
-          })}</div> : <div className="library-empty"><Bookmark /><h3>{savedOnly && !hasFilters ? 'Chưa có tài liệu đã lưu.' : 'Chưa tìm thấy tài liệu phù hợp.'}</h3><p>{savedOnly && !hasFilters ? 'Khám phá thư viện và lưu những nội dung bạn muốn tìm hiểu.' : 'Thử từ khóa khác hoặc xóa bộ lọc để xem lại danh sách tài liệu.'}</p>{hasFilters ? <button type="button" onClick={() => setSearchParams({}, { replace: true })}>Xóa tìm kiếm và bộ lọc</button> : <Link className="button-link" to="/courses">Khám phá thư viện →</Link>}</div>}
+          <LibraryBoundary>
+            <p className="sr-only" role="status" aria-atomic="true">Tìm thấy {filteredCourses.length} tài liệu</p>
+            <div className="library-catalog-heading"><div><p className="eyebrow">{savedOnly ? 'ĐÃ CHỌN CHO RIÊNG MÌNH' : 'ĐỌC, HIỂU VÀ KHÁM PHÁ'}</p><h2 id="library-catalog-title">{savedOnly ? 'Những tài liệu bạn muốn đọc lại' : 'Một tài liệu hay. Một bước tiến mới.'}</h2></div><span className="library-catalog-label">Học theo nhịp của bạn</span></div>
+            <label htmlFor="category-filter">Chủ đề </label>
+            <select id="category-filter" value={selectedTopic?.id || ''} onChange={(event) => updateFilter('topic', event.target.value)}>
+              <option value="">Tất cả chủ đề</option>
+              {topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}
+            </select>
+            {filteredCourses.length > 0 ? <div className="library-grid">{filteredCourses.map((course) => {
+              const topic = topics.find((item) => item.courseIds.includes(course.id));
+              const saved = favoriteIds.includes(course.id);
+              return <article className="library-card" key={course.id}><div className="library-card-cover"><img src={course.coverImage} alt="" width="960" height="520" loading="lazy" decoding="async" /></div><div className="library-card-body"><div className="library-card-meta"><span>{topic?.title || 'Kiến thức'}</span><span>{course.file_type?.toUpperCase()}</span></div><h3><Link to={`/courses/${course.id}`}>{course.title}</Link></h3><p>{course.description}</p><div className="library-card-actions"><Link to={`/courses/${course.id}`}>Xem tài liệu <span aria-hidden="true">→</span></Link><button type="button" aria-pressed={saved} aria-label={`${saved ? 'Bỏ lưu' : 'Lưu'} ${course.title}`} onClick={() => onToggleFavorite(course.id)}><Bookmark filled={saved} />{saved ? 'Đã lưu' : 'Lưu'}</button></div></div></article>;
+            })}</div> : <div className="library-empty"><Bookmark /><h3>{savedOnly && !hasFilters ? 'Chưa có tài liệu đã lưu.' : 'Chưa tìm thấy tài liệu phù hợp.'}</h3><p>{savedOnly && !hasFilters ? 'Khám phá thư viện và lưu những nội dung bạn muốn tìm hiểu.' : 'Thử từ khóa khác hoặc xóa bộ lọc để xem lại danh sách tài liệu.'}</p>{hasFilters ? <button type="button" onClick={() => setSearchParams({}, { replace: true })}>Xóa tìm kiếm và bộ lọc</button> : <Link className="button-link" to="/courses">Khám phá thư viện →</Link>}</div>}
+          </LibraryBoundary>
         </div>
       </section>
       {!savedOnly && <>

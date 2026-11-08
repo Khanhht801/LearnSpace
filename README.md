@@ -1,5 +1,15 @@
 # React + Vite
 
+## Deploy LearnSpace trên Vercel
+
+- Build command: `npm run build`; Output directory: `dist`.
+- Trong Project Settings → Environment Variables, đặt `VITE_SUPABASE_URL` và `VITE_SUPABASE_PUBLISHABLE_KEY` cho môi trường Production (và Preview nếu sử dụng). Lấy giá trị tương ứng từ dự án Supabase; xem tên biến trong `.env.example`.
+- Các biến `VITE_*` được đóng gói vào JavaScript lúc build. Sau khi thêm/sửa biến, phải Redeploy để áp dụng. File `.env` trên máy không được push lên GitHub.
+- Chỉ dùng publishable key ở frontend; không đưa `DATABASE_URL`, service role hoặc secret key vào biến `VITE_*`.
+- `vercel.json` hỗ trợ mở trực tiếp và tải lại các route React. Các API `/api/documents` và `/api/feedback` hiện chạy bằng server Node.js riêng (`npm start`), chưa phải Vercel Functions; deploy frontend trên Vercel chưa cung cấp các API này.
+
+Nếu trang trắng và console báo `supabaseUrl is required`, bản build đang thiếu biến Supabase. Ứng dụng hiện hiển thị thông báo cấu hình khi gặp trường hợp này.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

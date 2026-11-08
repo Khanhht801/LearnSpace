@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="550" viewBox="0 0 1200 550">
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#fff8d8"/>
+      <stop offset="1" stop-color="#f6d86b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="550" fill="url(#background)"/>
+  <circle cx="1090" cy="50" r="230" fill="#fff" opacity=".25"/>
+  <circle cx="70" cy="560" r="210" fill="#e7ae32" opacity=".16"/>
+  <rect x="460" y="105" width="280" height="280" rx="40" fill="#f7df1e" stroke="#d9b92a" stroke-width="2"/>
+  <text x="704" y="344" text-anchor="end" font-family="Arial, sans-serif" font-size="150" font-weight="700" fill="#292619">JS</text>
+  <text x="600" y="454" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="6" fill="#594a24">JAVASCRIPT</text>
+  <g fill="none" stroke="#967525" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".4">
+    <path d="m320 190-45 45 45 45m560-90 45 45-45 45"/>
+    <path d="m355 335 30-90m430 90 30-90"/>
+  </g>
+</svg>

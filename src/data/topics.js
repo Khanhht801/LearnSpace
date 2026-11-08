@@ -1,5 +1,27 @@
 const topics = [
   {
+    id: 'javascript',
+    title: 'JavaScript cơ bản',
+    description: 'Làm quen với biến, hàm, mảng và object. Từng bước thêm tương tác cho trang web và chuẩn bị nền tảng để học React.',
+    courseIds: [],
+    coverImage: '/images/topics/javascript.svg',
+    tags: ['Biến & Hàm', 'Mảng & Object', 'DOM'],
+    level: 'Cơ bản',
+    audience: 'Bạn mới bắt đầu lập trình web hoặc muốn củng cố kiến thức JavaScript trước khi học React.',
+    prerequisites: 'HTML và CSS cơ bản. Bạn chỉ cần trình duyệt và trình soạn thảo mã để bắt đầu thực hành.',
+    knowledge: [
+      { title: 'Nền tảng ngôn ngữ', description: 'Làm quen với let, const, kiểu dữ liệu, toán tử, câu lệnh điều kiện và vòng lặp.' },
+      { title: 'Hàm và dữ liệu', description: 'Viết hàm có thể tái sử dụng, làm việc với mảng và object, tìm hiểu map và filter.' },
+      { title: 'Tương tác trên trang web', description: 'Truy cập phần tử bằng DOM, lắng nghe sự kiện và cập nhật nội dung theo thao tác của người dùng.' },
+    ],
+    practice: {
+      title: 'Tạo danh sách việc cần làm',
+      tasks: ['Tạo biểu mẫu HTML để nhập công việc và lắng nghe sự kiện gửi biểu mẫu.', 'Lưu công việc trong một mảng, dùng hàm để thêm và xóa từng mục.', 'Hiển thị danh sách bằng DOM và cho phép đánh dấu công việc đã hoàn thành.'],
+    },
+    nextTopicId: 'react',
+    nextDescription: 'Khi đã quen với hàm, mảng và object, hãy khám phá cách xây dựng giao diện bằng component trong React.',
+  },
+  {
     id: 'react',
     title: 'React',
     description: 'Bắt đầu với component, JSX, props và state. Tiếp tục khám phá cách điều hướng với React Router.',

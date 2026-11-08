@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useMatch } from 'react-router-dom';
 import { LibraryBoundary, LibraryProvider } from './hooks/LibraryProvider.jsx';
 import './App.css';
 import Header from './components/Header.jsx';
@@ -30,6 +30,8 @@ function getInitialFavoriteIds() {
 }
 
 export default function App() {
+  const isLoginPage = useMatch('/login');
+  const isRegisterPage = useMatch('/register');
   const [favoriteIds, setFavoriteIds] = useState(getInitialFavoriteIds);
   const [storageError, setStorageError] = useState(false);
 
@@ -53,7 +55,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <ScrollToLocation />
-      <Header />
+      {!isLoginPage && !isRegisterPage && <Header />}
       {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
 
       <main className="main-content" id="main-content">

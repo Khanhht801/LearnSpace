@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.jsx';
-import TopicCard from '../components/TopicCard.jsx';
+import GalleryHoverCarousel from '../components/ui/gallery-hover-carousel.jsx';
 import topics from '../data/topics.js';
 import '../topics.css';
 
@@ -22,8 +22,17 @@ export default function Topics() {
 
       <section className="topics-page-catalog" id="topic-list" aria-labelledby="topic-list-title">
         <div className="topic-page-inner">
-          <div className="topic-section-heading"><div><p className="eyebrow">TÌM ĐIỀU BẠN QUAN TÂM</p><h2 id="topic-list-title">Các chủ đề để khám phá</h2></div><span className="topics-catalog-count">{topics.length} chủ đề hiện có</span></div>
-          {topics.length > 0 ? <div className="topics-grid">{topics.map((topic) => <TopicCard key={topic.id} topic={topic} />)}</div> : <p className="topics-empty">Các chủ đề đang được chuẩn bị. Bạn hãy quay lại sau để khám phá nội dung mới.</p>}
+          <GalleryHoverCarousel
+            heading="Các chủ đề để khám phá"
+            description="Chọn điều bạn quan tâm và khám phá kiến thức theo cách của bạn."
+            items={topics.map((topic) => ({
+              id: topic.id,
+              title: topic.title,
+              summary: topic.description,
+              url: `/topics/${topic.id}`,
+              image: topic.coverImage,
+            }))}
+          />
         </div>
       </section>
 

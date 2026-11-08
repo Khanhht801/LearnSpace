@@ -1,9 +1,9 @@
+import { useLibrary } from '../hooks/useLibrary.js';
 import { Link } from 'react-router-dom';
-import topics from '../data/topics.js';
-import courses from '../data/courses.js';
 import TopicCard from './TopicCard.jsx';
 
 export default function Topics() {
+  const { courses, topics } = useLibrary();
   const availableTopics = topics.map((topic) => ({ ...topic, count: courses.filter((course) => topic.courseIds.includes(course.id)).length })).filter((topic) => topic.count > 0);
 
   return (

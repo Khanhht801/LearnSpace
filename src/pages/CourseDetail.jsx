@@ -1,14 +1,15 @@
+import { useLibrary } from '../hooks/useLibrary.js';
 import { Link, useParams } from 'react-router-dom';
-import courses from '../data/courses.js';
 
 export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
+  const { courses } = useLibrary();
   const { courseId } = useParams();
   const course = courses.find((item) => item.id === Number(courseId));
 
   if (!course) {
     return (
       <section>
-        <h1>Không tìm thấy khóa học</h1>
+        <h1>Không tìm thấy tài liệu</h1>
         <Link to="/courses">Quay lại danh sách</Link>
       </section>
     );
@@ -19,8 +20,7 @@ export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
   return (
     <article className="course-detail">
       <h1>{course.title}</h1>
-      <p>Cấp độ: {course.level}</p>
-      <p>Thời lượng: {course.duration} giờ</p>
+      {course.file_type && <p>Định dạng: {course.file_type.toUpperCase()}</p>}
       <p>{course.description}</p>
 
       <button aria-pressed={isFavorite} type="button" onClick={() => onToggleFavorite(course.id)}>

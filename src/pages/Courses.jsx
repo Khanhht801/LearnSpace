@@ -1,17 +1,15 @@
+import { useLibrary } from '../hooks/useLibrary.js';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.jsx';
-import courses from '../data/courses.js';
-import topics from '../data/topics.js';
 import '../library.css';
 
 export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = false }) {
+  const { courses, topics } = useLibrary();
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get('q') || '';
   const selectedTopic = topics.find((topic) => topic.id === searchParams.get('topic'));
-  const levels = [...new Set(courses.map((course) => course.level))];
-  const selectedLevel = levels.includes(searchParams.get('level')) ? searchParams.get('level') : '';
-  const hasFilters = Boolean(keyword || selectedTopic || selectedLevel);
+  const hasFilters = Boolean(keyword || selectedTopic);
   const savedCount = courses.filter((course) => favoriteIds.includes(course.id)).length;
   function updateFilter(key, value) {
     setSearchParams((current) => {
@@ -24,7 +22,7 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
   const normalize = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd');
 
   const filteredCourses = courses.filter((course) =>
-    (!savedOnly || favoriteIds.includes(course.id)) && (!selectedTopic || selectedTopic.courseIds.includes(course.id)) && (!selectedLevel || selectedLevel === course.level) && normalize(`${course.title} ${course.description}`).includes(normalize(keyword.trim())),
+    (!savedOnly || favoriteIds.includes(course.id)) && (!selectedTopic || selectedTopic.courseIds.includes(course.id)) && normalize(`${course.title} ${course.description}`).includes(normalize(keyword.trim())),
   );
 
   return (
@@ -34,7 +32,7 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
           <div>
             <p className="eyebrow">{savedOnly ? 'GÓC HỌC TẬP CỦA BẠN' : 'THƯ VIỆN LEARNSPACE'}</p>
             <h1 id="library-page-title">{savedOnly ? <>Tài liệu đã lưu.<br /><span>Kiến thức để dành.</span></> : <>Tìm kiến thức cho<br /><span>bước tiếp theo.</span></>}</h1>
-            <p className="library-lead">{savedOnly ? 'Những nội dung bạn quan tâm, sẵn sàng để khám phá khi bạn cần.' : 'Khám phá tài liệu về React và phát triển ứng dụng web. Chọn nội dung phù hợp và lưu lại để học khi cần.'}</p>
+            <p className="library-lead">{savedOnly ? 'Những nội dung bạn quan tâm, sẵn sàng để khám phá khi bạn cần.' : 'Khám phá tài liệu theo môn học và chủ đề bạn quan tâm. Chọn nội dung phù hợp và lưu lại để học khi cần.'}</p>
             <label htmlFor="course-search" className="sr-only">Tìm tài liệu theo tên hoặc mô tả</label>
             <div className="library-search"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.7" /><path d="m16 16 5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" /></svg><input id="course-search" type="search" value={keyword} onChange={(event) => updateFilter('q', event.target.value)} placeholder="Tìm tài liệu, ví dụ: React, props, API…" /></div>
             {savedOnly && <p className="library-storage-note">Danh sách được lưu trên trình duyệt hiện tại, chưa đồng bộ giữa thiết bị.</p>}
@@ -53,10 +51,15 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
         <div className="library-inner">
           <p className="sr-only" role="status" aria-atomic="true">Tìm thấy {filteredCourses.length} tài liệu</p>
           <div className="library-catalog-heading"><div><p className="eyebrow">{savedOnly ? 'ĐÃ CHỌN CHO RIÊNG MÌNH' : 'ĐỌC, HIỂU VÀ KHÁM PHÁ'}</p><h2 id="library-catalog-title">{savedOnly ? 'Những tài liệu bạn muốn đọc lại' : 'Một tài liệu hay. Một bước tiến mới.'}</h2></div><span className="library-catalog-label">Học theo nhịp của bạn</span></div>
+          <label htmlFor="category-filter">Chủ đề </label>
+          <select id="category-filter" value={selectedTopic?.id || ''} onChange={(event) => updateFilter('topic', event.target.value)}>
+            <option value="">Tất cả chủ đề</option>
+            {topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}
+          </select>
           {filteredCourses.length > 0 ? <div className="library-grid">{filteredCourses.map((course) => {
             const topic = topics.find((item) => item.courseIds.includes(course.id));
             const saved = favoriteIds.includes(course.id);
-            return <article className="library-card" key={course.id}><div className="library-card-cover"><img src={course.coverImage} alt="" width="960" height="520" loading="lazy" decoding="async" /></div><div className="library-card-body"><div className="library-card-meta"><span>{topic?.title || 'Kiến thức'}</span><span>{course.level}</span></div><h3><Link to={`/courses/${course.id}`}>{course.title}</Link></h3><p>{course.description}</p><div className="library-card-actions"><Link to={`/courses/${course.id}`}>Xem tài liệu <span aria-hidden="true">→</span></Link><button type="button" aria-pressed={saved} aria-label={`${saved ? 'Bỏ lưu' : 'Lưu'} ${course.title}`} onClick={() => onToggleFavorite(course.id)}><Bookmark filled={saved} />{saved ? 'Đã lưu' : 'Lưu'}</button></div></div></article>;
+            return <article className="library-card" key={course.id}><div className="library-card-cover"><img src={course.coverImage} alt="" width="960" height="520" loading="lazy" decoding="async" /></div><div className="library-card-body"><div className="library-card-meta"><span>{topic?.title || 'Kiến thức'}</span><span>{course.file_type?.toUpperCase()}</span></div><h3><Link to={`/courses/${course.id}`}>{course.title}</Link></h3><p>{course.description}</p><div className="library-card-actions"><Link to={`/courses/${course.id}`}>Xem tài liệu <span aria-hidden="true">→</span></Link><button type="button" aria-pressed={saved} aria-label={`${saved ? 'Bỏ lưu' : 'Lưu'} ${course.title}`} onClick={() => onToggleFavorite(course.id)}><Bookmark filled={saved} />{saved ? 'Đã lưu' : 'Lưu'}</button></div></div></article>;
           })}</div> : <div className="library-empty"><Bookmark /><h3>{savedOnly && !hasFilters ? 'Chưa có tài liệu đã lưu.' : 'Chưa tìm thấy tài liệu phù hợp.'}</h3><p>{savedOnly && !hasFilters ? 'Khám phá thư viện và lưu những nội dung bạn muốn tìm hiểu.' : 'Thử từ khóa khác hoặc xóa bộ lọc để xem lại danh sách tài liệu.'}</p>{hasFilters ? <button type="button" onClick={() => setSearchParams({}, { replace: true })}>Xóa tìm kiếm và bộ lọc</button> : <Link className="button-link" to="/courses">Khám phá thư viện →</Link>}</div>}
         </div>
       </section>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import '../utils/supabase.js';
+import { LibraryBoundary, LibraryProvider } from './hooks/LibraryProvider.jsx';
 import './App.css';
 import Header from './components/Header.jsx';
 import ScrollToLocation from './components/ScrollToLocation.jsx';
@@ -15,7 +15,7 @@ import TopicDetail from './pages/TopicDetail.jsx';
 
 function getInitialFavoriteIds() {
   try {
-  const savedValue = localStorage.getItem('favoriteCourseIds');
+  const savedValue = localStorage.getItem('savedDocumentIds');
 
   if (!savedValue) {
     return [];
@@ -34,7 +34,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('favoriteCourseIds', JSON.stringify(favoriteIds));
+      localStorage.setItem('savedDocumentIds', JSON.stringify(favoriteIds));
       setStorageError(false);
     } catch {
       setStorageError(true);
@@ -56,33 +56,37 @@ export default function App() {
       {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
 
       <main className="main-content" id="main-content">
-        <Routes>
-          <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/topics" element={<Topics />} />
-          <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
-          <Route
-            path="/courses"
-            element={
-              <Courses
-                favoriteIds={favoriteIds}
-                onToggleFavorite={handleToggleFavorite}
+        <LibraryProvider>
+          <Routes>
+            <Route element={<LibraryBoundary />}>
+              <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
+              <Route path="/topics" element={<Topics />} />
+              <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
+              <Route
+                path="/courses"
+                element={
+                  <Courses
+                    favoriteIds={favoriteIds}
+                    onToggleFavorite={handleToggleFavorite}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/courses/:courseId"
-            element={
-              <CourseDetail
-                favoriteIds={favoriteIds}
-                onToggleFavorite={handleToggleFavorite}
+              <Route
+                path="/courses/:courseId"
+                element={
+                  <CourseDetail
+                    favoriteIds={favoriteIds}
+                    onToggleFavorite={handleToggleFavorite}
+                  />
+                }
               />
-            }
-          />
-          <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+              <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
+            </Route>
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </LibraryProvider>
       </main>
     </div>
   );

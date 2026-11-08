@@ -1,7 +1,8 @@
+import { useLibrary } from '../hooks/useLibrary.js';
 import { Link } from 'react-router-dom';
-import courses from '../data/courses.js';
 
 export default function TopicCard({ topic }) {
+  const { courses } = useLibrary();
   const count = courses.filter((course) => topic.courseIds.includes(course.id)).length;
 
   return (

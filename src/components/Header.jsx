@@ -26,7 +26,7 @@ export default function Header() {
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>
-      <NavLink className="login-button" to="/login" onClick={closeMenu}>
+      <NavLink className="login-button" to="/auth/login" onClick={closeMenu}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.6" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
         <span>Đăng nhập</span>
       </NavLink>

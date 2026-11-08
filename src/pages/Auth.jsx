@@ -24,8 +24,8 @@ export default function Auth({ register = false }) {
       <div className="auth-panel">
         <Link className="auth-back" to="/"><ArrowLeft size={16} /> Về trang chủ</Link>
         <div className="auth-tabs" aria-label="Tài khoản">
-          <Link to="/login" aria-current={!register ? 'page' : undefined}>Đăng nhập</Link>
-          <Link to="/register" aria-current={register ? 'page' : undefined}>Đăng ký</Link>
+          <Link to="/auth/login" aria-current={!register ? 'page' : undefined}>Đăng nhập</Link>
+          <Link to="/auth/register" aria-current={register ? 'page' : undefined}>Đăng ký</Link>
         </div>
         <p className="eyebrow">CÙNG LEARNSPACE HỌC MỖI NGÀY</p>
         <h1 id="auth-title">{register ? 'Bắt đầu cùng nhau!' : 'Chào mừng trở lại!'}</h1>
@@ -52,7 +52,7 @@ export default function Auth({ register = false }) {
           {notice && <p className="auth-notice" role="status">{notice}</p>}
           <button className="auth-submit" type="submit">{register ? 'Tạo tài khoản' : 'Đăng nhập'}<ArrowRight size={19} /></button>
         </form>
-        <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/login' : '/register'}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
+        <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/auth/login' : '/auth/register'}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
       </div>
     </section>
   );

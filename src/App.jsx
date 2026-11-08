@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes, useMatch } from 'react-router-dom';
+import { Navigate, Route, Routes, useMatch } from 'react-router-dom';
 import { LibraryBoundary, LibraryProvider } from './hooks/LibraryProvider.jsx';
 import './App.css';
 import Header from './components/Header.jsx';
@@ -32,6 +32,7 @@ function getInitialFavoriteIds() {
 export default function App() {
   const isLoginPage = useMatch('/login');
   const isRegisterPage = useMatch('/register');
+  const isAuthPage = useMatch('/auth/*');
   const [favoriteIds, setFavoriteIds] = useState(getInitialFavoriteIds);
   const [storageError, setStorageError] = useState(false);
 
@@ -55,14 +56,20 @@ export default function App() {
   return (
     <div className="app-shell">
       <ScrollToLocation />
-      {!isLoginPage && !isRegisterPage && <Header />}
+      {!isAuthPage && !isLoginPage && !isRegisterPage && <Header />}
       {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
 
       <main className="main-content" id="main-content">
         <LibraryProvider>
           <Routes>
-            <Route path="/login" element={<Auth key="login" />} />
-            <Route path="/register" element={<Auth key="register" register />} />
+            <Route path="/auth">
+              <Route index element={<Navigate to="login" replace />} />
+              <Route path="login" element={<Auth key="login" />} />
+              <Route path="register" element={<Auth key="register" register />} />
+              <Route path="*" element={<Navigate to="/auth/login" replace />} />
+            </Route>
+            <Route path="/login" element={<Navigate to="/auth/login" replace />} />
+            <Route path="/register" element={<Navigate to="/auth/register" replace />} />
             <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
             <Route path="/topics" element={<Topics />} />
             <Route

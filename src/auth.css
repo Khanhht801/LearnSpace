@@ -1,5 +1,6 @@
 .login-button { text-decoration: none; }
 .header-account { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12px; }
+.header-account-name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .header-account > [role='alert'] { flex-basis: 100%; }
 .auth-submit:disabled, .login-button:disabled { opacity: .65; cursor: wait; }
 @media (max-width: 480px) { .header-account > span:first-child { display: none; } }

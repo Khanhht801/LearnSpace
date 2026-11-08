@@ -6,7 +6,7 @@ import { supabase } from '../../utils/supabase.js';
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const { session, loading } = useAuth();
+  const { session, loading, profile } = useAuth();
   const [signingOut, setSigningOut] = useState(false);
   const [authError, setAuthError] = useState('');
   async function handleSignOut() {
@@ -43,7 +43,7 @@ export default function Header() {
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>
       {session ? <div className="header-account">
-        <span title={session.user.email}>Đã đăng nhập</span>
+        <span className="header-account-name" title={profile?.display_name || session.user.email}>{profile?.display_name || 'Đã đăng nhập'}</span>
         <button className="login-button" type="button" disabled={signingOut} onClick={handleSignOut}>{signingOut ? 'Đang thoát…' : 'Đăng xuất'}</button>
         {authError && <span role="alert">{authError}</span>}
       </div> : <NavLink className="login-button" to="/auth/login" onClick={closeMenu}>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { supabase } from '../../utils/supabase.js';
 import { useAuth } from '../hooks/useAuth.js';
-import { authenticate } from '../lib/auth.js';
+import { authenticate, authFailureDetails } from '../lib/auth.js';
 import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff } from 'lucide-react';
 import '../auth.css';
 
@@ -38,6 +38,7 @@ export default function Auth({ register = false }) {
         form.reset();
       }
     } catch (authError) {
+      console.error('[LearnSpace Auth] Đăng ký/đăng nhập thất bại:', authFailureDetails(authError));
       const messages = {
         invalid_credentials: 'Email hoặc mật khẩu chưa đúng.',
         email_not_confirmed: 'Bạn cần xác nhận email trước khi đăng nhập. Vui lòng kiểm tra hộp thư.',

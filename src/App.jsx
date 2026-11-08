@@ -63,7 +63,7 @@ export default function App() {
         <LibraryProvider>
           <Routes>
             <Route path="/auth">
-              <Route index element={<Navigate to="login" replace />} />
+              <Route index element={<Auth key="callback" />} />
               <Route path="login" element={<Auth key="login" />} />
               <Route path="register" element={<Auth key="register" register />} />
               <Route path="*" element={<Navigate to="/auth/login" replace />} />

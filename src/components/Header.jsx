@@ -1,9 +1,25 @@
 ﻿import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth.js';
+import { supabase } from '../../utils/supabase.js';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { session, loading } = useAuth();
+  const [signingOut, setSigningOut] = useState(false);
+  const [authError, setAuthError] = useState('');
+  async function handleSignOut() {
+    setSigningOut(true);
+    setAuthError('');
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      closeMenu();
+    } catch {
+      setAuthError('Chưa thể đăng xuất. Vui lòng thử lại.');
+    } finally { setSigningOut(false); }
+  }
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -26,10 +42,14 @@ export default function Header() {
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>
-      <NavLink className="login-button" to="/auth/login" onClick={closeMenu}>
+      {session ? <div className="header-account">
+        <span title={session.user.email}>Đã đăng nhập</span>
+        <button className="login-button" type="button" disabled={signingOut} onClick={handleSignOut}>{signingOut ? 'Đang thoát…' : 'Đăng xuất'}</button>
+        {authError && <span role="alert">{authError}</span>}
+      </div> : <NavLink className="login-button" to="/auth/login" onClick={closeMenu}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.6" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-        <span>Đăng nhập</span>
-      </NavLink>
+        <span>{loading ? 'Đang tải…' : 'Đăng nhập'}</span>
+      </NavLink>}
     </header>
   );
 }

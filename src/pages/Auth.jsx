@@ -1,16 +1,59 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { supabase } from '../../utils/supabase.js';
+import { useAuth } from '../hooks/useAuth.js';
+import { authenticate } from '../lib/auth.js';
 import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff } from 'lucide-react';
 import '../auth.css';
 
 export default function Auth({ register = false }) {
   const [showPassword, setShowPassword] = useState(false);
   const [notice, setNotice] = useState('');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const { session, loading, error: sessionError } = useAuth();
+  const [callbackError] = useState(() => {
+    const query = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    return query.has('error') || hash.has('error') || hash.has('error_code')
+      ? 'Liên kết xác nhận không hợp lệ hoặc đã hết hạn. Vui lòng đăng nhập hoặc yêu cầu email xác nhận mới.' : '';
+  });
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    setNotice('Giao diện đang được hoàn thiện. Tính năng xác thực tài khoản sẽ sớm được kết nối; thông tin của bạn chưa được gửi hoặc lưu.');
+    if (submitting || loading) return;
+    const form = event.currentTarget;
+    const email = form.elements.email.value.trim();
+    const password = form.elements.password.value;
+    setSubmitting(true);
+    setError('');
+    setNotice('');
+    try {
+      const result = await authenticate(supabase, {
+        register, email, password, name: register ? form.elements.name.value : '', origin: window.location.origin,
+      });
+      if (result.error) throw result.error;
+      if (register && !result.data.session) {
+        setNotice('Vui lòng kiểm tra hộp thư (và thư rác) để xác nhận email trước khi đăng nhập. Nếu email đã được đăng ký, hãy đăng nhập bằng tài khoản hiện có.');
+        form.reset();
+      }
+    } catch (authError) {
+      const messages = {
+        invalid_credentials: 'Email hoặc mật khẩu chưa đúng.',
+        email_not_confirmed: 'Bạn cần xác nhận email trước khi đăng nhập. Vui lòng kiểm tra hộp thư.',
+        user_already_exists: 'Không thể đăng ký email này. Hãy thử đăng nhập.',
+        weak_password: 'Mật khẩu chưa đáp ứng yêu cầu bảo mật. Hãy dùng mật khẩu mạnh hơn.',
+        over_email_send_rate_limit: 'Đã gửi quá nhiều email. Vui lòng chờ ít phút rồi thử lại.',
+        over_request_rate_limit: 'Bạn thao tác quá nhanh. Vui lòng thử lại sau ít phút.',
+        signup_disabled: 'Đăng ký tài khoản hiện đang tạm đóng.',
+      };
+      setError(messages[authError.code] || 'Không thể kết nối hoặc hoàn tất xác thực. Vui lòng thử lại.');
+    } finally {
+      setSubmitting(false);
+    }
   }
+
+  if (session) return <Navigate to="/" replace />;
 
   return (
     <section className="auth-page" aria-labelledby="auth-title">
@@ -32,6 +75,7 @@ export default function Auth({ register = false }) {
         <p className="auth-description">{register ? 'Tạo tài khoản để bắt đầu hành trình học tập của bạn.' : 'Đăng nhập để tiếp tục hành trình khám phá kiến thức.'}</p>
         <form onSubmit={handleSubmit} onChange={(event) => {
           setNotice('');
+          setError('');
           if (register) {
             const { password, confirmPassword } = event.currentTarget.elements;
             confirmPassword.setCustomValidity(confirmPassword.value && confirmPassword.value !== password.value ? 'Mật khẩu xác nhận chưa khớp.' : '');
@@ -48,9 +92,10 @@ export default function Auth({ register = false }) {
             {register && <small id="password-hint">Sử dụng ít nhất 8 ký tự.</small>}
           </div>
           {register && <div className="auth-field"><label htmlFor="auth-confirm">Xác nhận mật khẩu</label><input id="auth-confirm" name="confirmPassword" type={showPassword ? 'text' : 'password'} autoComplete="new-password" placeholder="Nhập lại mật khẩu" required /></div>}
-          <p className="auth-demo-note">Bản xem trước giao diện · Chưa hỗ trợ xác thực tài khoản.</p>
+          {loading && <p className="auth-demo-note" role="status">Đang kiểm tra phiên đăng nhập…</p>}
+          {(error || callbackError || sessionError) && <p className="auth-notice" role="alert">{error || callbackError || 'Không thể khôi phục phiên đăng nhập. Vui lòng đăng nhập lại.'}</p>}
           {notice && <p className="auth-notice" role="status">{notice}</p>}
-          <button className="auth-submit" type="submit">{register ? 'Tạo tài khoản' : 'Đăng nhập'}<ArrowRight size={19} /></button>
+          <button className="auth-submit" type="submit" disabled={loading || submitting} aria-busy={submitting}>{submitting ? 'Đang xử lý…' : register ? 'Tạo tài khoản' : 'Đăng nhập'}<ArrowRight size={19} /></button>
         </form>
         <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/auth/login' : '/auth/register'}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
       </div>

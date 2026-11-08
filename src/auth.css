@@ -1,4 +1,8 @@
 .login-button { text-decoration: none; }
+.header-account { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12px; }
+.header-account > [role='alert'] { flex-basis: 100%; }
+.auth-submit:disabled, .login-button:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 480px) { .header-account > span:first-child { display: none; } }
 .main-content:has(> .auth-page) { display: grid; align-items: center; width: min(1080px, calc(100% - 32px)); min-height: 100dvh; margin: 0 auto; padding-block: 16px; }
 .main-content > .auth-page { display: grid; grid-template-columns: 1fr 1.1fr; padding: 0; overflow: hidden; max-width: 1080px; margin-inline: auto; }
 .auth-story { display: flex; flex-direction: column; align-items: flex-start; min-height: 0; padding: 32px; background: var(--brand-gradient); color: #fff; }

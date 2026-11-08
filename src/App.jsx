@@ -12,6 +12,7 @@ import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Topics from './pages/Topics.jsx';
 import TopicDetail from './pages/TopicDetail.jsx';
+import Auth from './pages/Auth.jsx';
 
 function getInitialFavoriteIds() {
   try {
@@ -58,6 +59,8 @@ export default function App() {
       <main className="main-content" id="main-content">
         <LibraryProvider>
           <Routes>
+            <Route path="/login" element={<Auth key="login" />} />
+            <Route path="/register" element={<Auth key="register" register />} />
             <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
             <Route path="/topics" element={<Topics />} />
             <Route

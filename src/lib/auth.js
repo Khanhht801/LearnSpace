@@ -8,6 +8,13 @@ export function authenticate(client, { register, email, password, name, origin }
     : client.auth.signInWithPassword(credentials);
 }
 
+export function resendConfirmation(client, email, origin) {
+  return client.auth.resend({
+    type: 'signup', email: email.trim(),
+    options: { emailRedirectTo: new URL('/auth', origin).href },
+  });
+}
+
 // Deliberately omit credentials, request bodies, sessions and token values.
 export function authFailureDetails(error) {
   return {

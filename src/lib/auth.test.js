@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { authenticate, authFailureDetails } from './auth.js';
+import { authenticate, authFailureDetails, resendConfirmation } from './auth.js';
 
 for (const origin of ['http://localhost:5173', 'https://learnspace.example']) {
   test(`registration redirects confirmation to ${origin}/auth`, async () => {
@@ -33,4 +33,15 @@ test('diagnostics preserve the server failure reason without logging credentials
   assert.deepEqual(authFailureDetails(null), {
     status: null, code: 'unknown', message: 'Unknown authentication error',
   });
+});
+
+test('resending confirmation uses signup flow and the current site callback', async () => {
+  const client = { auth: { resend: async (params) => {
+    assert.deepEqual(params, {
+      type: 'signup', email: 'student@example.com',
+      options: { emailRedirectTo: 'https://learn-space.khanhht.tech/auth' },
+    });
+    return { error: null };
+  } } };
+  assert.deepEqual(await resendConfirmation(client, ' student@example.com ', 'https://learn-space.khanhht.tech'), { error: null });
 });

@@ -5,18 +5,20 @@ import { useAuth } from '../hooks/useAuth.js';
 import { authenticate, authFailureDetails } from '../lib/auth.js';
 import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff } from 'lucide-react';
 import '../auth.css';
+import ResendConfirmation from '../components/ResendConfirmation.jsx';
 
 export default function Auth({ register = false }) {
   const [showPassword, setShowPassword] = useState(false);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [needsConfirmation, setNeedsConfirmation] = useState(false);
   const { session, loading, error: sessionError } = useAuth();
   const [callbackError] = useState(() => {
     const query = new URLSearchParams(window.location.search);
     const hash = new URLSearchParams(window.location.hash.slice(1));
     return query.has('error') || hash.has('error') || hash.has('error_code')
-      ? 'Liên kết xác nhận không hợp lệ hoặc đã hết hạn. Vui lòng đăng nhập hoặc yêu cầu email xác nhận mới.' : '';
+      ? 'Liên kết xác nhận không hợp lệ, đã được sử dụng hoặc đã hết hạn. Nếu bạn chưa xác nhận tài khoản, hãy yêu cầu email mới bên dưới.' : '';
   });
 
   async function handleSubmit(event) {
@@ -34,10 +36,12 @@ export default function Auth({ register = false }) {
       });
       if (result.error) throw result.error;
       if (register && !result.data.session) {
+        setNeedsConfirmation(true);
         setNotice('Vui lòng kiểm tra hộp thư (và thư rác) để xác nhận email trước khi đăng nhập. Nếu email đã được đăng ký, hãy đăng nhập bằng tài khoản hiện có.');
         form.reset();
       }
     } catch (authError) {
+      if (authError.code === 'email_not_confirmed') setNeedsConfirmation(true);
       console.error('[LearnSpace Auth] Đăng ký/đăng nhập thất bại:', authFailureDetails(authError));
       const messages = {
         invalid_credentials: 'Email hoặc mật khẩu chưa đúng.',
@@ -104,6 +108,7 @@ export default function Auth({ register = false }) {
           {notice && <p className="auth-notice" role="status">{notice}</p>}
           <button className="auth-submit" type="submit" disabled={loading || submitting} aria-busy={submitting}>{submitting ? 'Đang xử lý…' : register ? 'Tạo tài khoản' : 'Đăng nhập'}<ArrowRight size={19} /></button>
         </form>
+        {(callbackError || needsConfirmation) && <ResendConfirmation />}
         <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/auth/login' : '/auth/register'}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
       </div>
     </section>

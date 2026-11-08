@@ -20,6 +20,7 @@ export default function Header() {
         <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
       </button>
       <nav id="primary-navigation" className={menuOpen ? 'primary-nav is-open' : 'primary-nav'} aria-label="Điều hướng chính">
+        <NavLink to="/" end onClick={closeMenu}>Trang chủ</NavLink>
         <NavLink to="/about" onClick={closeMenu}>Giới thiệu</NavLink>
         <NavLink to="/topics" onClick={closeMenu}>Chủ đề</NavLink>
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>

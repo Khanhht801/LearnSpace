@@ -47,7 +47,13 @@ export default function Auth({ register = false }) {
         over_request_rate_limit: 'Bạn thao tác quá nhanh. Vui lòng thử lại sau ít phút.',
         signup_disabled: 'Đăng ký tài khoản hiện đang tạm đóng.',
       };
-      setError(messages[authError.code] || 'Không thể kết nối hoặc hoàn tất xác thực. Vui lòng thử lại.');
+      const serverMessage = authError.message || '';
+      const serverError = /error sending confirmation email/i.test(serverMessage)
+        ? 'Chưa gửi được email xác nhận. Hệ thống gửi email đang gặp lỗi. Vui lòng thử lại sau.'
+        : /database error/i.test(serverMessage)
+          ? 'Hệ thống gặp lỗi khi lưu tài khoản. Vui lòng thử lại sau.'
+          : '';
+      setError(messages[authError.code] || serverError || 'Không thể kết nối hoặc hoàn tất xác thực. Vui lòng thử lại.');
     } finally {
       setSubmitting(false);
     }

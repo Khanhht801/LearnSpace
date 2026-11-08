@@ -9,9 +9,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     let active = true;
     if (!userId) return;
-    supabase.from('profile').select('id, display_name, avatar_url, created_at').eq('id', userId).single()
+    supabase.from('profile').select('id, display_name, avatar_url, created_at').eq('id', userId).maybeSingle()
       .then(({ data, error }) => {
-        if (active) setProfileState({ profile: data, profileError: error });
+        if (active) setProfileState({ profile: data, profileError: error || (!data ? new Error('Không tìm thấy hồ sơ cho phiên đăng nhập hiện tại.') : null) });
       }).catch(() => {
         if (active) setProfileState({ profile: null, profileError: new Error('Không thể tải hồ sơ.') });
       });

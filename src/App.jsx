@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import '../utils/supabase.js';
 import './App.css';
 import Header from './components/Header.jsx';
 import ScrollToLocation from './components/ScrollToLocation.jsx';

@@ -1,8 +1,26 @@
-﻿:root { font-family: 'SVN-Gilroy', 'Segoe UI', sans-serif; color: #252525; background: #fff8f8; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; color-scheme: light; --primary: #db1f1f; --primary-dark: #9d0b0f; --brand-gradient: linear-gradient(180deg, #db1f1f 0%, #9d0b0f 100%); --muted: #686060; --border: #f0dada; }
+/* Shared typography based on docs/LangmasterStyle.md. Use rem so browser
+   font preferences scale headings, content and controls together. */
+:root {
+  --text-caption: .75rem;
+  --text-small: .875rem;
+  --text-body: 1rem;
+  --text-lead: 1.125rem;
+  --text-action: 1rem;
+  --text-nav: 1.125rem;
+  --text-label: .875rem;
+  --text-h1: clamp(2rem, 3.5vw, 2.5rem);
+  --text-h2: clamp(1.75rem, 2.8vw, 2rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --text-h4: 1.25rem;
+}
+@media (max-width: 600px) {
+  :root { --text-nav: 1rem; }
+}
+:root { font-family: 'SVN-Gilroy', 'Segoe UI', sans-serif; color: #252525; background: #fff8f8; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; color-scheme: light; --primary: #db1f1f; --primary-dark: #9d0b0f; --brand-gradient: linear-gradient(180deg, #db1f1f 0%, #9d0b0f 100%); --muted: #686060; --border: #f0dada; }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 112px; }
-body { margin: 0; min-width: 320px; line-height: 1.65; }
-button, input, textarea { font: inherit; }
+body { margin: 0; min-width: 320px; font-size: var(--text-body); line-height: 1.65; }
+button, input, textarea, select { font: inherit; }
 a { color: var(--primary); text-underline-offset: 4px; }
 a:hover { color: #9d0b0f; }
 button, .button-link { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; padding: 10px 20px; border: 1px solid transparent; border-radius: 12px; background: var(--brand-gradient); color: white; font-weight: 600; text-decoration: none; cursor: pointer; transition: background .18s, box-shadow .18s; }
@@ -13,9 +31,11 @@ input, textarea { display: block; width: 100%; min-height: 48px; padding: 12px 1
 input::placeholder, textarea::placeholder { color: #746b6b; opacity: 1; }
 input:focus, textarea:focus { border-color: var(--primary); background: white; }
 textarea { resize: vertical; min-height: 150px; }
-label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+label { display: block; margin-bottom: 8px; font-weight: 600; font-size: var(--text-label); }
 h1, h2 { color: #252525; line-height: 1.25; }
-h1 { margin: 0 0 20px; font-size: clamp(30px, 4vw, 46px); letter-spacing: -.035em; }
-h2 { font-size: 22px; margin: 0 0 14px; }
+h1 { margin: 0 0 20px; font-size: var(--text-h1); letter-spacing: -.035em; }
+h2 { font-size: var(--text-h2); margin: 0 0 14px; }
+h3 { font-size: var(--text-h3); line-height: 1.35; }
+h4 { font-size: var(--text-h4); line-height: 1.4; }
 p { margin: 0 0 18px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }

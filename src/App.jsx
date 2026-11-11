@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useMatch } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation, useMatch } from 'react-router-dom';
 import { LibraryBoundary, LibraryProvider } from './hooks/LibraryProvider.jsx';
 import './App.css';
 import Header from './components/Header.jsx';
@@ -14,6 +14,17 @@ import Topics from './pages/Topics.jsx';
 import TopicDetail from './pages/TopicDetail.jsx';
 import Auth from './pages/Auth.jsx';
 import ConfirmEmail from './pages/ConfirmEmail.jsx';
+import PasswordRecovery from './pages/PasswordRecovery.jsx';
+import { useAuth } from './hooks/useAuth.js';
+
+function RequireAuth() {
+  const { session, loading, error } = useAuth();
+  const location = useLocation();
+  if (loading) return <section className="library-inner" role="status">Đang kiểm tra phiên đăng nhập…</section>;
+  if (error) return <section className="library-inner" role="alert">Không thể kiểm tra phiên đăng nhập. Vui lòng tải lại trang và thử lại.</section>;
+  if (!session) return <Navigate to="/auth/login" replace state={{ from: location.pathname + location.search + location.hash }} />;
+  return <Outlet />;
+}
 
 function getInitialFavoriteIds() {
   try {
@@ -68,6 +79,8 @@ export default function App() {
               <Route path="confirm" element={<ConfirmEmail />} />
               <Route path="login" element={<Auth key="login" />} />
               <Route path="register" element={<Auth key="register" register />} />
+              <Route path="forgot-password" element={<PasswordRecovery />} />
+              <Route path="reset-password" element={<PasswordRecovery reset />} />
               <Route path="*" element={<Navigate to="/auth/login" replace />} />
             </Route>
             <Route path="/login" element={<Navigate to="/auth/login" replace />} />
@@ -81,7 +94,7 @@ export default function App() {
             <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
             <Route element={<LibraryBoundary />}>
               <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
-              <Route
+              <Route element={<RequireAuth />}><Route
                 path="/courses/:courseId"
                 element={
                   <CourseDetail
@@ -89,7 +102,7 @@ export default function App() {
                     onToggleFavorite={handleToggleFavorite}
                   />
                 }
-              />
+              /></Route>
             </Route>
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

@@ -30,6 +30,14 @@ export function confirmationErrorKind(error) {
   return 'error';
 }
 
+export function documentDestination(value) {
+  return typeof value === 'string' && /^\/courses\/\d+(?:[?#]|$)/.test(value) ? value : '/';
+}
+
+export function requestPasswordReset(client, email, origin) {
+  return client.auth.resetPasswordForEmail(email.trim(), { redirectTo: new URL('/auth/reset-password', origin).href });
+}
+
 // Deliberately omit credentials, request bodies, sessions and token values.
 export function authFailureDetails(error) {
   return {

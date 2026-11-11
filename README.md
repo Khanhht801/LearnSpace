@@ -18,6 +18,11 @@ Nếu trang trắng và console báo `supabaseUrl is required`, bản build đan
 - Trong Supabase Dashboard, mở **Authentication → Email Templates → Confirm signup**, thay nội dung bằng file `supabase/templates/confirm-signup.html` và lưu. Đặt **Site URL** thành địa chỉ công khai của LearnSpace (hoặc địa chỉ tương ứng với môi trường). Mẫu này sử dụng `{{ .SiteURL }}` nên tất cả email sẽ dẫn về Site URL đó.
 - Người dùng mở link trong email rồi bấm **Xác nhận email**; chỉ lúc đó ứng dụng mới gửi mã đến Supabase. Các email cũ vẫn dùng luồng cũ. Kiểm tra bằng một tài khoản thử và email thật sau khi cập nhật; mã xác nhận vẫn chỉ dùng được một lần.
 
+### Khôi phục mật khẩu
+
+- Trong Authentication → URL Configuration của Supabase, cho phép URL `/auth/reset-password` trên từng origin sử dụng. Kiểm tra Site URL và mẫu email khôi phục của dự án trước khi phát hành.
+- Thử toàn bộ luồng với một tài khoản thử và hộp thư thật; ứng dụng gửi yêu cầu đặt lại và cập nhật mật khẩu qua Supabase Auth.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

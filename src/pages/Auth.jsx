@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { supabase } from '../../utils/supabase.js';
 import { useAuth } from '../hooks/useAuth.js';
-import { authenticate, authFailureDetails, signupResult } from '../lib/auth.js';
+import { authenticate, authFailureDetails, documentDestination, signupResult } from '../lib/auth.js';
 import { ArrowLeft, ArrowRight, BookOpen, Eye, EyeOff } from 'lucide-react';
 import '../auth.css';
 import ResendConfirmation from '../components/ResendConfirmation.jsx';
 
 export default function Auth({ register = false }) {
+  const location = useLocation();
+  const destination = documentDestination(location.state?.from);
   const [showPassword, setShowPassword] = useState(false);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
@@ -72,7 +74,7 @@ export default function Auth({ register = false }) {
     }
   }
 
-  if (session) return <Navigate to="/" replace />;
+  if (session) return <Navigate to={destination} replace />;
 
   return (
     <section className="auth-page" aria-labelledby="auth-title">
@@ -86,8 +88,8 @@ export default function Auth({ register = false }) {
       <div className="auth-panel">
         <Link className="auth-back" to="/"><ArrowLeft size={16} /> Về trang chủ</Link>
         <div className="auth-tabs" aria-label="Tài khoản">
-          <Link to="/auth/login" aria-current={!register ? 'page' : undefined}>Đăng nhập</Link>
-          <Link to="/auth/register" aria-current={register ? 'page' : undefined}>Đăng ký</Link>
+          <Link to="/auth/login" state={location.state} aria-current={!register ? 'page' : undefined}>Đăng nhập</Link>
+          <Link to="/auth/register" state={location.state} aria-current={register ? 'page' : undefined}>Đăng ký</Link>
         </div>
         <p className="eyebrow">CÙNG LEARNSPACE HỌC MỖI NGÀY</p>
         <h1 id="auth-title">{register ? 'Bắt đầu cùng nhau!' : 'Chào mừng trở lại!'}</h1>
@@ -112,13 +114,14 @@ export default function Auth({ register = false }) {
             {register && <small id="password-hint">Sử dụng ít nhất 8 ký tự.</small>}
           </div>
           {register && <div className="auth-field"><label htmlFor="auth-confirm">Xác nhận mật khẩu</label><input id="auth-confirm" name="confirmPassword" type={showPassword ? 'text' : 'password'} autoComplete="new-password" placeholder="Nhập lại mật khẩu" required /></div>}
+          {!register && <p><Link to="/auth/forgot-password">Quên mật khẩu?</Link></p>}
           {loading && <p className="auth-demo-note" role="status">Đang kiểm tra phiên đăng nhập…</p>}
           {(error || callbackError || sessionError) && <p className="auth-notice" role="alert">{error || callbackError || 'Không thể khôi phục phiên đăng nhập. Vui lòng đăng nhập lại.'}</p>}
           {notice && <p className="auth-notice" role="status">{notice}</p>}
           <button className="auth-submit" type="submit" disabled={loading || submitting} aria-busy={submitting}>{submitting ? 'Đang xử lý…' : register ? 'Tạo tài khoản' : 'Đăng nhập'}<ArrowRight size={19} /></button>
         </form>
         {(callbackError || needsConfirmation) && <ResendConfirmation key={confirmationEmail} initialEmail={confirmationEmail} />}
-        <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/auth/login' : '/auth/register'}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
+        <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/auth/login' : '/auth/register'} state={location.state}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
       </div>
     </section>
   );

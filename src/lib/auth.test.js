@@ -1,6 +1,20 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { authenticate, authFailureDetails, confirmationErrorKind, confirmSignup, resendConfirmation, signupResult } from './auth.js';
+import { authenticate, authFailureDetails, confirmationErrorKind, confirmSignup, documentDestination, requestPasswordReset, resendConfirmation, signupResult } from './auth.js';
+
+test('login destination accepts only an internal document route', () => {
+  assert.equal(documentDestination('/courses/12?q=react#content'), '/courses/12?q=react#content');
+  for (const value of ['https://example.com', '//example.com', '/courses/1/extra', '/courses/1evil', null]) assert.equal(documentDestination(value), '/');
+});
+
+test('password recovery targets the current origin and trims email', async () => {
+  const client = { auth: { resetPasswordForEmail: async (email, options) => {
+    assert.equal(email, 'student@example.com');
+    assert.equal(options.redirectTo, 'https://learnspace.example/auth/reset-password');
+    return { error: null };
+  } } };
+  assert.deepEqual(await requestPasswordReset(client, ' student@example.com ', 'https://learnspace.example'), { error: null });
+});
 
 for (const origin of ['http://localhost:5173', 'https://learnspace.example']) {
   test(`registration redirects confirmation to ${origin}/auth`, async () => {

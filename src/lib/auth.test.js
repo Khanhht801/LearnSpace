@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { authenticate, authFailureDetails, confirmSignup, resendConfirmation } from './auth.js';
+import { authenticate, authFailureDetails, confirmSignup, resendConfirmation, signupResult } from './auth.js';
 
 for (const origin of ['http://localhost:5173', 'https://learnspace.example']) {
   test(`registration redirects confirmation to ${origin}/auth`, async () => {
@@ -23,6 +23,13 @@ test('login sends password unchanged and preserves authentication errors', async
     return result;
   } } };
   assert.equal(await authenticate(client, { register: false, email: ' student@example.com ', password: ' password ' }), result);
+});
+
+test('signup distinguishes an existing account from a pending confirmation and a session', () => {
+  assert.equal(signupResult({ user: { identities: [] }, session: null }), 'existing');
+  assert.equal(signupResult({ user: { identities: [{ provider: 'email' }] }, session: null }), 'confirmation');
+  assert.equal(signupResult({ user: {}, session: null }), 'confirmation');
+  assert.equal(signupResult({ user: { identities: [] }, session: {} }), 'signed_in');
 });
 
 test('diagnostics preserve the server failure reason without logging credentials', () => {

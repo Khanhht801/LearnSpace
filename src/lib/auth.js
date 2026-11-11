@@ -15,6 +15,12 @@ export function resendConfirmation(client, email, origin) {
   });
 }
 
+export function signupResult(data) {
+  if (data?.session) return 'signed_in';
+  if (Array.isArray(data?.user?.identities) && data.user.identities.length === 0) return 'existing';
+  return 'confirmation';
+}
+
 export function confirmSignup(client, tokenHash) {
   return client.auth.verifyOtp({ token_hash: tokenHash, type: 'email' });
 }

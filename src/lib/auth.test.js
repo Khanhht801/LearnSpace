@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { authenticate, authFailureDetails, confirmSignup, resendConfirmation, signupResult } from './auth.js';
+import { authenticate, authFailureDetails, confirmationErrorKind, confirmSignup, resendConfirmation, signupResult } from './auth.js';
 
 for (const origin of ['http://localhost:5173', 'https://learnspace.example']) {
   test(`registration redirects confirmation to ${origin}/auth`, async () => {
@@ -64,4 +64,11 @@ test('confirmation sends the email token to Supabase only when requested', async
   assert.equal(calls, 0);
   assert.equal(await confirmSignup(client, 'confirmation-token'), result);
   assert.equal(calls, 1);
+});
+
+test('only an expired token is reported as an invalid confirmation link', () => {
+  assert.equal(confirmationErrorKind({ code: 'otp_expired', status: 403 }), 'invalid');
+  assert.equal(confirmationErrorKind({ code: 'over_request_rate_limit', status: 429 }), 'error');
+  assert.equal(confirmationErrorKind({ code: 'otp_disabled', status: 403 }), 'error');
+  assert.equal(confirmationErrorKind({ status: 400 }), 'error');
 });

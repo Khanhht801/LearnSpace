@@ -13,12 +13,13 @@ export default function Auth({ register = false }) {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
+  const [confirmationEmail, setConfirmationEmail] = useState('');
   const { session, loading, error: sessionError } = useAuth();
-  const [callbackError] = useState(() => {
+  const [callbackError, setCallbackError] = useState(() => {
     const query = new URLSearchParams(window.location.search);
     const hash = new URLSearchParams(window.location.hash.slice(1));
-    return query.has('error') || hash.has('error') || hash.has('error_code')
-      ? 'Liên kết xác nhận không hợp lệ, đã được sử dụng hoặc đã hết hạn. Nếu bạn chưa xác nhận tài khoản, hãy yêu cầu email mới bên dưới.' : '';
+    return query.has('error') || query.has('error_code') || hash.has('error') || hash.has('error_code')
+      ? 'Không thể hoàn tất xác thực từ liên kết. Nếu bạn đã xác nhận email, hãy đăng nhập; nếu chưa, hãy yêu cầu email mới bên dưới.' : '';
   });
 
   async function handleSubmit(event) {
@@ -26,10 +27,12 @@ export default function Auth({ register = false }) {
     if (submitting || loading) return;
     const form = event.currentTarget;
     const email = form.elements.email.value.trim();
+    setConfirmationEmail(email);
     const password = form.elements.password.value;
     setSubmitting(true);
     setError('');
     setNotice('');
+    setCallbackError('');
     setNeedsConfirmation(false);
     try {
       const result = await authenticate(supabase, {
@@ -92,6 +95,7 @@ export default function Auth({ register = false }) {
         <form onSubmit={handleSubmit} onChange={(event) => {
           setNotice('');
           setError('');
+          setCallbackError('');
           if (register) {
             const { password, confirmPassword } = event.currentTarget.elements;
             confirmPassword.setCustomValidity(confirmPassword.value && confirmPassword.value !== password.value ? 'Mật khẩu xác nhận chưa khớp.' : '');
@@ -113,7 +117,7 @@ export default function Auth({ register = false }) {
           {notice && <p className="auth-notice" role="status">{notice}</p>}
           <button className="auth-submit" type="submit" disabled={loading || submitting} aria-busy={submitting}>{submitting ? 'Đang xử lý…' : register ? 'Tạo tài khoản' : 'Đăng nhập'}<ArrowRight size={19} /></button>
         </form>
-        {(callbackError || needsConfirmation) && <ResendConfirmation />}
+        {(callbackError || needsConfirmation) && <ResendConfirmation key={confirmationEmail} initialEmail={confirmationEmail} />}
         <p className="auth-switch">{register ? 'Bạn đã có tài khoản?' : 'Bạn chưa có tài khoản?'} <Link to={register ? '/auth/login' : '/auth/register'}>{register ? 'Đăng nhập' : 'Đăng ký ngay'}</Link></p>
       </div>
     </section>

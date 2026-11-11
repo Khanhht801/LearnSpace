@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../utils/supabase.js';
-import { confirmSignup } from '../lib/auth.js';
+import { confirmationErrorKind, confirmSignup } from '../lib/auth.js';
 import ResendConfirmation from '../components/ResendConfirmation.jsx';
 import '../auth.css';
 
@@ -15,7 +15,7 @@ export default function ConfirmEmail() {
     try {
       const { error } = await confirmSignup(supabase, token);
       if (error) {
-        if (error.code === 'otp_expired' || error.status === 403 || error.status === 400) {
+        if (confirmationErrorKind(error) === 'invalid') {
           window.history.replaceState(window.history.state, '', window.location.pathname);
           setStatus('invalid');
         } else {
@@ -48,8 +48,9 @@ export default function ConfirmEmail() {
         <ResendConfirmation />
       </>}
       {status === 'error' && <>
-        <p className="auth-notice" role="alert">Chưa thể xác nhận email. Vui lòng kiểm tra kết nối và thử lại.</p>
-        <button className="auth-submit" type="button" onClick={() => setStatus('ready')}>Thử lại</button>
+        <p className="auth-notice" role="alert">Chưa thể xác nhận email. Vui lòng kiểm tra kết nối và thử lại. Nếu vẫn không được, hãy yêu cầu email mới.</p>
+        <button className="auth-submit" type="button" onClick={() => { setStatus('ready'); }}>Quay lại xác nhận</button>
+        <ResendConfirmation />
       </>}
     </div>
   </section>;

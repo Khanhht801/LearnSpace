@@ -25,6 +25,11 @@ export function confirmSignup(client, tokenHash) {
   return client.auth.verifyOtp({ token_hash: tokenHash, type: 'email' });
 }
 
+export function confirmationErrorKind(error) {
+  if (error?.code === 'otp_expired') return 'invalid';
+  return 'error';
+}
+
 // Deliberately omit credentials, request bodies, sessions and token values.
 export function authFailureDetails(error) {
   return {

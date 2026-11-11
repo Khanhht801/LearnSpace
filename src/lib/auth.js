@@ -15,6 +15,10 @@ export function resendConfirmation(client, email, origin) {
   });
 }
 
+export function confirmSignup(client, tokenHash) {
+  return client.auth.verifyOtp({ token_hash: tokenHash, type: 'email' });
+}
+
 // Deliberately omit credentials, request bodies, sessions and token values.
 export function authFailureDetails(error) {
   return {

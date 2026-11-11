@@ -10,6 +10,12 @@
 
 Nếu trang trắng và console báo `supabaseUrl is required`, bản build đang thiếu biến Supabase. Ứng dụng hiện hiển thị thông báo cấu hình khi gặp trường hợp này.
 
+### Xác nhận email đăng ký
+
+- Triển khai phiên bản có route `/auth/confirm` trước khi thay mẫu email, để các liên kết mới không dẫn đến trang chưa tồn tại.
+- Trong Supabase Dashboard, mở **Authentication → Email Templates → Confirm signup**, thay nội dung bằng file `supabase/templates/confirm-signup.html` và lưu. Đặt **Site URL** thành địa chỉ công khai của LearnSpace (hoặc địa chỉ tương ứng với môi trường). Mẫu này sử dụng `{{ .SiteURL }}` nên tất cả email sẽ dẫn về Site URL đó.
+- Người dùng mở link trong email rồi bấm **Xác nhận email**; chỉ lúc đó ứng dụng mới gửi mã đến Supabase. Các email cũ vẫn dùng luồng cũ. Kiểm tra bằng một tài khoản thử và email thật sau khi cập nhật; mã xác nhận vẫn chỉ dùng được một lần.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

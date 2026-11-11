@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { authenticate, authFailureDetails, resendConfirmation } from './auth.js';
+import { authenticate, authFailureDetails, confirmSignup, resendConfirmation } from './auth.js';
 
 for (const origin of ['http://localhost:5173', 'https://learnspace.example']) {
   test(`registration redirects confirmation to ${origin}/auth`, async () => {
@@ -44,4 +44,17 @@ test('resending confirmation uses signup flow and the current site callback', as
     return { error: null };
   } } };
   assert.deepEqual(await resendConfirmation(client, ' student@example.com ', 'https://learn-space.khanhht.tech'), { error: null });
+});
+
+test('confirmation sends the email token to Supabase only when requested', async () => {
+  const result = { data: { session: {} }, error: null };
+  let calls = 0;
+  const client = { auth: { verifyOtp: async (params) => {
+    calls += 1;
+    assert.deepEqual(params, { token_hash: 'confirmation-token', type: 'email' });
+    return result;
+  } } };
+  assert.equal(calls, 0);
+  assert.equal(await confirmSignup(client, 'confirmation-token'), result);
+  assert.equal(calls, 1);
 });

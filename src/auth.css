@@ -40,6 +40,7 @@
 .auth-resend input { margin-bottom: 12px; }
 .auth-resend button { width: 100%; }
 .auth-resend button:disabled { opacity: .65; cursor: wait; }
+.main-content > .auth-confirm-page { display: block; width: min(100%, 580px); }
 @media (max-width: 760px) {
   .main-content > .auth-page { grid-template-columns: 1fr; padding: 0; }
   .auth-story { display: none; }

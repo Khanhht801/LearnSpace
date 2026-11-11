@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound.jsx';
 import Topics from './pages/Topics.jsx';
 import TopicDetail from './pages/TopicDetail.jsx';
 import Auth from './pages/Auth.jsx';
+import ConfirmEmail from './pages/ConfirmEmail.jsx';
 
 function getInitialFavoriteIds() {
   try {
@@ -64,6 +65,7 @@ export default function App() {
           <Routes>
             <Route path="/auth">
               <Route index element={<Auth key="callback" />} />
+              <Route path="confirm" element={<ConfirmEmail />} />
               <Route path="login" element={<Auth key="login" />} />
               <Route path="register" element={<Auth key="register" register />} />
               <Route path="*" element={<Navigate to="/auth/login" replace />} />

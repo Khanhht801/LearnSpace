@@ -1,12 +1,14 @@
 # React + Vite
 
+Đọc [phạm vi hiện tại](docs/PhanTichNghiepVu.md) và [hướng dẫn kiểm kê, chuẩn bị xuất bản](docs/HuongDanXuatBan.md) trước khi đăng tài liệu. Quyền truy cập file và quy trình xuất bản đầy đủ chưa được xác minh.
+
 ## Deploy LearnSpace trên Vercel
 
 - Build command: `npm run build`; Output directory: `dist`.
 - Trong Project Settings → Environment Variables, đặt `VITE_SUPABASE_URL` và `VITE_SUPABASE_PUBLISHABLE_KEY` cho môi trường Production (và Preview nếu sử dụng). Lấy giá trị tương ứng từ dự án Supabase; xem tên biến trong `.env.example`.
 - Các biến `VITE_*` được đóng gói vào JavaScript lúc build. Sau khi thêm/sửa biến, phải Redeploy để áp dụng. File `.env` trên máy không được push lên GitHub.
 - Chỉ dùng publishable key ở frontend; không đưa `DATABASE_URL`, service role hoặc secret key vào biến `VITE_*`.
-- `vercel.json` hỗ trợ mở trực tiếp và tải lại các route React. Các API `/api/documents` và `/api/feedback` hiện chạy bằng server Node.js riêng (`npm start`), chưa phải Vercel Functions; deploy frontend trên Vercel chưa cung cấp các API này.
+- `vercel.json` hỗ trợ mở trực tiếp và tải lại các route React. API cộng đồng `/api/documents` đã đóng trên server Node.js; dữ liệu file cũ không bị xóa. API `/api/feedback` chỉ có trên server Node.js, chưa phải Vercel Function và không còn được giao diện sử dụng. Giao diện góp ý hiển thị email `VITE_CONTRIBUTION_EMAIL` nếu được cấu hình khi build.
 
 Nếu trang trắng và console báo `supabaseUrl is required`, bản build đang thiếu biến Supabase. Ứng dụng hiện hiển thị thông báo cấu hình khi gặp trường hợp này.
 

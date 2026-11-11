@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Introduction from '../components/Introduction.jsx';
 import Journey from '../components/Journey.jsx';
@@ -6,20 +5,18 @@ import Topics from '../components/Topics.jsx';
 import LibrarySection from '../components/LibrarySection.jsx';
 import MessageSection from '../components/MessageSection.jsx';
 import ContributionSection from '../components/ContributionSection.jsx';
-import SharedSection from '../components/SharedSection.jsx';
 import SavedSection from '../components/SavedSection.jsx';
 import FeedbackSection from '../components/FeedbackSection.jsx';
 import Footer from '../components/Footer.jsx';
 
 export default function Home({ favoriteIds, onToggleFavorite }) {
-  const [sharedRevision, setSharedRevision] = useState(0);
   return (
     <>
     <section className="welcome-page" id="hero" aria-labelledby="hero-title">
       <div className="hero-copy">
         <p className="hero-eyebrow"><span aria-hidden="true">✦</span> KHO TÀI LIỆU & TRI THỨC CHUNG CỦA CỘNG ĐỒNG</p>
         <h1 id="hero-title">Kiến thức dễ tìm.<br /><span>Học tập dễ hơn.</span></h1>
-        <p className="hero-description">LearnSpace là không gian chung để lưu trữ, chia sẻ tài liệu học tập và cùng khám phá tri thức trong nhiều lĩnh vực.</p>
+        <p className="hero-description">LearnSpace là không gian chung để lưu trữ, chia sẻ tài liệu học tập và cùng khám phá kiến thức lập trình.</p>
         <HeroSearch />
         <div className="hero-topics"><span>Tìm nhanh:</span><Link to="/courses?q=React">React</Link><Link to="/courses?q=Router">React Router</Link><Link to="/courses?q=API">Làm việc với API</Link></div>
         <div className="hero-actions">
@@ -42,7 +39,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
         </div>
         <div className="mascot-platform" aria-hidden="true" />
         <img className="hero-mascot" src="/mascot.png" alt="Linh vật LearnSpace: chú gà vàng đeo khăn đỏ và ba lô, vẫy cánh chào bạn" width="1024" height="1024" fetchPriority="high" />
-        <div className="floating-bookmark"><span><HeroIcon name="book" /></span><div>Tri thức hay, cùng sẻ chia.<small>Từ cộng đồng LearnSpace</small></div></div>
+        <div className="floating-bookmark"><span><HeroIcon name="book" /></span><div>Tri thức hay, cùng sẻ chia.<small>Cùng LearnSpace khám phá</small></div></div>
       </div>
     </section>
     <Introduction />
@@ -50,8 +47,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
     <Topics />
     <LibrarySection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
     <MessageSection />
-    <ContributionSection onDocumentShared={() => setSharedRevision((value) => value + 1)} />
-    <SharedSection revision={sharedRevision} />
+    <ContributionSection />
     <div className="personal-sections">
       <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
       <FeedbackSection />

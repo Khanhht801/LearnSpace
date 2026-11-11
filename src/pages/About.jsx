@@ -81,7 +81,7 @@ export default function About() {
           <div className="about-hero-copy">
             <p className="eyebrow">VỀ LEARNSPACE</p>
             <h1 id="about-title">Một nơi giữ lại điều hay.<br /><span>Một điểm bắt đầu<br />để học tiếp.</span></h1>
-            <p className="about-description">Dành cho những ai đang tự học và muốn tìm lại kiến thức dễ dàng hơn, LearnSpace giúp bạn khám phá nội dung học tập, lưu lại mục hữu ích và chia sẻ tài liệu với cộng đồng.</p>
+            <p className="about-description">Dành cho những ai đang tự học và muốn tìm lại kiến thức dễ dàng hơn, LearnSpace giúp bạn khám phá nội dung học tập và lưu lại mục hữu ích để học tiếp.</p>
             <div className="about-actions">
               <Link className="button-link" to="/courses">Khám phá thư viện <span aria-hidden="true">↗</span></Link>
               <a className="about-secondary-link" href="#gia-tri">Điều LearnSpace mang lại <span aria-hidden="true">↓</span></a>
@@ -195,7 +195,7 @@ export default function About() {
             <p className="about-start-description">Bắt đầu từ một nội dung bạn quan tâm, lưu lại điều hữu ích và quay lại khi bạn muốn tìm hiểu thêm.</p>
             <div className="about-start-actions">
               <Link className="button-link" to="/courses">Khám phá thư viện <span aria-hidden="true">↗</span></Link>
-              <Link className="about-start-share" to="/contact">Chia sẻ tài liệu <span aria-hidden="true">↗</span></Link>
+              <Link className="about-start-share" to="/contact">Về việc đóng góp <span aria-hidden="true">↗</span></Link>
             </div>
             <div className="about-start-contact"><a href="/#gop-y">Góp ý cho LearnSpace</a><span aria-hidden="true">·</span>{contributionEmail ? <a href={`mailto:${contributionEmail}`}>{contributionEmail}</a> : <span>Kênh liên hệ sẽ được cập nhật.</span>}</div>
           </div>

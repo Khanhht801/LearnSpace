@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../../utils/supabase.js';
 import { resendConfirmation } from '../lib/auth.js';
 
 export default function ResendConfirmation() {
   const [busy, setBusy] = useState(false);
-  const [cooldown, setCooldown] = useState(false);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
-  useEffect(() => {
-    if (!cooldown) return;
-    const timer = setTimeout(() => setCooldown(false), 60_000);
-    return () => clearTimeout(timer);
-  }, [cooldown]);
 
   async function handleResend(event) {
     event.preventDefault();
-    if (busy || cooldown) return;
+    if (busy) return;
     const email = event.currentTarget.elements.confirmationEmail.value;
     setBusy(true);
     setNotice('');
@@ -23,7 +17,6 @@ export default function ResendConfirmation() {
     try {
       const { error: resendError } = await resendConfirmation(supabase, email, window.location.origin);
       if (resendError) throw resendError;
-      setCooldown(true);
       setNotice('Nếu tài khoản đang chờ xác nhận, email mới sẽ được gửi. Hãy kiểm tra hộp thư và mở liên kết trong email mới nhất.');
     } catch (resendError) {
       setError(resendError.status === 429 || resendError.code === 'over_email_send_rate_limit'
@@ -38,6 +31,6 @@ export default function ResendConfirmation() {
     <input id="confirmation-email" name="confirmationEmail" type="email" autoComplete="email" required placeholder="ban@example.com" />
     {notice && <p className="auth-notice" role="status">{notice}</p>}
     {error && <p className="auth-notice" role="alert">{error}</p>}
-    <button type="submit" disabled={busy || cooldown} aria-busy={busy}>{busy ? 'Đang gửi…' : cooldown ? 'Chờ 60 giây để gửi lại' : 'Gửi lại email xác nhận'}</button>
+    <button type="submit" disabled={busy} aria-busy={busy}>{busy ? 'Đang gửi…' : 'Gửi lại email xác nhận'}</button>
   </form>;
 }

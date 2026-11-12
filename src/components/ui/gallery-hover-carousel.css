@@ -9,13 +9,13 @@
 .gallery-track { display: flex; gap: 24px; touch-action: pan-y pinch-zoom; }
 .gallery-slide { flex: 0 0 calc((100% - 48px) / 3); min-width: 0; }
 .gallery-card { position: relative; display: block; height: 350px; overflow: hidden; border: 1px solid var(--border); border-radius: 24px; background: #fff5f4; color: #252525; text-decoration: none; }
-.gallery-image { display: block; width: 100%; height: 100%; object-fit: cover; transition: height .5s; }
-.gallery-rest-title { position: absolute; inset: auto 0 0; padding: 48px 22px 22px; background: linear-gradient(transparent, #260608d9); color: white; font-size: 24px; font-weight: 800; transition: opacity .3s; }
-.gallery-caption { position: absolute; inset: 50% 0 0; display: flex; flex-direction: column; justify-content: center; padding: 18px 22px; background: #ffffffed; backdrop-filter: blur(8px); opacity: 0; transform: translateY(15px); transition: opacity .5s, transform .5s; }
+.gallery-image { display: block; width: 100%; height: 100%; object-fit: cover; transition: height .8s ease-in-out; }
+.gallery-rest-title { position: absolute; inset: auto 0 0; padding: 48px 22px 22px; background: linear-gradient(transparent, #260608d9); color: white; font-size: 24px; font-weight: 800; transition: opacity .48s ease-out; }
+.gallery-caption { position: absolute; inset: 50% 0 0; display: flex; flex-direction: column; justify-content: center; padding: 18px 22px; background: #ffffffed; backdrop-filter: blur(8px); opacity: 0; transform: translateY(15px); transition: opacity .8s ease-out, transform .8s ease-out; }
 .gallery-caption h3 { margin: 0 0 8px; font-size: 22px; }
 .gallery-caption p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
 .gallery-action { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; color: var(--primary-dark); font-size: 14px; font-weight: 700; }
-.gallery-arrow { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 50%; transition: transform .5s; }
+.gallery-arrow { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 50%; transition: transform .2s ease-out; }
 .gallery-card:is(:hover, :focus-visible) .gallery-image { height: 50%; }
 .gallery-card:is(:hover, :focus-visible) .gallery-rest-title { opacity: 0; }
 .gallery-card:is(:hover, :focus-visible) .gallery-caption { opacity: 1; transform: translateY(0); }

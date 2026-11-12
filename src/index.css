@@ -38,12 +38,17 @@ h2 { font-size: var(--text-h2); margin: 0 0 14px; }
 h3 { font-size: var(--text-h3); line-height: 1.35; }
 h4 { font-size: var(--text-h4); line-height: 1.4; }
 p { margin: 0 0 18px; }
-/* Keep page changes gentle while controls remain responsive. */
+/* Reveal content as it comes into view without hiding it before JavaScript runs. */
 @media (prefers-reduced-motion: no-preference) {
-  .main-content > * { animation: page-arrive .5s ease-out; }
-  @keyframes page-arrive {
-    from { opacity: .75; }
-    to { opacity: 1; }
+  .motion-reveal, .hero-copy > *, .hero-visual { animation: content-arrive .7s ease-out backwards; }
+  .hero-copy > :nth-child(2), .hero-visual { animation-delay: .1s; }
+  .hero-copy > :nth-child(3) { animation-delay: .2s; }
+  .hero-copy > :nth-child(4) { animation-delay: .3s; }
+  .hero-copy > :nth-child(5) { animation-delay: .4s; }
+  .hero-copy > :nth-child(n+6) { animation-delay: .5s; }
+  @keyframes content-arrive {
+    from { opacity: .2; translate: 0 24px; }
+    to { opacity: 1; translate: 0 0; }
   }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

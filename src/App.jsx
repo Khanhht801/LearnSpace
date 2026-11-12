@@ -42,6 +42,7 @@ function getInitialFavoriteIds() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
   const isLoginPage = useMatch('/login');
   const isRegisterPage = useMatch('/register');
   const isAuthPage = useMatch('/auth/*');
@@ -56,6 +57,24 @@ export default function App() {
       setStorageError(true);
     }
   }, [favoriteIds]);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const sections = document.querySelectorAll('.main-content > section:not(.welcome-page), .main-content > div > section, .main-content > .personal-sections > section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('motion-reveal');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+
+    sections.forEach((section) => {
+      if (section.firstElementChild) observer.observe(section.firstElementChild);
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
 
   function handleToggleFavorite(courseId) {
     setFavoriteIds((currentIds) =>

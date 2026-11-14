@@ -11,7 +11,7 @@ export function parseLegacyIds(value) {
 export async function publishedIds(client, ids) {
   const valid = [];
   for (let offset = 0; offset < ids.length; offset += 100) {
-    const { data, error } = await client.from('document').select('id').in('id', ids.slice(offset, offset + 100));
+    const { data, error } = await client.from('document').select('id').eq('is_published', true).in('id', ids.slice(offset, offset + 100));
     if (error) throw error;
     valid.push(...data.map((item) => item.id));
   }

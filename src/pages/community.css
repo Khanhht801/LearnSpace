@@ -1,0 +1,17 @@
+.community-page { width: 100%; padding-block: 48px 72px; }
+.community-inner { width: min(960px, calc(100% - 40px)); margin-inline: auto; }
+.community-form, .community-card { margin-block: 24px; padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: white; }
+.community-form fieldset { padding: 0; margin: 0; border: 0; }
+.community-form :is(input:not([type='checkbox']), textarea, select) { margin-bottom: 18px; }
+.community-form select, .community-card select { width: 100%; min-height: 48px; padding: 10px; border: 1px solid #e3d6d6; border-radius: 10px; background: #f2f4f5; }
+.community-consent { display: flex; align-items: flex-start; gap: 10px; margin: 16px 0 24px; }
+.community-consent input { width: 18px; min-height: 18px; margin: 4px 0 0; flex-shrink: 0; }
+.community-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.community-error { color: #a01015; margin-top: 16px; }
+.community-card h2 { font-size: var(--text-h3); }
+.community-card dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 16px; }
+.community-card dt { font-weight: 700; }
+.community-card dd { margin: 0; overflow-wrap: anywhere; }
+.community-card input[type='file'] { margin-block: 12px; }
+.community-card textarea { margin-block: 8px; }
+@media (max-width: 600px) { .community-page { padding-block: 28px 48px; } .community-form, .community-card { padding: 18px; } .community-card dl { grid-template-columns: 1fr; gap: 2px; } .community-card dd { margin-bottom: 12px; } }

@@ -18,6 +18,15 @@ Các bản ghi cũ vẫn được giữ ở trạng thái xuất bản để kh�
 
 Các file từng được lưu bởi API cộng đồng cũ vẫn ở máy chủ Node cũ. Nếu cần giữ, sao lưu và kiểm tra nội dung, nguồn, quyền chia sẻ và thông tin cá nhân trước khi quyết định chuyển thủ công.
 
+## Duyệt đóng góp cộng đồng
+
+- Thành viên đăng nhập vào `/contribute`, gửi file PDF tối đa 10 MB kèm tác giả, nguồn, điều kiện sử dụng và xác nhận quyền chia sẻ. Trang `/my-contributions` hiển thị trạng thái và phản hồi; mục chưa tải xong có thể được gửi lại tại đây.
+- Quản trị viên đăng nhập vào `/moderation`. Tải file bằng liên kết ngắn hạn, kiểm tra nguồn và quyền chia sẻ, quét mã độc bằng công cụ tin cậy, sau đó xác nhận và duyệt hoặc nhập lý do từ chối. File chưa được quét mã độc tự động và thông tin MIME có thể bị giả mạo.
+- Duyệt sẽ tạo tài liệu công khai trong bảng `document`, với `storage_bucket = contributions`; file vẫn nằm trong bucket riêng tư `contributions`. Sau khi tài liệu được xuất bản, người dùng đăng nhập có thể mở file theo chính sách Storage. Link có chữ ký đã cấp vẫn còn hiệu lực tới khi hết hạn.
+- Tại mục báo cáo, quản trị viên có thể đánh dấu đã xem hoặc ẩn tài liệu. Khi ẩn, metadata và file không còn được cung cấp cho người học khác; người đóng góp vẫn có thể truy cập file của chính mình.
+- File bị từ chối và bản tải dở vẫn lưu trong bucket riêng. Kiểm tra định kỳ và xóa file không cần giữ bằng Dashboard hoặc Storage API theo chính sách lưu trữ; không xóa trực tiếp từ `storage.objects`. Chưa có hạn mức chống spam theo tài khoản.
+- Quyền quản trị dựa trên `learnspace_role: admin` trong `app_metadata` do quản trị viên hệ thống thiết lập, không dùng thông tin hồ sơ người dùng tự sửa. Sau khi được cấp quyền, người dùng cần đăng xuất và đăng nhập lại để nhận phiên mới.
+
 ## Kiểm tra cấu hình
 
 - Cấu hình Supabase Auth cho phép URL `/auth/reset-password` trên từng origin trong Authentication → URL Configuration; kiểm tra mẫu email và luồng khôi phục bằng tài khoản thử.

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { supabase } from '../../utils/supabase.js';
 import { useLibrary } from '../hooks/useLibrary.js';
 import Footer from '../components/Footer.jsx';
+import ReportDocument from '../components/ReportDocument.jsx';
 import '../library.css';
 
 export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
@@ -33,15 +34,15 @@ export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
     async function load() {
       setDetail({ courseId: course.id, loading: true, error: false, document: null, readUrl: '', downloadUrl: '' });
       try {
-        const { data, error } = await supabase.from('document').select('id,file_path,author,source,usage_note,updated_at').eq('id', course.id).maybeSingle();
+        const { data, error } = await supabase.from('document').select('id,file_path,storage_bucket,author,source,usage_note,updated_at').eq('id', course.id).maybeSingle();
         if (error) throw error;
         if (!data) { if (active) setDetail({ courseId: course.id, loading: false, error: false, document: null, readUrl: '', downloadUrl: '' }); return; }
         let readUrl = '';
         let downloadUrl = '';
         if (data.file_path) {
           const [read, download] = await Promise.all([
-            supabase.storage.from('documents').createSignedUrl(data.file_path, 300),
-            supabase.storage.from('documents').createSignedUrl(data.file_path, 300, { download: true }),
+            supabase.storage.from(data.storage_bucket).createSignedUrl(data.file_path, 300),
+            supabase.storage.from(data.storage_bucket).createSignedUrl(data.file_path, 300, { download: true }),
           ]);
           if (!read.error && !download.error) { readUrl = read.data.signedUrl; downloadUrl = download.data.signedUrl; }
         }
@@ -86,6 +87,7 @@ export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
     {detail.error && <div role="alert"><p>Không thể tải thông tin tài liệu. Vui lòng thử lại.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Thử lại</button></div>}
     {!detail.loading && !detail.error && detail.document && !detail.readUrl && <div role="status"><p>Không thể mở file. File có thể chưa sẵn sàng hoặc phiên đăng nhập đã hết hạn.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Thử lại</button></div>}
     {detail.readUrl && course.file_type?.toLowerCase() === 'pdf' && <iframe className="document-preview" src={detail.readUrl} title={`Xem trước ${course.title}`} />}
+    <ReportDocument key={course.id} documentId={course.id} />
     <p><Link to="/courses">Quay lại thư viện</Link></p>
   </article><Footer topId="document-top" /></>;
 }

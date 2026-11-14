@@ -31,7 +31,7 @@ export function confirmationErrorKind(error) {
 }
 
 export function documentDestination(value) {
-  return typeof value === 'string' && /^\/(?:courses(?:\/\d+)?|saved|topics(?:\/[a-z0-9-]+)?)(?:[?#]|$)/i.test(value) ? value : '/';
+  return typeof value === 'string' && /^\/(?:courses(?:\/\d+)?|saved|topics(?:\/[a-z0-9-]+)?|contribute|my-contributions|moderation)(?:[?#]|$)/i.test(value) ? value : '/';
 }
 
 export function requestPasswordReset(client, email, origin) {

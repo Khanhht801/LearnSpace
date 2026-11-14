@@ -19,6 +19,9 @@ const TopicDetail = lazy(() => import('./pages/TopicDetail.jsx'));
 const Auth = lazy(() => import('./pages/Auth.jsx'));
 const ConfirmEmail = lazy(() => import('./pages/ConfirmEmail.jsx'));
 const PasswordRecovery = lazy(() => import('./pages/PasswordRecovery.jsx'));
+const Contribute = lazy(() => import('./pages/Contribute.jsx'));
+const MyContributions = lazy(() => import('./pages/MyContributions.jsx'));
+const Moderation = lazy(() => import('./pages/Moderation.jsx'));
 
 function RequireAuth() {
   const { session, loading, error } = useAuth();
@@ -27,6 +30,11 @@ function RequireAuth() {
   if (error) return <section className="library-inner" role="alert">Không thể kiểm tra phiên đăng nhập. Vui lòng tải lại trang và thử lại.</section>;
   if (!session) return <Navigate to="/auth/login" replace state={{ from: location.pathname + location.search + location.hash }} />;
   return <Outlet />;
+}
+
+function RequireAdmin() {
+  const { session } = useAuth();
+  return session?.user.app_metadata?.learnspace_role === 'admin' ? <Outlet /> : <section className="library-inner"><h1>Không có quyền truy cập</h1><p>Trang này chỉ dành cho quản trị viên.</p></section>;
 }
 
 export default function App() {
@@ -38,7 +46,7 @@ export default function App() {
 
   useEffect(() => {
     if (/^\/courses\/\d+$/.test(pathname)) return;
-    const titles = { '/': 'Trang chủ', '/courses': 'Thư viện', '/topics': 'Chủ đề', '/saved': 'Tài liệu đã lưu', '/about': 'Giới thiệu', '/contact': 'Liên hệ', '/auth/login': 'Đăng nhập', '/auth/register': 'Đăng ký', '/auth/forgot-password': 'Quên mật khẩu', '/auth/reset-password': 'Đặt lại mật khẩu' };
+    const titles = { '/': 'Trang chủ', '/courses': 'Thư viện', '/topics': 'Chủ đề', '/saved': 'Tài liệu đã lưu', '/about': 'Giới thiệu', '/contact': 'Liên hệ', '/contribute': 'Gửi tài liệu', '/my-contributions': 'Tài liệu đã gửi', '/moderation': 'Kiểm duyệt', '/auth/login': 'Đăng nhập', '/auth/register': 'Đăng ký', '/auth/forgot-password': 'Quên mật khẩu', '/auth/reset-password': 'Đặt lại mật khẩu' };
     document.title = `${titles[pathname] || 'LearnSpace'} | LearnSpace`;
   }, [pathname]);
 
@@ -90,6 +98,11 @@ export default function App() {
               element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />}
             />
             <Route element={<RequireAuth />}><Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly savedLoading={saved.loading} savedReady={saved.ready} />} /></Route>
+            <Route element={<RequireAuth />}>
+              <Route path="/contribute" element={<Contribute />} />
+              <Route path="/my-contributions" element={<MyContributions />} />
+              <Route element={<RequireAdmin />}><Route path="/moderation" element={<Moderation />} /></Route>
+            </Route>
             <Route element={<LibraryBoundary />}>
               <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
               <Route element={<RequireAuth />}><Route

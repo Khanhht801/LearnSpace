@@ -12,6 +12,10 @@
 .document-actions .button-link { padding: 10px 16px; }
 .document-preview { width: 100%; min-height: 640px; border: 1px solid var(--border); border-radius: 12px; }
 .document-share-url { display: block; width: min(100%, 600px); margin-block: 8px 20px; }
+.document-report { margin-block: 28px; padding: 18px; border: 1px solid var(--border); border-radius: 12px; }
+.document-report summary { cursor: pointer; color: var(--primary-dark); font-weight: 700; }
+.document-report form { margin-top: 16px; }
+.document-report textarea { margin-bottom: 12px; }
 .library-inner { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 .library-page section { scroll-margin-top: 112px; }
 .library-page .eyebrow { font-size: var(--text-label); font-weight: 800; letter-spacing: .09em; }

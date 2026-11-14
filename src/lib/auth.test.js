@@ -6,6 +6,9 @@ test('login destination accepts only an internal document route', () => {
   assert.equal(documentDestination('/courses/12?q=react#content'), '/courses/12?q=react#content');
   assert.equal(documentDestination('/saved'), '/saved');
   assert.equal(documentDestination('/courses?q=react'), '/courses?q=react');
+  assert.equal(documentDestination('/contribute'), '/contribute');
+  assert.equal(documentDestination('/my-contributions'), '/my-contributions');
+  assert.equal(documentDestination('/moderation'), '/moderation');
   for (const value of ['https://example.com', '//example.com', '/courses/1/extra', '/courses/1evil', null]) assert.equal(documentDestination(value), '/');
 });
 

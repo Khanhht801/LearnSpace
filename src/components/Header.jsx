@@ -42,6 +42,7 @@ export default function Header() {
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
         <NavLink to="/saved" onClick={closeMenu}>Đã lưu</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
+        {session?.user.app_metadata?.learnspace_role === 'admin' && <NavLink to="/moderation" onClick={closeMenu}>Kiểm duyệt</NavLink>}
       </nav>
       {session ? <div className="header-account">
         <span className="header-account-name" title={profile?.display_name || session.user.email}>{profile?.display_name || 'Đã đăng nhập'}</span>

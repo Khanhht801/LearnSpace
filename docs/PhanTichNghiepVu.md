@@ -4,17 +4,18 @@ Cập nhật: 11/11/2026. Tài liệu này thay thế phạm vi frontend tĩnh t
 
 ## Mục tiêu
 
-LearnSpace là thư viện tài liệu lập trình miễn phí. Giai đoạn đầu, chủ website chọn lọc và xuất bản tài liệu qua Supabase Dashboard. Khách được khám phá danh mục; trải nghiệm dự kiến yêu cầu đăng nhập để mở chi tiết, đọc và tải. Cộng đồng đóng góp tài liệu sẽ được mở ở giai đoạn sau, với bước duyệt trước khi công khai.
+LearnSpace là thư viện tài liệu lập trình miễn phí. Khách được khám phá danh mục; người dùng đăng nhập để mở chi tiết, đọc, tải và gửi tài liệu. Tài liệu cộng đồng phải được quản trị viên kiểm tra và duyệt trước khi công khai.
 
-## Hiện trạng sau các thay đổi Phase 3
+## Hiện trạng sau các thay đổi Phase 4
 
 - Giao diện thư viện đọc metadata từ các bảng `categories` và `document` trên Supabase. Các route `/courses` và `/topics` được giữ nguyên.
-- Biểu mẫu và danh sách tài liệu cộng đồng đã ẩn; API Node `/api/documents` trả 410 và không xóa các file đã lưu cũ. Không tự chuyển các file đó sang thư viện.
+- Thành viên có thể gửi PDF tối đa 10 MB và theo dõi trạng thái. Quản trị viên duyệt hoặc từ chối, xử lý báo cáo và có thể ẩn tài liệu. API Node `/api/documents` cũ vẫn đóng và dữ liệu cũ không tự chuyển sang thư viện.
 - Góp ý dùng email cấu hình `VITE_CONTRIBUTION_EMAIL` nếu có; nếu chưa cấu hình, trang thông báo kênh đang được cập nhật.
 - Danh mục tìm kiếm không dấu, lọc, sắp xếp và phân trang ở phía dữ liệu. Trang chi tiết yêu cầu đăng nhập; tài liệu xuất bản có thể được xem hoặc tải qua bucket riêng tư bằng URL có thời hạn.
 - Tài liệu nháp không được truy cập qua Data API công khai; quyền Storage chỉ cho phép tài khoản đăng nhập đọc file của tài liệu đã xuất bản. Danh sách đã lưu gắn với tài khoản và đồng bộ giữa thiết bị.
 - Danh sách cũ trên trình duyệt được chuyển một lần sang tài khoản đăng nhập đầu tiên; chỉ chuyển các ID còn thuộc tài liệu đã xuất bản. Nếu có lỗi, danh sách cũ được giữ để thử lại và không tự chuyển sang tài khoản khác.
 - Dữ liệu cũ vẫn được giữ, nhưng bucket chưa có file tương ứng khi kiểm tra Phase 2. Trang chi tiết sẽ báo file chưa sẵn sàng cho đến khi file thật được tải lên.
+- File cộng đồng chưa được quét mã độc tự động; quản trị viên phải kiểm tra nguồn, quyền chia sẻ và quét file trước khi duyệt. Giới hạn MIME, dung lượng và kiểm tra chữ ký PDF ở giao diện không xác nhận file an toàn. Chưa có hạn mức chống spam theo tài khoản.
 
 ## Những việc cần hoàn tất khi đưa nội dung lên
 

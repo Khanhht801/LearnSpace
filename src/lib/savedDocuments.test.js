@@ -10,7 +10,7 @@ function storage(values = {}) {
 function client({ valid = [1, 2], fail = false } = {}) {
   const writes = [];
   return { writes, from(table) {
-    if (table === 'document') return { select: () => ({ in: async (_column, ids) => ({ data: ids.filter((id) => valid.includes(id)).map((id) => ({ id })), error: null }) }) };
+    if (table === 'document') return { select: () => ({ eq: () => ({ in: async (_column, ids) => ({ data: ids.filter((id) => valid.includes(id)).map((id) => ({ id })), error: null }) }) }) };
     return { upsert: async (rows, options) => { writes.push({ rows, options }); return { error: fail ? new Error('offline') : null }; } };
   } };
 }

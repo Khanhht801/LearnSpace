@@ -9,8 +9,9 @@ async function readTable(table, columns, signal) {
   const rows = [];
   const pageSize = 500;
   for (let offset = 0; ; offset += pageSize) {
-    const { data, error } = await supabase.from(table).select(columns)
-      .order('id').range(offset, offset + pageSize - 1).abortSignal(signal);
+    let query = supabase.from(table).select(columns);
+    if (table === 'document') query = query.eq('is_published', true);
+    const { data, error } = await query.order('id').range(offset, offset + pageSize - 1).abortSignal(signal);
     if (error) throw error;
     rows.push(...data);
     if (data.length < pageSize) return rows;
@@ -18,8 +19,10 @@ async function readTable(table, columns, signal) {
 }
 
 export function LibraryProvider({ children }) {
-  const catalogOnly = useLocation().pathname === '/courses';
-  const [state, setState] = useState({ courses: [], topics: [], loading: true, error: false, catalogOnly });
+  const { pathname } = useLocation();
+  const scope = pathname === '/courses' ? 'catalog' : /^\/courses\/\d+$/.test(pathname) ? pathname : 'general';
+  const catalogOnly = scope === 'catalog';
+  const [state, setState] = useState({ courses: [], topics: [], loading: true, error: false, scope });
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
@@ -47,23 +50,23 @@ export function LibraryProvider({ children }) {
           coverImage: courses.find((document) => document.category_id === category.id)?.coverImage || '/mascot-topics.png',
           tags: [],
         }));
-        if (active) setState({ courses, topics, loading: false, error: false, catalogOnly });
+        if (active) setState({ courses, topics, loading: false, error: false, scope });
       } catch {
-        if (active) setState({ courses: [], topics: [], loading: false, error: true, catalogOnly });
+        if (active) setState({ courses: [], topics: [], loading: false, error: true, scope });
       } finally {
         clearTimeout(timeout);
       }
     }
     load();
     return () => { active = false; clearTimeout(timeout); controller.abort(); };
-  }, [attempt, catalogOnly]);
+  }, [attempt, catalogOnly, scope]);
 
   function retry() {
-    setState({ courses: [], topics: [], loading: true, error: false, catalogOnly });
+    setState({ courses: [], topics: [], loading: true, error: false, scope });
     setAttempt((value) => value + 1);
   }
 
-  return <LibraryContext.Provider value={{ ...state, loading: state.loading || state.catalogOnly !== catalogOnly, retry }}>{children}</LibraryContext.Provider>;
+  return <LibraryContext.Provider value={{ ...state, loading: state.loading || state.scope !== scope, retry }}>{children}</LibraryContext.Provider>;
 }
 
 export function LibraryBoundary({ children }) {

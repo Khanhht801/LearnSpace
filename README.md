@@ -29,6 +29,11 @@ Nếu trang trắng và console báo `supabaseUrl is required`, bản build đan
 - Đăng nhập để lưu tài liệu theo tài khoản và đồng bộ giữa các thiết bị. Danh sách cũ trong `localStorage` được nhập một lần vào tài khoản đầu tiên đăng nhập trên trình duyệt; chỉ nhập tài liệu còn được xuất bản.
 - Khi việc nhập thất bại, website giữ dữ liệu cũ, gắn lần nhập với cùng tài khoản và cho phép thử lại. Danh sách không khả dụng khi mạng lỗi sẽ hiển thị thông báo thay vì giả vờ trống.
 
+### Đóng góp cộng đồng
+
+- Người dùng đăng nhập gửi PDF qua `/contribute` và xem trạng thái tại `/my-contributions`. Chỉ tài liệu được duyệt mới xuất hiện trong thư viện.
+- Quản trị viên dùng `/moderation` để duyệt, từ chối và xử lý báo cáo. Quy trình kiểm tra nguồn, bản quyền, quét file thủ công và các giới hạn hiện tại được mô tả trong [hướng dẫn xuất bản](docs/HuongDanXuatBan.md).
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

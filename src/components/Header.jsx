@@ -40,6 +40,7 @@ export default function Header() {
         <NavLink to="/about" onClick={closeMenu}>Giới thiệu</NavLink>
         <NavLink to="/topics" onClick={closeMenu}>Chủ đề</NavLink>
         <NavLink to="/courses" onClick={closeMenu}>Thư viện</NavLink>
+        <NavLink to="/saved" onClick={closeMenu}>Đã lưu</NavLink>
         <NavLink to="/contact" onClick={closeMenu}>Đóng góp</NavLink>
       </nav>
       {session ? <div className="header-account">

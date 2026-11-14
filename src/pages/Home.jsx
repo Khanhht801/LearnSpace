@@ -9,7 +9,7 @@ import SavedSection from '../components/SavedSection.jsx';
 import FeedbackSection from '../components/FeedbackSection.jsx';
 import Footer from '../components/Footer.jsx';
 
-export default function Home({ favoriteIds, onToggleFavorite }) {
+export default function Home({ favoriteIds, onToggleFavorite, savedLoading, savedReady }) {
   return (
     <>
     <section className="welcome-page" id="hero" aria-labelledby="hero-title">
@@ -49,7 +49,7 @@ export default function Home({ favoriteIds, onToggleFavorite }) {
     <MessageSection />
     <ContributionSection />
     <div className="personal-sections">
-      <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} />
+      <SavedSection favoriteIds={favoriteIds} onToggleFavorite={onToggleFavorite} loading={savedLoading} ready={savedReady} />
       <FeedbackSection />
     </div>
     <Footer />

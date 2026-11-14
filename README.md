@@ -7,6 +7,7 @@
 - Build command: `npm run build`; Output directory: `dist`.
 - Trong Project Settings → Environment Variables, đặt `VITE_SUPABASE_URL` và `VITE_SUPABASE_PUBLISHABLE_KEY` cho môi trường Production (và Preview nếu sử dụng). Lấy giá trị tương ứng từ dự án Supabase; xem tên biến trong `.env.example`.
 - Các biến `VITE_*` được đóng gói vào JavaScript lúc build. Sau khi thêm/sửa biến, phải Redeploy để áp dụng. File `.env` trên máy không được push lên GitHub.
+- Đặt `VITE_CONTRIBUTION_EMAIL` thành địa chỉ tiếp nhận góp ý thật. Nếu chưa cấu hình, website hiển thị thông báo kênh đang được cập nhật, không giả vờ đã nhận góp ý.
 - Chỉ dùng publishable key ở frontend; không đưa `DATABASE_URL`, service role hoặc secret key vào biến `VITE_*`.
 - `vercel.json` hỗ trợ mở trực tiếp và tải lại các route React. API cộng đồng `/api/documents` đã đóng trên server Node.js; dữ liệu file cũ không bị xóa. API `/api/feedback` chỉ có trên server Node.js, chưa phải Vercel Function và không còn được giao diện sử dụng. Giao diện góp ý hiển thị email `VITE_CONTRIBUTION_EMAIL` nếu được cấu hình khi build.
 
@@ -22,6 +23,11 @@ Nếu trang trắng và console báo `supabaseUrl is required`, bản build đan
 
 - Trong Authentication → URL Configuration của Supabase, cho phép URL `/auth/reset-password` trên từng origin sử dụng. Kiểm tra Site URL và mẫu email khôi phục của dự án trước khi phát hành.
 - Thử toàn bộ luồng với một tài khoản thử và hộp thư thật; ứng dụng gửi yêu cầu đặt lại và cập nhật mật khẩu qua Supabase Auth.
+
+### Tài liệu đã lưu
+
+- Đăng nhập để lưu tài liệu theo tài khoản và đồng bộ giữa các thiết bị. Danh sách cũ trong `localStorage` được nhập một lần vào tài khoản đầu tiên đăng nhập trên trình duyệt; chỉ nhập tài liệu còn được xuất bản.
+- Khi việc nhập thất bại, website giữ dữ liệu cũ, gắn lần nhập với cùng tài khoản và cho phép thử lại. Danh sách không khả dụng khi mạng lỗi sẽ hiển thị thông báo thay vì giả vờ trống.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

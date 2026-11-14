@@ -19,7 +19,7 @@ async function readTable(table, columns, signal) {
 
 export function LibraryProvider({ children }) {
   const catalogOnly = useLocation().pathname === '/courses';
-  const [state, setState] = useState({ courses: [], topics: [], loading: true, error: false });
+  const [state, setState] = useState({ courses: [], topics: [], loading: true, error: false, catalogOnly });
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
@@ -47,9 +47,9 @@ export function LibraryProvider({ children }) {
           coverImage: courses.find((document) => document.category_id === category.id)?.coverImage || '/mascot-topics.png',
           tags: [],
         }));
-        if (active) setState({ courses, topics, loading: false, error: false });
+        if (active) setState({ courses, topics, loading: false, error: false, catalogOnly });
       } catch {
-        if (active) setState({ courses: [], topics: [], loading: false, error: true });
+        if (active) setState({ courses: [], topics: [], loading: false, error: true, catalogOnly });
       } finally {
         clearTimeout(timeout);
       }
@@ -59,11 +59,11 @@ export function LibraryProvider({ children }) {
   }, [attempt, catalogOnly]);
 
   function retry() {
-    setState({ courses: [], topics: [], loading: true, error: false });
+    setState({ courses: [], topics: [], loading: true, error: false, catalogOnly });
     setAttempt((value) => value + 1);
   }
 
-  return <LibraryContext.Provider value={{ ...state, retry }}>{children}</LibraryContext.Provider>;
+  return <LibraryContext.Provider value={{ ...state, loading: state.loading || state.catalogOnly !== catalogOnly, retry }}>{children}</LibraryContext.Provider>;
 }
 
 export function LibraryBoundary({ children }) {

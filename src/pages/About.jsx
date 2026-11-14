@@ -5,7 +5,7 @@ import Footer from '../components/Footer.jsx';
 const values = [
   { title: 'Dễ tìm điều cần học', description: 'Tìm theo tên và khám phá theo chủ đề để đến gần hơn với nội dung bạn quan tâm.', path: 'M10 1a9 9 0 1 0 5.2 16.35l5.85 5.85 2.15-2.15-5.85-5.85A9 9 0 0 0 10 1Zm0 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z' },
   { title: 'Hiểu trước khi chọn', description: 'Xem mô tả, cấp độ và thời lượng để chọn nội dung phù hợp với nhu cầu học tập.', path: 'M1 3c3.7-1.1 7.2-.5 10 1.5V22c-2.8-2-6.3-2.6-10-1.5V3Zm12 1.5C15.8 2.5 19.3 1.9 23 3v17.5c-3.7-1.1-7.2-.5-10 1.5V4.5Z' },
-  { title: 'Giữ lại kiến thức hay', description: 'Lưu mục yêu thích để dễ dàng tìm lại và tiếp tục khám phá trên trình duyệt bạn đang dùng.', path: 'M6 1h12a2 2 0 0 1 2 2v20l-8-5-8 5V3a2 2 0 0 1 2-2Z' },
+  { title: 'Giữ lại kiến thức hay', description: 'Lưu tài liệu vào tài khoản để dễ dàng tìm lại trên các thiết bị.', path: 'M6 1h12a2 2 0 0 1 2 2v20l-8-5-8 5V3a2 2 0 0 1 2-2Z' },
   { title: 'Chia sẻ điều hữu ích', description: 'Đóng góp tài liệu bạn có quyền chia sẻ, cùng làm phong phú thêm không gian học tập chung.', path: 'M18 1a4 4 0 1 1 0 8 4 4 0 0 1 0-8ZM5 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm13 7a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm-9-5.5 4.5-2.4 1.4 2.6-4.5 2.4L9 9.5Zm1.4 2.4 4.5 2.4-1.4 2.6L9 14.5l1.4-2.6Z' },
   { title: 'Lắng nghe để cải thiện', description: 'Mỗi góp ý là một cơ hội để LearnSpace hiểu nhu cầu của bạn và từng bước hoàn thiện.', path: 'M12 4a6.5 6.5 0 0 0-4.7 11c1.2 1.2 1.7 2 1.7 3h6c0-1 .5-1.8 1.7-3A6.5 6.5 0 0 0 12 4ZM9 19h6v2H9v-2Zm1 3h4v2h-4v-2ZM11 0h2v3h-2V0ZM1 8h3v2H1V8Zm19 0h3v2h-3V8ZM3.2 2.8l2.2 2.1L4 6.3 1.8 4.2l1.4-1.4Zm17.6 0 1.4 1.4L20 6.3l-1.4-1.4 2.2-2.1Z' },
   { title: 'Tôn trọng nguồn tri thức', description: 'Khuyến khích ghi rõ nguồn, tôn trọng tác giả và kiểm tra điều kiện sử dụng trước khi chia sẻ.', path: 'M5 1h9v7h7v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2Zm11 0 5 5h-5V1ZM7 12v2h10v-2H7Zm0 5v2h7v-2H7Z' },
@@ -166,7 +166,7 @@ export default function About() {
               <span className="about-how-number" aria-hidden="true">03</span>
               <span className="about-how-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d={values[2].path} fillRule="evenodd" /></svg></span>
               <h3>Lưu để quay lại</h3>
-              <p>Nhấn yêu thích để giữ nội dung hữu ích trong danh sách đã lưu trên trình duyệt hiện tại.</p>
+              <p>Đăng nhập và lưu tài liệu để quay lại học tiếp trên các thiết bị.</p>
               <Link to="/saved">Xem nội dung đã lưu <span aria-hidden="true">↗</span></Link>
             </li>
           </ol>

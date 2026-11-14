@@ -11,6 +11,20 @@ export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
   const course = courses.find((item) => item.id === Number(courseId));
   const [detail, setDetail] = useState({ courseId: null, loading: true, error: false, document: null, readUrl: '', downloadUrl: '' });
   const [attempt, setAttempt] = useState(0);
+  const [shareStatus, setShareStatus] = useState({ courseId: null, result: '' });
+
+  useEffect(() => {
+    if (course) document.title = `${course.title} | LearnSpace`;
+  }, [course]);
+
+  async function shareDocument() {
+    const url = new URL(`/courses/${course.id}`, window.location.origin).href;
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(url);
+      setShareStatus({ courseId: course.id, result: 'success' });
+    } catch { setShareStatus({ courseId: course.id, result: 'manual' }); }
+  }
 
   useEffect(() => {
     if (!course) return;
@@ -63,8 +77,11 @@ export default function CourseDetail({ favoriteIds, onToggleFavorite }) {
       {detail.document?.usage_note && <div><dt>Điều kiện sử dụng</dt><dd>{detail.document.usage_note}</dd></div>}
     </dl>
     <div className="document-actions"><button aria-pressed={isFavorite} type="button" onClick={() => onToggleFavorite(course.id)}>{isFavorite ? 'Bỏ lưu' : 'Lưu tài liệu'}</button>
+      <button type="button" onClick={shareDocument}>Chia sẻ liên kết</button>
       {detail.readUrl && <><a className="button-link" href={detail.readUrl} target="_blank" rel="noopener noreferrer">Mở tài liệu</a><a className="button-link" href={detail.downloadUrl}>Tải tài liệu</a></>}
     </div>
+    {shareStatus.courseId === course.id && shareStatus.result === 'success' && <p role="status">Đã sao chép liên kết tài liệu.</p>}
+    {shareStatus.courseId === course.id && shareStatus.result === 'manual' && <div role="status"><label htmlFor="share-document-link">Sao chép liên kết tài liệu:</label><input id="share-document-link" className="document-share-url" readOnly value={new URL(`/courses/${course.id}`, window.location.origin).href} onFocus={(event) => event.target.select()} /></div>}
     {detail.loading && <p role="status">Đang tải thông tin tài liệu…</p>}
     {detail.error && <div role="alert"><p>Không thể tải thông tin tài liệu. Vui lòng thử lại.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Thử lại</button></div>}
     {!detail.loading && !detail.error && detail.document && !detail.readUrl && <div role="status"><p>Không thể mở file. File có thể chưa sẵn sàng hoặc phiên đăng nhập đã hết hạn.</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Thử lại</button></div>}

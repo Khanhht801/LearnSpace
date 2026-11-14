@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation, useMatch } from 'react-router-dom';
 import { LibraryBoundary, LibraryProvider } from './hooks/LibraryProvider.jsx';
 import './App.css';
 import Header from './components/Header.jsx';
 import ScrollToLocation from './components/ScrollToLocation.jsx';
-import About from './pages/About.jsx';
-import Contact from './pages/Contact.jsx';
-import CourseDetail from './pages/CourseDetail.jsx';
-import Courses from './pages/Courses.jsx';
 import Home from './pages/Home.jsx';
-import NotFound from './pages/NotFound.jsx';
-import Topics from './pages/Topics.jsx';
-import TopicDetail from './pages/TopicDetail.jsx';
-import Auth from './pages/Auth.jsx';
-import ConfirmEmail from './pages/ConfirmEmail.jsx';
-import PasswordRecovery from './pages/PasswordRecovery.jsx';
 import { useAuth } from './hooks/useAuth.js';
+import { useSavedDocuments } from './hooks/useSavedDocuments.js';
+import './auth.css';
+
+const About = lazy(() => import('./pages/About.jsx'));
+const Contact = lazy(() => import('./pages/Contact.jsx'));
+const CourseDetail = lazy(() => import('./pages/CourseDetail.jsx'));
+const Courses = lazy(() => import('./pages/Courses.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound.jsx'));
+const Topics = lazy(() => import('./pages/Topics.jsx'));
+const TopicDetail = lazy(() => import('./pages/TopicDetail.jsx'));
+const Auth = lazy(() => import('./pages/Auth.jsx'));
+const ConfirmEmail = lazy(() => import('./pages/ConfirmEmail.jsx'));
+const PasswordRecovery = lazy(() => import('./pages/PasswordRecovery.jsx'));
 
 function RequireAuth() {
   const { session, loading, error } = useAuth();
@@ -26,37 +29,18 @@ function RequireAuth() {
   return <Outlet />;
 }
 
-function getInitialFavoriteIds() {
-  try {
-  const savedValue = localStorage.getItem('savedDocumentIds');
-
-  if (!savedValue) {
-    return [];
-  }
-
-    const parsedValue = JSON.parse(savedValue);
-    return Array.isArray(parsedValue) ? parsedValue.filter((id) => Number.isInteger(id)) : [];
-  } catch {
-    return [];
-  }
-}
-
 export default function App() {
   const { pathname } = useLocation();
   const isLoginPage = useMatch('/login');
   const isRegisterPage = useMatch('/register');
   const isAuthPage = useMatch('/auth/*');
-  const [favoriteIds, setFavoriteIds] = useState(getInitialFavoriteIds);
-  const [storageError, setStorageError] = useState(false);
+  const saved = useSavedDocuments();
 
   useEffect(() => {
-    try {
-      localStorage.setItem('savedDocumentIds', JSON.stringify(favoriteIds));
-      setStorageError(false);
-    } catch {
-      setStorageError(true);
-    }
-  }, [favoriteIds]);
+    if (/^\/courses\/\d+$/.test(pathname)) return;
+    const titles = { '/': 'Trang chủ', '/courses': 'Thư viện', '/topics': 'Chủ đề', '/saved': 'Tài liệu đã lưu', '/about': 'Giới thiệu', '/contact': 'Liên hệ', '/auth/login': 'Đăng nhập', '/auth/register': 'Đăng ký', '/auth/forgot-password': 'Quên mật khẩu', '/auth/reset-password': 'Đặt lại mật khẩu' };
+    document.title = `${titles[pathname] || 'LearnSpace'} | LearnSpace`;
+  }, [pathname]);
 
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -76,23 +60,18 @@ export default function App() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  function handleToggleFavorite(courseId) {
-    setFavoriteIds((currentIds) =>
-      currentIds.includes(courseId)
-        ? currentIds.filter((id) => id !== courseId)
-        : [...currentIds, courseId],
-    );
-  }
+  const favoriteIds = saved.ids;
+  const handleToggleFavorite = saved.toggle;
 
   return (
     <div className="app-shell">
       <ScrollToLocation />
       {!isAuthPage && !isLoginPage && !isRegisterPage && <Header />}
-      {storageError && <p className="storage-notice" role="status">Trình duyệt không cho phép lưu lâu dài. Danh sách đã lưu chỉ được giữ trong phiên hiện tại.</p>}
+      {saved.error && <div className="storage-notice" role="alert">{saved.error} <button type="button" onClick={saved.retry}>Thử lại</button></div>}
 
       <main className="main-content" id="main-content">
         <LibraryProvider>
-          <Routes>
+          <Suspense fallback={<section className="library-inner" role="status">Đang tải trang…</section>}><Routes>
             <Route path="/auth">
               <Route index element={<Auth key="callback" />} />
               <Route path="confirm" element={<ConfirmEmail />} />
@@ -104,13 +83,13 @@ export default function App() {
             </Route>
             <Route path="/login" element={<Navigate to="/auth/login" replace />} />
             <Route path="/register" element={<Navigate to="/auth/register" replace />} />
-            <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
+            <Route path="/" element={<Home favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedLoading={saved.loading} savedReady={saved.ready} />} />
             <Route path="/topics" element={<Topics />} />
             <Route
               path="/courses"
               element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />}
             />
-            <Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly />} />
+            <Route element={<RequireAuth />}><Route path="/saved" element={<Courses favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} savedOnly savedLoading={saved.loading} savedReady={saved.ready} />} /></Route>
             <Route element={<LibraryBoundary />}>
               <Route path="/topics/:topicId" element={<TopicDetail favoriteIds={favoriteIds} onToggleFavorite={handleToggleFavorite} />} />
               <Route element={<RequireAuth />}><Route
@@ -126,7 +105,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
+          </Routes></Suspense>
         </LibraryProvider>
       </main>
     </div>

@@ -887,6 +887,10 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
 .personal-sections > section { display: grid; align-items: center; min-width: 0; }
 .personal-sections > section > .landing-inner { width: 100%; }
 
+/* Keep the two personal sections compact while their rows remain equal. */
+.personal-sections > .saved-section, .personal-sections > .feedback-section { padding-block: 32px; }
+.feedback-mascot { max-width: 220px; }
+
 /* Compact, consistent spacing between landing sections. */
 .main-content:has(> .welcome-page) { --landing-section-space: 44px; }
 .main-content > :is(.introduction, .journey-section, .topics-section, .library-section, .message-section, .contribution-section, .shared-section), .personal-sections > section { padding-block: var(--landing-section-space); }
@@ -897,18 +901,19 @@ body:has(.contribution-dialog[open]) { overflow: hidden; }
 /* Reserve space only where the artwork extends outside its panel. */
 .contribution-layout { padding-bottom: 46px; }
 .main-content > .contribution-section { padding-bottom: 32px; }
-.personal-sections > .saved-section { padding-bottom: 48px; }
+.personal-sections > .saved-section { padding-bottom: 32px; }
 .main-content > .message-section { padding-bottom: 56px; }
 .message-waves { height: 95px; }
 @media (max-width: 800px) {
   .main-content:has(> .welcome-page) { --landing-section-space: 32px; }
   .main-content > .welcome-page { padding-block: 32px 36px; }
   .main-content > .message-section { padding-bottom: 40px; }
-  .personal-sections > .saved-section { padding-bottom: 32px; }
+  .personal-sections > .saved-section, .personal-sections > .feedback-section { padding-block: 24px; }
   .introduction-benefits { margin-top: 30px; }
   .saved-section .library-heading { margin-bottom: 32px; }
   .message-inner { gap: 20px; }
   .feedback-layout { gap: 24px; }
+  .feedback-mascot { max-width: 160px; }
 }
 @media (max-width: 480px) {
   .main-content:has(> .welcome-page) { --landing-section-space: 28px; }

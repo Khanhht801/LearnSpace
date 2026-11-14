@@ -1,23 +1,28 @@
-# Kiểm kê và chuẩn bị xuất bản tài liệu
+# Xuất bản tài liệu qua Supabase Dashboard
 
-LearnSpace dự kiến dùng Supabase Dashboard để quản lý nội dung. Tài liệu này mô tả hiện trạng và các bước kiểm tra; **chưa phải quy trình xuất bản file hoàn chỉnh**. Trang chi tiết chưa đọc/tải file, và chính sách bảo vệ file chưa được xác minh.
+LearnSpace dùng bảng `categories`, `document` và bucket riêng tư `documents`. Khách xem danh mục tài liệu đã xuất bản; tài khoản đăng nhập mới có thể yêu cầu đường dẫn đọc/tải ngắn hạn. Các đường dẫn này có hiệu lực tối đa 5 phút và có thể tiếp tục hoạt động đến khi hết hạn sau khi một tài liệu bị gỡ.
 
-## Kiểm tra dự án hiện tại
+## Thêm tài liệu
 
-1. Mở đúng dự án Supabase trong Dashboard. Trong Table Editor, kiểm tra `categories` và `document`, các cột, liên kết giữa bảng và nội dung đã có. Giao diện hiện đọc `categories` (`id`, `name`, `slug`, `description`) và `document` (`id`, `category_id`, `title`, `slug`, `description`, `thumbnail_url`, `file_type`, `created_at`).
-2. Kiểm tra `file_path`, bucket tương ứng và các file hiện có trong Storage. Không đặt tài liệu cần đăng nhập trong bucket công khai hoặc dùng URL công khai như biện pháp bảo vệ.
-3. Kiểm tra RLS, quyền Data API và chính sách Storage bằng tài khoản khách và tài khoản thử; xác nhận bản nháp không lộ qua API và khách không truy cập được file. RLS, quyền bảng và quyền Storage cần được kiểm tra riêng.
-4. Xác định dữ liệu cũ cần giữ, quyền sử dụng từng tài liệu và cách nhận biết tài liệu được xuất bản. Chưa có bằng chứng trong repo rằng bảng `document` có trạng thái xuất bản; không đưa bản nháp vào bảng đang được đọc công khai.
-5. Kiểm tra môi trường deploy và biến trong README. Không đưa secret hoặc service role key vào frontend.
+1. Chuẩn bị file có quyền chia sẻ, tác giả, nguồn và điều kiện sử dụng. Trong Storage, tải file vào bucket `documents`; ghi lại chính xác đường dẫn tương đối trong bucket, ví dụ `react/react-co-ban.pdf`.
+2. Trong Table Editor → `categories`, chọn chủ đề có sẵn hoặc tạo chủ đề mới với tên, slug duy nhất và mô tả.
+3. Trong bảng `document`, thêm dòng với `category_id`, `title`, `slug` duy nhất, `description`, `file_path` (đúng đường dẫn đã tải), `file_type` (ví dụ `pdf`) và `thumbnail_url` nếu có. Điền `author`, `source`, `usage_note` và `updated_at` khi có thông tin.
+4. Giữ `is_published = false` trong lúc chuẩn bị. Kiểm tra file, metadata và quyền sử dụng; chuyển `is_published` sang `true` để xuất bản. Tài liệu nháp không xuất hiện trong thư viện hoặc Data API công khai.
+5. Kiểm tra từ website: khách thấy card trong thư viện; sau khi đăng nhập có thể mở chi tiết, xem PDF và tải file. Kiểm tra cả liên kết mở riêng nếu trình xem nhúng không hoạt động.
 
-## Chuẩn bị một tài liệu
+File cần được tải lên bằng Supabase Dashboard hoặc Storage API; không chèn trực tiếp metadata vào `storage.objects`. Để gỡ tài liệu, chuyển `is_published` sang `false`. File vẫn nằm trong bucket, có thể quản lý trong Dashboard. Khi sửa nội dung, cập nhật `updated_at` theo thời điểm sửa.
 
-- Chọn file có quyền chia sẻ; ghi lại tiêu đề, mô tả, chủ đề, định dạng, tác giả/nguồn, quyền sử dụng và ngày cập nhật.
-- Sau khi schema, trạng thái xuất bản, bucket và quyền được xác nhận và triển khai, thêm metadata và file qua Dashboard theo cấu hình thực tế; kiểm tra hiển thị, đăng nhập, đọc/tải và truy cập trái phép trước khi công bố.
-- Những trường nguồn, quyền sử dụng, trạng thái xuất bản và luồng file chưa được xác nhận là đã tồn tại hoặc được giao diện hỗ trợ. Không giả định việc điền chúng trong Dashboard đã làm chúng hiển thị trên website.
+## Dữ liệu cũ
 
-## Dữ liệu từ biểu mẫu cũ
+Các bản ghi cũ vẫn được giữ ở trạng thái xuất bản để không thay đổi danh mục hiện có. Khi triển khai Phase 2, bucket `documents` chưa có file; các đường dẫn cũ là metadata, vì vậy trang chi tiết báo file chưa sẵn sàng. Bạn cần cung cấp file thực sự có quyền chia sẻ và tải vào đúng đường dẫn, hoặc cập nhật `file_path` tương ứng. Không tự động xuất bản các file trong `docs/` hoặc file nhận từ biểu mẫu cộng đồng cũ.
 
-API cộng đồng cũ đã đóng; file từng lưu trên máy chủ Node vẫn giữ nguyên tại nơi triển khai cũ. Nếu cần giữ lại, sao lưu và kiểm tra nội dung, nguồn, quyền chia sẻ và thông tin cá nhân trước khi quyết định chuyển thủ công. Không tự động đưa các file này lên Supabase hoặc công khai lại.
+Các file từng được lưu bởi API cộng đồng cũ vẫn ở máy chủ Node cũ. Nếu cần giữ, sao lưu và kiểm tra nội dung, nguồn, quyền chia sẻ và thông tin cá nhân trước khi quyết định chuyển thủ công.
 
-Tham khảo [quyền truy cập Storage](https://supabase.com/docs/guides/storage/security/access-control) và [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security) của Supabase khi cấu hình.
+## Kiểm tra cấu hình
+
+- Cấu hình Supabase Auth cho phép URL `/auth/reset-password` trên từng origin trong Authentication → URL Configuration; kiểm tra mẫu email và luồng khôi phục bằng tài khoản thử.
+- Chỉ dùng publishable key trên frontend; không đưa mật khẩu database hoặc service role key vào frontend hay Git.
+- Với SQL test, chạy `supabase/tests/library_phase2.sql` trên môi trường phù hợp; các bản ghi kiểm thử được hoàn tác. Kiểm tra `supabase migration list` và `supabase db advisors` sau khi áp dụng migration.
+- Đường dẫn có chữ ký là bí mật tạm thời: không lưu công khai trong metadata hay chia sẻ ngoài người dùng được phép.
+
+Xem thêm [quyền truy cập Storage](https://supabase.com/docs/guides/storage/security/access-control) và [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security).

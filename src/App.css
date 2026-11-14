@@ -318,6 +318,7 @@
 .library-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border); border-radius: 20px; box-shadow: 3px 4px 24px rgba(58,22,22,.06); }
 .library-card-cover { aspect-ratio: 24 / 13; overflow: hidden; background: #fff2f2; }
 .library-card-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.library-card-cover--placeholder img { object-fit: contain; padding: 12px; }
 .library-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
 .library-card-meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: var(--text-caption); margin-bottom: 16px; }
 .library-card-meta > span:first-child { color: var(--primary-dark); font-weight: 600; }

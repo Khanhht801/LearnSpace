@@ -2,29 +2,37 @@ import { LibraryBoundary } from '../hooks/LibraryProvider.jsx';
 import { useLibrary } from '../hooks/useLibrary.js';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { PAGE_SIZE, useCatalog } from '../hooks/useCatalog.js';
 import Footer from '../components/Footer.jsx';
 import '../library.css';
 
 export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = false }) {
-  const { courses, topics } = useLibrary();
+  const { courses, topics, loading, error } = useLibrary();
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get('q') || '';
   const selectedTopic = topics.find((topic) => topic.id === searchParams.get('topic'));
+  const sort = searchParams.get('sort') === 'title' ? 'title' : 'newest';
+  const pageValue = Number(searchParams.get('page'));
+  const page = Number.isSafeInteger(pageValue) && pageValue > 0 ? Math.min(pageValue, 100000) : 1;
+  const catalog = useCatalog({ keyword, categoryId: selectedTopic?.categoryId, sort, page, enabled: !savedOnly && !loading && !error });
   const hasFilters = Boolean(keyword || selectedTopic);
-  const savedCount = courses.filter((course) => favoriteIds.includes(course.id)).length;
+  const savedCount = savedOnly ? courses.filter((course) => favoriteIds.includes(course.id)).length : favoriteIds.length;
   function updateFilter(key, value) {
     setSearchParams((current) => {
       const next = new URLSearchParams(current);
       if (value) next.set(key, value);
       else next.delete(key);
+      if (key !== 'page') next.delete('page');
       return next;
     }, { replace: true });
   }
   const normalize = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd');
 
-  const filteredCourses = courses.filter((course) =>
-    (!savedOnly || favoriteIds.includes(course.id)) && (!selectedTopic || selectedTopic.courseIds.includes(course.id)) && normalize(`${course.title} ${course.description}`).includes(normalize(keyword.trim())),
-  );
+  const filteredCourses = savedOnly ? courses.filter((course) =>
+    favoriteIds.includes(course.id) && (!selectedTopic || selectedTopic.courseIds.includes(course.id)) && normalize(`${course.title} ${course.description}`).includes(normalize(keyword.trim())),
+  ) : catalog.items;
+  const total = savedOnly ? filteredCourses.length : catalog.count;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return (
     <div className="library-page" id="library-top">
@@ -51,18 +59,23 @@ export default function Courses({ favoriteIds, onToggleFavorite, savedOnly = fal
       <section className="library-catalog" id="library-catalog" aria-labelledby="library-catalog-title">
         <div className="library-inner">
           <LibraryBoundary>
-            <p className="sr-only" role="status" aria-atomic="true">Tìm thấy {filteredCourses.length} tài liệu</p>
+            <p className="sr-only" role="status" aria-atomic="true">{!savedOnly && catalog.loading ? 'Đang tải tài liệu' : `Tìm thấy ${total} tài liệu`}</p>
             <div className="library-catalog-heading"><div><p className="eyebrow">{savedOnly ? 'ĐÃ CHỌN CHO RIÊNG MÌNH' : 'ĐỌC, HIỂU VÀ KHÁM PHÁ'}</p><h2 id="library-catalog-title">{savedOnly ? 'Những tài liệu bạn muốn đọc lại' : 'Một tài liệu hay. Một bước tiến mới.'}</h2></div><span className="library-catalog-label">Học theo nhịp của bạn</span></div>
-            <label htmlFor="category-filter">Chủ đề </label>
-            <select id="category-filter" value={selectedTopic?.id || ''} onChange={(event) => updateFilter('topic', event.target.value)}>
-              <option value="">Tất cả chủ đề</option>
-              {topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}
-            </select>
-            {filteredCourses.length > 0 ? <div className="library-grid">{filteredCourses.map((course) => {
-              const topic = topics.find((item) => item.courseIds.includes(course.id));
+            <div className="catalog-filters">
+              <div className="catalog-filter"><label htmlFor="category-filter">Chủ đề</label>
+                <select id="category-filter" value={selectedTopic?.id || ''} onChange={(event) => updateFilter('topic', event.target.value)}>
+                  <option value="">Tất cả chủ đề</option>
+                  {topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.title}</option>)}
+                </select>
+              </div>
+              {!savedOnly && <div className="catalog-filter"><label htmlFor="catalog-sort">Sắp xếp</label><select id="catalog-sort" value={sort} onChange={(event) => updateFilter('sort', event.target.value === 'newest' ? '' : event.target.value)}><option value="newest">Mới nhất</option><option value="title">Tên tài liệu</option></select></div>}
+            </div>
+            {!savedOnly && catalog.loading ? <p role="status">Đang tải tài liệu…</p> : !savedOnly && catalog.error ? <div role="alert"><p>Không thể tải danh sách tài liệu.</p><button type="button" onClick={catalog.retry}>Thử lại</button></div> : filteredCourses.length > 0 ? <div className="library-grid">{filteredCourses.map((course) => {
+              const topic = topics.find((item) => item.categoryId === course.category_id);
               const saved = favoriteIds.includes(course.id);
-              return <article className="library-card" key={course.id}><div className="library-card-cover"><img src={course.coverImage} alt="" width="960" height="520" loading="lazy" decoding="async" /></div><div className="library-card-body"><div className="library-card-meta"><span>{topic?.title || 'Kiến thức'}</span><span>{course.file_type?.toUpperCase()}</span></div><h3><Link to={`/courses/${course.id}`}>{course.title}</Link></h3><p>{course.description}</p><div className="library-card-actions"><Link to={`/courses/${course.id}`}>Xem tài liệu <span aria-hidden="true">→</span></Link><button type="button" aria-pressed={saved} aria-label={`${saved ? 'Bỏ lưu' : 'Lưu'} ${course.title}`} onClick={() => onToggleFavorite(course.id)}><Bookmark filled={saved} />{saved ? 'Đã lưu' : 'Lưu'}</button></div></div></article>;
-            })}</div> : <div className="library-empty"><Bookmark /><h3>{savedOnly && !hasFilters ? 'Chưa có tài liệu đã lưu.' : 'Chưa tìm thấy tài liệu phù hợp.'}</h3><p>{savedOnly && !hasFilters ? 'Khám phá thư viện và lưu những nội dung bạn muốn tìm hiểu.' : 'Thử từ khóa khác hoặc xóa bộ lọc để xem lại danh sách tài liệu.'}</p>{hasFilters ? <button type="button" onClick={() => setSearchParams({}, { replace: true })}>Xóa tìm kiếm và bộ lọc</button> : <Link className="button-link" to="/courses">Khám phá thư viện →</Link>}</div>}
+              return <article className="library-card" key={course.id}><div className={`library-card-cover${course.thumbnail_url ? '' : ' library-card-cover--placeholder'}`}><img src={course.coverImage} alt="" width="960" height="520" loading="lazy" decoding="async" /></div><div className="library-card-body"><div className="library-card-meta"><span>{topic?.title || 'Kiến thức'}</span><span>{course.file_type?.toUpperCase()}</span></div><h3><Link to={`/courses/${course.id}`}>{course.title}</Link></h3><p>{course.description}</p><div className="library-card-actions"><Link to={`/courses/${course.id}`}>Xem tài liệu <span aria-hidden="true">→</span></Link><button type="button" aria-pressed={saved} aria-label={`${saved ? 'Bỏ lưu' : 'Lưu'} ${course.title}`} onClick={() => onToggleFavorite(course.id)}><Bookmark filled={saved} />{saved ? 'Đã lưu' : 'Lưu'}</button></div></div></article>;
+            })}</div> : <div className="library-empty"><Bookmark /><h3>{savedOnly && !hasFilters ? 'Chưa có tài liệu đã lưu.' : 'Chưa tìm thấy tài liệu phù hợp.'}</h3><p>{savedOnly && !hasFilters ? 'Khám phá thư viện và lưu những nội dung bạn muốn tìm hiểu.' : 'Thử từ khóa khác hoặc xóa bộ lọc để xem lại danh sách tài liệu.'}</p>{hasFilters || (!savedOnly && page > 1) ? <button type="button" onClick={() => setSearchParams({}, { replace: true })}>Xóa tìm kiếm và bộ lọc</button> : <Link className="button-link" to="/courses">Khám phá thư viện →</Link>}</div>}
+            {!savedOnly && !catalog.loading && !catalog.error && totalPages > 1 && <nav className="catalog-pagination" aria-label="Phân trang thư viện"><button type="button" disabled={page <= 1} onClick={() => updateFilter('page', String(page - 1))}>Trang trước</button><span>Trang {Math.min(page, totalPages)} / {totalPages} · {total} tài liệu</span><button type="button" disabled={page >= totalPages} onClick={() => updateFilter('page', String(page + 1))}>Trang sau</button></nav>}
           </LibraryBoundary>
         </div>
       </section>

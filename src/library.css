@@ -1,6 +1,16 @@
 ﻿/* Keep the library aligned with LearnSpace's red palette and Gilroy typography. */
 .main-content:has(> .library-page) { width: 100%; margin: 0; }
 .library-page { background: #fff; }
+.document-detail { width: min(1000px, calc(100% - 48px)); margin: 0 auto; padding-block: 40px 64px; }
+.document-detail nav { margin-bottom: 28px; color: var(--muted); }
+.document-detail h1 { font-size: var(--text-h1); }
+.document-meta { display: flex; flex-wrap: wrap; gap: 16px 32px; margin: 24px 0; }
+.document-meta div { min-width: 130px; }
+.document-meta dt { color: var(--muted); font-size: var(--text-small); }
+.document-meta dd { margin: 4px 0 0; }
+.document-actions, .catalog-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 24px 0; }
+.document-actions .button-link { padding: 10px 16px; }
+.document-preview { width: 100%; min-height: 640px; border: 1px solid var(--border); border-radius: 12px; }
 .library-inner { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 .library-page section { scroll-margin-top: 112px; }
 .library-page .eyebrow { font-size: var(--text-label); font-weight: 800; letter-spacing: .09em; }
@@ -36,6 +46,14 @@
 .library-catalog-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
 .library-catalog-heading h2 { max-width: 700px; margin: 0; font-size: var(--text-h2); }
 .library-catalog-label { flex-shrink: 0; color: var(--muted); font-size: var(--text-label); }
+.catalog-filters { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+.catalog-filter { display: grid; gap: 8px; flex: 0 1 240px; min-width: 0; }
+.catalog-filter label { color: #252525; font-size: var(--text-small); font-weight: 700; }
+.catalog-filter select { width: 100%; min-height: 48px; padding: 10px 42px 10px 14px; border: 1px solid #dfbcbc; border-radius: 12px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239d0b0f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center; color: #252525; appearance: none; cursor: pointer; }
+.catalog-filter select:hover { border-color: var(--primary); }
+.catalog-pagination { justify-content: center; color: var(--muted); }
+.catalog-pagination button:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+.library-page .library-card-cover--placeholder img { object-fit: contain; }
 .library-page .library-card { box-shadow: none; }
 .library-page .library-card h3 { font-size: var(--text-h3); }
 .library-page .library-card-body > p { font-size: var(--text-body); }
@@ -112,6 +130,8 @@
   .library-search input { font-size: var(--text-action); }
   .library-catalog, .library-practice { padding-block: 36px; }
   .library-catalog-heading { margin-bottom: 24px; }
+  .catalog-filters { gap: 12px; margin-bottom: 24px; }
+  .catalog-filter { flex: 1 1 100%; }
   .library-saved-layout { gap: 16px; align-items: flex-start; }
   .library-saved-icon { width: 44px; height: 54px; border-radius: 10px; }
   .library-saved-copy { flex-basis: calc(100% - 60px); }

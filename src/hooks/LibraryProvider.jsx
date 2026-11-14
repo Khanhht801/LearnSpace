@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LibraryContext, useLibrary } from './useLibrary.js';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../../utils/supabase.js';
 
 
@@ -18,6 +18,7 @@ async function readTable(table, columns, signal) {
 }
 
 export function LibraryProvider({ children }) {
+  const catalogOnly = useLocation().pathname === '/courses';
   const [state, setState] = useState({ courses: [], topics: [], loading: true, error: false });
   const [attempt, setAttempt] = useState(0);
 
@@ -30,7 +31,7 @@ export function LibraryProvider({ children }) {
       try {
         const [categories, documents] = await Promise.all([
           readTable('categories', 'id,name,slug,description', controller.signal),
-          readTable('document', 'id,category_id,title,slug,description,thumbnail_url,file_type,created_at', controller.signal),
+          catalogOnly ? Promise.resolve([]) : readTable('document', 'id,category_id,title,slug,description,thumbnail_url,file_type,created_at', controller.signal),
         ]);
         const courses = documents.map((document) => ({
           ...document,
@@ -55,7 +56,7 @@ export function LibraryProvider({ children }) {
     }
     load();
     return () => { active = false; clearTimeout(timeout); controller.abort(); };
-  }, [attempt]);
+  }, [attempt, catalogOnly]);
 
   function retry() {
     setState({ courses: [], topics: [], loading: true, error: false });

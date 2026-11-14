@@ -6,18 +6,20 @@ Cập nhật: 11/11/2026. Tài liệu này thay thế phạm vi frontend tĩnh t
 
 LearnSpace là thư viện tài liệu lập trình miễn phí. Giai đoạn đầu, chủ website chọn lọc và xuất bản tài liệu qua Supabase Dashboard. Khách được khám phá danh mục; trải nghiệm dự kiến yêu cầu đăng nhập để mở chi tiết, đọc và tải. Cộng đồng đóng góp tài liệu sẽ được mở ở giai đoạn sau, với bước duyệt trước khi công khai.
 
-## Hiện trạng sau các thay đổi Phase 1
+## Hiện trạng sau các thay đổi Phase 2
 
 - Giao diện thư viện đọc metadata từ các bảng `categories` và `document` trên Supabase. Các route `/courses` và `/topics` được giữ nguyên.
 - Biểu mẫu và danh sách tài liệu cộng đồng đã ẩn; API Node `/api/documents` trả 410 và không xóa các file đã lưu cũ. Không tự chuyển các file đó sang thư viện.
 - Góp ý dùng email cấu hình `VITE_CONTRIBUTION_EMAIL` nếu có; nếu chưa cấu hình, trang thông báo kênh đang được cập nhật.
-- Danh sách đã lưu vẫn ở trình duyệt. Trang chi tiết hiện chưa có đọc/tải, và yêu cầu đăng nhập cùng kiểm soát truy cập file chưa được triển khai. Không coi việc ẩn giao diện là bảo vệ dữ liệu.
+- Danh mục tìm kiếm không dấu, lọc, sắp xếp và phân trang ở phía dữ liệu. Trang chi tiết yêu cầu đăng nhập; tài liệu xuất bản có thể được xem hoặc tải qua bucket riêng tư bằng URL có thời hạn.
+- Tài liệu nháp không được truy cập qua Data API công khai; quyền Storage chỉ cho phép tài khoản đăng nhập đọc file của tài liệu đã xuất bản. Danh sách đã lưu vẫn ở trình duyệt và chưa đồng bộ thiết bị.
+- Dữ liệu cũ vẫn được giữ, nhưng bucket chưa có file tương ứng khi kiểm tra Phase 2. Trang chi tiết sẽ báo file chưa sẵn sàng cho đến khi file thật được tải lên.
 
-## Những việc cần xác minh trước khi xuất bản thật
+## Những việc cần hoàn tất khi đưa nội dung lên
 
-Lần kiểm tra chỉ dùng quyền đọc công khai: thấy `categories` và `document`, trong đó `document` có `file_path`; không có quyền kiểm tra đầy đủ schema, RLS, bucket, dữ liệu bản nháp hoặc cấu hình deploy. Repo không chứa migration tạo hai bảng này. Vì vậy chưa thể khẳng định quyền, nội dung, bản nháp hoặc file đang được bảo vệ đúng; chưa thay đổi schema hay dữ liệu từ xa.
+Schema hiện có đã được kiểm tra qua session pooler; migration Phase 2 bổ sung trạng thái xuất bản, metadata chi tiết, bucket riêng tư và chính sách truy cập. Repo vẫn chưa có migration khởi tạo các bảng `categories` và `document` vốn có. Khi tạo dự án Supabase mới, cần chuẩn bị schema nền tương ứng trước khi chạy migration.
 
-Xem [hướng dẫn xuất bản](./HuongDanXuatBan.md) để kiểm kê cấu hình và các bước hoàn thiện trước khi đưa tài liệu thật lên. Quyền đọc/tải theo tài khoản, lưu đồng bộ, trang chi tiết đầy đủ và quy trình xuất bản hoàn chỉnh thuộc các phase tiếp theo.
+Xem [hướng dẫn xuất bản](./HuongDanXuatBan.md) để thêm file và metadata có quyền chia sẻ, cấu hình URL khôi phục mật khẩu và kiểm tra luồng thật. Lưu đồng bộ theo tài khoản thuộc Phase 3.
 
 ## Phân kỳ
 

@@ -12,6 +12,7 @@ dist
 dist-ssr
 data/documents/
 data/feedback/
+supabase/.temp/
 *.local
 .env
 
